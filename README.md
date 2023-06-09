@@ -7,3 +7,6 @@
 * react
 * TinyColors
 * react-country-region-selector
+* Recharts
+* framer-motion
+* react-i18next
