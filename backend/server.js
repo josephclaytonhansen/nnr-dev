@@ -10,6 +10,9 @@ const port = process.env.PORT || 5000
 const app = express()
 connectDB()
 
+var passport = require('passport')
+var LocalStrategy = require('passport-local')
+
 /* const helmet = require('helmet')
 app.use(helmet())
 app.disable('x-powered-by') */
