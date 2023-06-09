@@ -4,14 +4,14 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 dotenv.config()
 import connectDB from './config/db.js'
+import passport from 'passport'
+import passportLocal from 'passport-local'
 
 const port = process.env.PORT || 5000
 
 const app = express()
 connectDB()
 
-var passport = require('passport')
-var LocalStrategy = require('passport-local')
 
 /* const helmet = require('helmet')
 app.use(helmet())
