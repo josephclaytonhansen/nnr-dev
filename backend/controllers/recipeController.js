@@ -13,7 +13,7 @@ const getRecipes = asyncHandler(async (req, res) => {
 // @route   GET /api/recipes/:id
 // @access  Public
 const getRecipeById = asyncHandler(async (req, res) => {
-    const recipe = await Recipe.findById(req.params.id)
+    const recipe = await Recipe.findOne({slug: {$eq: req.params.slug}})
 
     if (recipe) {
         res.json(recipe)
@@ -24,10 +24,10 @@ const getRecipeById = asyncHandler(async (req, res) => {
 })
 
 // @desc    Get recipe by slug
-// @route   GET /api/recipes/slug/:slug
+// @route   GET /api/recipes/:slug
 // @access  Public
 const getRecipeBySlug = asyncHandler(async (req, res) => {
-    const recipe = await Recipe.findOne({slug: req.params.slug})
+    const recipe = await Recipe.findOne({slug: {$eq: req.params.slug}})
 
     if (recipe) {
         res.json(recipe)
@@ -139,7 +139,10 @@ const getRecipesRecent = asyncHandler(async (req, res) => {
 // @route   GET /api/recipes/ingredient/:ingredient
 // @access  Public
 const getRecipesByIngredient = asyncHandler(async (req, res) => {
-    const recipes = await Recipe.find({ingredients: req.params.ingredient})
+    const i = {name: req.params.ingredient}
+    console.log(i)
+    //get recipes where i.name is in ingredients.name and ingredients is an array
+    const recipes = await Recipe.find({ingredients: {$elemMatch: i}})
 
     if (recipes) {
         res.json(recipes)

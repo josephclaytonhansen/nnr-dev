@@ -17,6 +17,19 @@ import {
     getRecipesVegetarian,
 } from '../controllers/recipeController.js'
 
+import {
+    createRecipeById,
+    deleteRecipeById,
+    updateRecipeById,
+} from '../controllers/admin/recipeController.js'
+
+
+//Admin routes (needs protect/admin middleware)
+router.route('/id/:id').post(createRecipeById)
+router.route('/id/:id').delete(deleteRecipeById)
+router.route('/id/:id').put(updateRecipeById)
+
+//Public routes
 router.route('/all').get(getRecipes)
 router.route('/random').get(getRandomRecipe)
 router.route('/tag/:tag').get(getRecipesByTag)

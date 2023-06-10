@@ -42,7 +42,7 @@ const recipeSchema = new mongoose.Schema({
     }],
     source: {
         type: String,
-        required: true
+        required: false
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
@@ -52,7 +52,6 @@ const recipeSchema = new mongoose.Schema({
     slug: {
         type: String,
         required: true,
-        default: 'slug',
     },
     isGlutenFree: {
         type: Boolean,
@@ -98,11 +97,18 @@ const recipeSchema = new mongoose.Schema({
 
 }, {timestamps: true})
 
-recipeSchema.pre('save', async function (next){
+recipeSchema.pre('validate', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
     next()
     
 })
+
+recipeSchema.post('save', async function (next){
+    this.slug = this.name.toLowerCase().replace(/ /g, '-')
+    next()
+    
+})
+
 
 const Recipe = mongoose.model("Recipe", recipeSchema)
 export default Recipe
