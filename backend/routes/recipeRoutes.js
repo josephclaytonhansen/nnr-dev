@@ -25,7 +25,7 @@ import {
 
 
 //Admin routes (needs protect/admin middleware)
-router.route('/id/:id').post(createRecipeById)
+router.route('/').post(createRecipeById)
 router.route('/id/:id').delete(deleteRecipeById)
 router.route('/id/:id').put(updateRecipeById)
 
