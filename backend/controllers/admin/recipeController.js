@@ -22,6 +22,7 @@ const createRecipeById = asyncHandler(async (req, res) => {
         numReviews,
         comments,
         timeToMake,
+        content,
     } = req.body
     const snlug = name.toLowerCase().replace(/ /g, '-')
     const recipeExists = await Recipe.findById(req.params.id)
@@ -46,6 +47,7 @@ const createRecipeById = asyncHandler(async (req, res) => {
             numReviews,
             comments,
             timeToMake,
+            content,
         })
         if (recipe) {
             res.status(201).json({
@@ -66,6 +68,7 @@ const createRecipeById = asyncHandler(async (req, res) => {
                 numReviews: recipe.numReviews,
                 comments: recipe.comments,
                 timeToMake: recipe.timeToMake,
+                content: recipe.content,
             })
         } else {
             res.status(400)
@@ -108,6 +111,7 @@ const updateRecipeById = asyncHandler(async (req, res) => {
         numReviews,
         comments,
         timeToMake,
+        content,
     } = req.body
     const recipe = await Recipe.findById(req.params.id)
     if (recipe) {
@@ -126,6 +130,7 @@ const updateRecipeById = asyncHandler(async (req, res) => {
         recipe.numReviews = numReviews
         recipe.comments = comments
         recipe.timeToMake = timeToMake
+        recipe.content = content
 
         const updatedRecipe = await recipe.save()
         res.json({
@@ -146,6 +151,7 @@ const updateRecipeById = asyncHandler(async (req, res) => {
             numReviews: updatedRecipe.numReviews,
             comments: updatedRecipe.comments,
             timeToMake: updatedRecipe.timeToMake,
+            content: updatedRecipe.content,
         })
     } else {
         res.status(404)

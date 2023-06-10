@@ -31,7 +31,8 @@ const recipes = [
         rating: 0,
         numReviews: 0,
         comments: [],
-        timeToMake: 0},
+        timeToMake: 0,
+        content: "This is a great recipe that I found in my Grandma's recipe book. Judging from the weathered look of this recipe card, this was a family favorite."},
         {
             name: "Strawberry Shortcake",
             ingredients: [
@@ -62,7 +63,8 @@ const recipes = [
             rating: 0,
             numReviews: 0,
             comments: [],
-            timeToMake: 60
+            timeToMake: 60,
+            content: "### This is a great old Maine recipe, *moist* and **spicy**. \nThe bread actually tastes even better the day after it is baked. Great for holiday gift giving!"
         }
 ]
 

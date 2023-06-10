@@ -10,6 +10,8 @@
 * Recharts https://recharts.org/en-US/
 * framer-motion https://www.framer.com/motion/
 * react-i18next https://react.i18next.com/
+* react-markdown https://www.npmjs.com/package/react-markdown
+* remark-gfm https://www.npmjs.com/package/remark-gfm
 
 ### backend packages
 * react-router-dom https://reactrouter.com/web/guides/quick-start

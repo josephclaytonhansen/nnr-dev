@@ -92,6 +92,10 @@ const recipeSchema = new mongoose.Schema({
         required: true,
         default: 60
     },
+    content: {
+        type: String,
+        required: true,
+    },
 
 
 

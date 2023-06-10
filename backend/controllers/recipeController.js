@@ -13,7 +13,7 @@ const getRecipes = asyncHandler(async (req, res) => {
 // @route   GET /api/recipes/:id
 // @access  Public
 const getRecipeById = asyncHandler(async (req, res) => {
-    const recipe = await Recipe.findOne({slug: {$eq: req.params.slug}})
+    const recipe = await Recipe.findById(req.params.id)
 
     if (recipe) {
         res.json(recipe)
