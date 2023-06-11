@@ -4,19 +4,15 @@ import ReactMarkdown from "react-markdown"
 import {Table, ListGroup, List, Row, Col} from "react-bootstrap"
 import remarkGfm from "remark-gfm"
 import {useParams} from "react-router-dom"
+import Recipe from '../components/Recipe'
 
-const AdminRecipeScreen = () => {
+const RecipeById = () => {
     const { id: recipeId } = useParams()
     const { data:recipe, isLoading, error } = useGetRecipeByIdQuery(recipeId)
 
     return(
-        <>
-        {recipe && (
-            <h1>{recipe.name}</h1>
-        )}
-                    
-        </>
+        <Recipe recipe={recipe}/>
     )
 }
 
-export default AdminRecipeScreen
+export default RecipeById

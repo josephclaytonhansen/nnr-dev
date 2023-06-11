@@ -22,7 +22,7 @@ const AdminRecipesListScreen = () => {
                     {recipes && (recipes.map((recipe) => (
                         <tr key={recipe._id}>
                             <td>{recipe._id}</td>
-                            <td><Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link></td>
+                            <td><Link to={`/recipes/id/${recipe._id}`}>{recipe.name}</Link></td>
                             <td>{<ReactMarkdown children={recipe.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>}</td>
                         </tr>
                         
