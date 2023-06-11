@@ -28,7 +28,9 @@ app.use('/api', apiLimiter)
 
 /* const helmet = require('helmet')
 app.use(helmet())
-app.disable('x-powered-by') */
+ */
+
+app.disable('x-powered-by')
 
 // Body parser middleware
 app.use(express.json())
