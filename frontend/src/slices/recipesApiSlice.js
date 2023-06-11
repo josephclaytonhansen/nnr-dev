@@ -20,13 +20,13 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByTag: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/tag`,
+            query: (tag) => ({
+                url: `${RECIPES_URL}/tag/${tag}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByCuisine: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/cuisine`,
+            query: (cuisine) => ({
+                url: `${RECIPES_URL}/cuisine/${cuisine}`,
             }), keepUnusedDataFor: 5,
         }),
         getRandomRecipe: builder.query({
@@ -35,18 +35,18 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
             }), keepUnusedDataFor: 5,
         }),
         getRecipesBySource: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/source`,
+            query: (source) => ({
+                url: `${RECIPES_URL}/source/${source}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByAuthor: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/author`,
+            query: (author) => ({
+                url: `${RECIPES_URL}/author/${author}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByMeal: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/meal`,
+            query: (meal) => ({
+                url: `${RECIPES_URL}/meal/${meal}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesRecent: builder.query({
@@ -55,8 +55,8 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByIngredient: builder.query({
-            query: () => ({
-                url: `${RECIPES_URL}/ingredient`,
+            query: (ingredient) => ({
+                url: `${RECIPES_URL}/ingredient/${ingredient}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesGlutenFree: builder.query({
