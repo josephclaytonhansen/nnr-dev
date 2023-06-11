@@ -8,20 +8,13 @@ import {useParams} from "react-router-dom"
 const AdminRecipeScreen = () => {
     const { id: recipeId } = useParams()
     const { data:recipe, isLoading, error } = useGetRecipeByIdQuery(recipeId)
+
     return(
         <>
+        {recipe && (
             <h1>{recipe.name}</h1>
-            <ListGroup>
-                {recipe.ingredients && (recipe.ingredients.map((ingredient) => (
-                    <ListGroup.Item key={ingredient._id}>
-                        JSON.stringify(ingredient)
-                    </ListGroup.Item>
-
-                )))}
-            </ListGroup>
+        )}
                     
-
-
         </>
     )
 }

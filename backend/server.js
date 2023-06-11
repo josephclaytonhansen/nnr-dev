@@ -37,9 +37,6 @@ app.use(express.urlencoded({extended: true}))
 //Cookie parser middleware
 app.use(cookieParser())
 
-
-app.use("/api/recipes", recipeRoutes)
-
 app.use(function(req, res, next) {  
     res.header('Access-Control-Allow-Origin', req.headers.origin)
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
@@ -49,6 +46,8 @@ app.use(function(req, res, next) {
 app.get("/", (req, res) => {
     res.send("API is running")
 })
+
+app.use("/api/recipes", recipeRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
