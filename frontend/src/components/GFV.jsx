@@ -34,7 +34,7 @@ const GFV = () => {
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw'>
-                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-7 right-.5" fontSize = {'3rem'} color = {'#1A5276'}/>
+                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-7 left-.25 down-.25" fontSize = {'3rem'} color = {'#1A5276'}/>
                     <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} color={'tomato'}/>
                     </span>
                 )}

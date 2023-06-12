@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {ListGroup, Row, Col, InputGroup, Form, Container} from 'react-bootstrap'
 import {} from 'react-icons/fa'
 import { useState } from 'react'
+import fractionFormatter from '../utils/fractionFormatter'
 
 const Ingredients = () => {
     const recipe = JSON.parse(sessionStorage.getItem("recipe"))
@@ -34,7 +35,7 @@ const Ingredients = () => {
                     {recipe.ingredients.map((ingredient) => (
                         
                         <ListGroup.Item key={ingredient.name}>
-                            {ingredient.amount * (feeds/recipe.feeds)} {!ingredient.unit ==="single" && ingredient.unit}{ingredient.name}
+                            {fractionFormatter(ingredient.amount * (feeds/recipe.feeds))} {!ingredient.unit ==="single" && ingredient.unit}{ingredient.name}
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
