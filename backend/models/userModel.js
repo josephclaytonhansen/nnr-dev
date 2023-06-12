@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: false,
-        default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor.is-not-rater.is-not-comment-flagger.not-verified.not-author.not-editor.not-moderator.not-admin'
+        default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor'
     },
 
 })
@@ -32,9 +32,7 @@ userSchema.pre('save', async function (next) {
         const passwordSalt = await bcrypt.genSalt(12)
         const passwordHash = await bcrypt.hash(user.password, passwordSalt)
         user.password = passwordHash
-        const permissionsSalt = await bcrypt.genSalt(12)
-        const permissionsHash = await bcrypt.hash(user.permissions, permissionsSalt)
-        user.permissions = permissionsHash
+        
         next()
     } catch (error) {
         next(error)

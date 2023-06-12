@@ -5,9 +5,9 @@ import cookieParser from 'cookie-parser'
 dotenv.config()
 import connectDB from './config/db.js'
 import passport from 'passport'
-import passportLocal from 'passport-local'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
 import recipeRoutes from "./routes/recipeRoutes.js"
+
 
 const port = process.env.PORT || 5000
 
@@ -50,6 +50,38 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/recipes", recipeRoutes)
+
+app.post("/api/users/register", passport.authenticate('local-signup', {session: false}), (req, res, next) => {
+    res.json({
+        user: req.user
+    })
+})
+
+app.post(
+    "/api/users/login",
+    passport.authenticate('local-login', { session: false }),
+    (req, res, next) => {
+      // login
+      jwt.sign({user: req.user}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
+        if(err) {
+          return res.json({
+            message: "Failed to login",
+            token: null,
+          });
+        }
+        res.json({
+          token
+        })
+      })
+    }
+   )
+
+//Passport protected routes
+app.post("/api/comment", passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    res.json({
+        message: "Comment posted"
+    })
+})
 
 app.use(notFound)
 app.use(errorHandler)
