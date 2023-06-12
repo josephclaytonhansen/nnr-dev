@@ -19,7 +19,7 @@ const fractionFormatter = (decimal) => {
         { decimal: 0.833, fraction: '5/6', unicode: '⅚' },
     ]
     if (
-        fractions.find(fraction => fraction.decimal === decimal.toFixed)
+        fractions.find(fraction => fraction.decimal === decimal)
     ){
         return fractions.find(fraction => fraction.decimal === decimal).unicode
     } else if (decimal > 0){
