@@ -26,17 +26,12 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
         }),
         getRecipesByCuisine: builder.query({
             query: (cuisine) => ({
-                url: `${RECIPES_URL}/cuisine/${cuisine}`,
+                url: `${RECIPES_URL}/cuisine/${cuisine.toLowerCase()}`,
             }), keepUnusedDataFor: 5,
         }),
         getRandomRecipe: builder.query({
             query: () => ({
                 url: `${RECIPES_URL}/random`,
-            }), keepUnusedDataFor: 5,
-        }),
-        getRecipesBySource: builder.query({
-            query: (source) => ({
-                url: `${RECIPES_URL}/source/${source}`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesByAuthor: builder.query({
@@ -61,12 +56,12 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
         }),
         getRecipesGlutenFree: builder.query({
             query: () => ({
-                url: `${RECIPES_URL}/gluten-free`,
+                url: `${RECIPES_URL}/gf/gluten-free`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesVegetarian: builder.query({
             query: () => ({
-                url: `${RECIPES_URL}/vegetarian`,
+                url: `${RECIPES_URL}/v/vegetarian`,
             }), keepUnusedDataFor: 5,
         }),
         updateRecipe: builder.mutation({
@@ -99,7 +94,6 @@ export const {
     useGetRecipesByTagQuery,
     useGetRecipesByCuisineQuery,
     useGetRandomRecipeQuery,
-    useGetRecipesBySourceQuery,
     useGetRecipesByAuthorQuery,
     useGetRecipesByMealQuery,
     useGetRecipesRecentQuery,

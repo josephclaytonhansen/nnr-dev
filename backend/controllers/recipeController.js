@@ -153,10 +153,10 @@ const getRecipesByIngredient = asyncHandler(async (req, res) => {
 })
 
 // @desc    Get gluten free recipes
-// @route   GET /api/recipes/glutenfree
+// @route   GET /api/recipes/gluten-free
 // @access  Public
 const getRecipesGlutenFree = asyncHandler(async (req, res) => {
-    const recipes = await Recipe.find({glutenFree: true})
+    const recipes = await Recipe.find({isGlutenFree: true})
 
     if (recipes) {
         res.json(recipes)
@@ -170,7 +170,7 @@ const getRecipesGlutenFree = asyncHandler(async (req, res) => {
 // @route   GET /api/recipes/vegetarian
 // @access  Public
 const getRecipesVegetarian = asyncHandler(async (req, res) => {
-    const recipes = await Recipe.find({vegetarian: true})
+    const recipes = await Recipe.find({isVegetarian: true})
 
     if (recipes) {
         res.json(recipes)

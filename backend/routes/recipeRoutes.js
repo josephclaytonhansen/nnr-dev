@@ -41,7 +41,7 @@ router.route('/slug/:slug').get(getRecipeBySlug)
 router.route('/meal/:meal').get(getRecipesByMeal)
 router.route('/').get(getRecipesRecent)
 router.route('/ingredient/:ingredient').get(getRecipesByIngredient)
-router.route('/gluten-free').get(getRecipesGlutenFree)
-router.route('/vegetarian').get(getRecipesVegetarian)
+router.route('/gf/gluten-free').get(getRecipesGlutenFree)
+router.route('/v/vegetarian').get(getRecipesVegetarian)
 
 export default router

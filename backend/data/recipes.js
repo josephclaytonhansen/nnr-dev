@@ -20,11 +20,11 @@ const recipes = [
                 details: "Lightly grease a 9x13 inch baking dish."
             }
         ],
-        cuisine: "Italian",
+        cuisine: "italian",
         tags: ["chicken", "parmesan", "italian"],
         source: "https://www.allrecipes.com/recipe/223042/chicken-parmesan/",
         author: "60d5f0b4e6c9c9b9b0f3e0b1",
-        isGlutenFree: false,
+        isGlutenFree: true,
         isVegetarian: false,
         meal: "dinner",
         image: "/images/chicken-parmesan.jpg",
@@ -52,9 +52,9 @@ const recipes = [
                 name: "Preheat oven to 425 degrees F (220 degrees C).",
                 details: "In a large bowl, combine strawberries with 1/2 cup sugar. Cover bowl and set aside to allow strawberries to release their juices."
             }],
-            cuisine: "American",
+            cuisine: "american",
             tags: ["strawberry", "shortcake", "dessert"],
-            source: "",
+            source: "https://www.recipes.com/recipe/strawberry-shortcake",
             author: "60d5f0b4e6c9c9b9b0f3e0b1",
             isGlutenFree: false,
             isVegetarian: true,
@@ -65,7 +65,31 @@ const recipes = [
             comments: [],
             timeToMake: 60,
             content: "### This is a great old Maine recipe, *moist* and **spicy**. \nThe bread actually tastes even better the day after it is baked. Great for holiday gift giving!"
-        }
+        },
+        {
+            name: "Pumpkin Bread",
+            ingredients: [
+                {
+                    name: "eggs",
+                    amount: 2,
+                    unit: "single"
+                },
+            ],
+            instructions: [],
+            cuisine: "american",
+            tags: ["pumpkin", "bread"],
+            source: "https://www.allrecipes.com/recipe/6820/downeast-maine-pumpkin-bread/",
+            author: "60d5f0b4e6c9c9b9b0f3e0b1",
+            isGlutenFree: false,
+            isVegetarian: true,
+            meal: "breakfast",
+            image: "/images/pumpkin-bread.jpg",
+            rating: 0,
+            numReviews: 0,
+            comments: [],
+            timeToMake: 60,
+            content: "This is *pumpkin* bread!"
+        },
 ]
 
 export default recipes
