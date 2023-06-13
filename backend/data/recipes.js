@@ -29,9 +29,11 @@ const recipes = [
         meal: "dinner",
         image: "/images/chicken-parmesan.jpg",
         rating: 0,
+        dogSafe: true,
         numReviews: 0,
         comments: [],
         timeToMake: 0,
+        feeds: 4,
         content: "This is a great recipe that I found in my Grandma's recipe book. Judging from the weathered look of this recipe card, this was a family favorite."},
         {
             name: "Strawberry Shortcake",
@@ -62,6 +64,8 @@ const recipes = [
             image: "/images/strawberry-shortcake.jpg",
             rating: 0,
             numReviews: 0,
+            feeds: 3,
+            dogSafe: true,
             comments: [],
             timeToMake: 60,
             content: "### This is a great old Maine recipe, *moist* and **spicy**. \nThe bread actually tastes even better the day after it is baked. Great for holiday gift giving!"
@@ -85,7 +89,9 @@ const recipes = [
             meal: "breakfast",
             image: "/images/pumpkin-bread.jpg",
             rating: 0,
+            feeds: 2,
             numReviews: 0,
+            dogSafe: false,
             comments: [],
             timeToMake: 60,
             content: "This is *pumpkin* bread!"

@@ -7,12 +7,22 @@ import connectDB from './config/db.js'
 import passport from 'passport'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
 import recipeRoutes from "./routes/recipeRoutes.js"
+import cors from 'cors'
 
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8080
 
 const app = express()
 connectDB()
+
+const corsOptions = {
+    origin:' *',
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 import rateLimit from 'express-rate-limit'
 
@@ -39,19 +49,22 @@ app.use(express.urlencoded({extended: true}))
 //Cookie parser middleware
 app.use(cookieParser())
 
-app.use(function(req, res, next) {  
-    res.header('Access-Control-Allow-Origin', req.headers.origin)
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    next()
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
 })
 
 app.get("/", (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
     res.send("API is running")
 })
 
 app.use("/api/recipes", recipeRoutes)
 
+
+
 app.post("/api/users/register", passport.authenticate('local-signup', {session: false}), (req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*')
     res.json({
         user: req.user
     })

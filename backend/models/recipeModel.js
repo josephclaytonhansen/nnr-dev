@@ -96,8 +96,16 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
-
+    feeds: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+    dogSafe: {
+        type: Boolean,
+        required: false,
+        default: false
+    }
 
 }, {timestamps: true, autoIndex: true})
 
