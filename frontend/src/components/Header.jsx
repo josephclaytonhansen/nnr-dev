@@ -28,7 +28,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-end">
                     <Nav>
-                        <Nav.Link href="/recipes">Recent</Nav.Link>
+                        <Nav.Link href="/recipes">All</Nav.Link>
                         <NavDropdown title="By Meal" id="">
                             <NavDropdown.Item href="/meal/breakfast">Breakfast</NavDropdown.Item>
                             <NavDropdown.Item href="/meal/lunch">Lunch</NavDropdown.Item>

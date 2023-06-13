@@ -21,7 +21,7 @@ const Vegetarian = () => {
                     <Loader/>
                 ) : error ? (
                     <>
-                    <Message variant='dark'>There has been an error; showing cached data</Message>
+                    <Message variant='dark'>There has been an error; showing cached recipes. Please refresh the page.</Message>
                     <RecipeList/>
                     </>
                 ) : (
