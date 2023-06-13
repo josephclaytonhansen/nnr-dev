@@ -6,4 +6,94 @@
     --lighter-blue: #a6bdd4;
     --purple: #664F6C;
     --light-purple: #A391B9;
+    --cream: rgb(248, 243, 237);
+    --light-cream: rgb(248, 244, 244);
+}
+main{
+    padding: max(1rem, 2vw);
+}
+
+.icon-dark-blue{
+    color: var(--dark-blue);
+}
+
+.icon-red{
+    color: var(--red);
+}
+
+.bg-d-blue{
+    background-color: var(--dark-blue)!important;
+    color: var(--cream);
+}
+
+.bg-red{
+    background-color: var(--red);
+    color: var(--cream);
+}
+
+.bg-l-red{
+    background-color: var(--light-red);
+}
+
+.bg-l-blue{
+    background-color: var(--light-blue);
+}
+
+.bg-lr-blue{
+    background-color: var(--lighter-blue);
+}
+
+.bg-purple{
+    background-color: var(--purple);
+    color: var(--cream);
+}
+
+.bg-l-purple{
+    background-color: var(--light-purple);
+}
+
+.balloon-tooltip{
+    --balloon-font-size: 1rem;
+    --balloon-color: var(--light-blue);
+}
+
+.balloon-tooltip-danger{
+    --balloon-color: var(--red);
+    --balloon-font-size: 1rem;
+}
+
+@media screen and (max-width: 768px){
+.display-mobile{
+    display: flex!important;
+}
+.display-desktop{
+    display: none!important;
+}
+}
+
+@media screen and (min-width: 768px){
+.display-mobile{
+    display: none!important;
+}
+.display-desktop{
+    display: flex!important;
+}
+}
+
+.custom-badge{
+    --bs-badge-padding-x: 0.65em;
+    --bs-badge-padding-y: 0.35em;
+    --bs-badge-font-size: 0.75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: var(--bs-border-radius);
+    display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-size: 90%;
+    font-weight: var(--bs-badge-font-weight);
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
 }

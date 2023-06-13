@@ -9,6 +9,7 @@ const Recipe = ({recipe}) => {
     if (recipe){
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
+            <main>
             <Container className="recipe">
             {recipe && (
                 <>
@@ -31,6 +32,7 @@ const Recipe = ({recipe}) => {
             )}
                         
             </Container>
+            </main>
         )
     }
     

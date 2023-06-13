@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://a652f9611e458d.lhr.life/",
+  "proxy": "https://883e39e2623ab0.lhr.life/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

@@ -52,12 +52,12 @@ const GFV = () => {
             </Col>
         </Row>
         <Row className = 'display-mobile justify-content-end '>
-                    {isGlutenFree && (<Col sm={4}><Badge className = 'bg-secondary'>Gluten free</Badge></Col>)}
-                    {!isGlutenFree && (<Col sm={4}><Badge className = 'bg-danger'>Not gluten free</Badge></Col>)}
-                    {isVegetarian && (<Col sm={4}><Badge className = 'bg-secondary'>Vegetarian</Badge></Col>)}
-                    {!isVegetarian && (<Col sm={4}><Badge className = 'bg-danger'>Not vegetarian</Badge></Col>)}
-                    {isDogSafe && (<Col sm={4}><Badge className = 'bg-secondary'>Safe for dogs</Badge></Col>)}
-                    {!isDogSafe && (<Col sm={4}><Badge className = 'bg-danger'>Unsafe for dogs</Badge></Col>)}
+                    {isGlutenFree && (<Col sm={4}><div className = 'bg-d-blue custom-badge' variant = 'light'>Gluten free</div></Col>)}
+                    {!isGlutenFree && (<Col sm={4}><div className = 'bg-red custom-badge'>Not gluten free</div></Col>)}
+                    {isVegetarian && (<Col sm={4}><div className = 'bg-d-blue custom-badge'>Vegetarian</div></Col>)}
+                    {!isVegetarian && (<Col sm={4}><div className = 'bg-red custom-badge'>Not vegetarian</div></Col>)}
+                    {isDogSafe && (<Col sm={4}><div className = 'bg-d-blue custom-badge'>Safe for dogs</div></Col>)}
+                    {!isDogSafe && (<Col sm={4}><div className = 'bg-red custom-badge'>Unsafe for dogs</div></Col>)}
         </Row>
         </>
     )
