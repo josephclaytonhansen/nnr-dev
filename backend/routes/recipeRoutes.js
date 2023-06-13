@@ -15,6 +15,8 @@ import {
     getRecipesByIngredient,
     getRecipesGlutenFree,
     getRecipesVegetarian,
+    getRecipesDogSafe,
+    getRecipesBySearch
 } from '../controllers/recipeController.js'
 
 import {
@@ -41,7 +43,9 @@ router.route('/slug/:slug').get(getRecipeBySlug)
 router.route('/meal/:meal').get(getRecipesByMeal)
 router.route('/').get(getRecipesRecent)
 router.route('/ingredient/:ingredient').get(getRecipesByIngredient)
-router.route('/gf/gluten-free').get(getRecipesGlutenFree)
-router.route('/v/vegetarian').get(getRecipesVegetarian)
+router.route('/safe/gluten-free').get(getRecipesGlutenFree)
+router.route('/safe/vegetarian').get(getRecipesVegetarian)
+router.route('/safe/dog-safe').get(getRecipesDogSafe)
+router.route('/search/:query').get(getRecipesBySearch)
 
 export default router

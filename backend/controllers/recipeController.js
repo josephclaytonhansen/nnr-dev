@@ -180,6 +180,34 @@ const getRecipesVegetarian = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Get dog safe recipes
+// @route   GET /api/safe/dog-safe
+// @access  Public
+const getRecipesDogSafe = asyncHandler(async (req, res) => {
+    const recipes = await Recipe.find({dogSafe: true})
+
+    if (recipes) {
+        res.json(recipes)
+    } else {
+        res.status(404)
+        throw new Error('Recipes not found')
+    }
+})
+
+// @desc Get recipe by search query
+// @route GET /api/recipes/search/:query
+// @access Public
+const getRecipesBySearch = asyncHandler(async (req, res) => {
+    const query = req.params.query
+    const recipes = await Recipe.find({$text: {$search: query, $caseSensitive: false, $diacriticSensitive: true}})
+
+    if (recipes) {
+        res.json(recipes)
+    } else {
+        res.status(404)
+        throw new Error('Recipes not found')
+    }
+})
 
 export {
     getRecipes,
@@ -195,4 +223,7 @@ export {
     getRecipesByIngredient,
     getRecipesGlutenFree,
     getRecipesVegetarian,
+    getRecipesDogSafe,
+    getRecipesBySearch
+
 }
