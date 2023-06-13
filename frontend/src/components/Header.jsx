@@ -12,7 +12,8 @@ const Header = () => {
         if (e.key === 'Enter'){
         e.preventDefault()
         //for some reason history isn't working here
-        window.location.href = `/search/${e.target.value}`
+        const sanitized = e.target.value.replace(/[^a-zA-Z ]/g, "")
+        window.location.href = `/search/${sanitized}`
     }}
 
     return(
