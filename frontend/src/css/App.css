@@ -13,6 +13,10 @@ main{
     padding: max(1rem, 2vw);
 }
 
+header{
+    padding-bottom:max(4%, 6vh);
+}
+
 .icon-dark-blue{
     color: var(--dark-blue);
 }
@@ -49,7 +53,15 @@ main{
 }
 
 .bg-l-purple{
-    background-color: var(--light-purple);
+    background-color: var(--light-purple)!important;
+}
+
+.bg-cream{
+    background-color: var(--cream)!important;
+}
+
+.bg-l-cream{
+    background-color: var(--light-cream)!important;
 }
 
 .balloon-tooltip{

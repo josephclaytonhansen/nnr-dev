@@ -9,9 +9,18 @@ import Recipe from '../components/Recipe'
 const RecipeBySlug = () => {
     const { slug: recipeSlug } = useParams()
     const { data:recipe, isLoading, error } = useGetRecipeBySlugQuery(recipeSlug)
+    sessionStorage.setItem("recipe", JSON.stringify(recipe))
+    
 
     return(
-        <Recipe recipe={recipe}/>
+        <>
+        {isLoading ? (<></>) : error ? (<></>) : recipe && (
+            <>
+            <Recipe recipe={recipe}/>
+            </>
+        )}
+        </>
+        
     )
 }
 
