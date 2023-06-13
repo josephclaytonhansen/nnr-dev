@@ -54,9 +54,9 @@ const Header = () => {
 
                     </NavDropdown>
                     <NavDropdown title="Restrictions" id="">
-                        <NavDropdown.Item href="/recipes/gluten-free">Gluten Free</NavDropdown.Item>
-                        <NavDropdown.Item href="/recipes/vegetarian">Vegetarian</NavDropdown.Item>
-                        <NavDropdown.Item href="/recipes/dog-safe">Dog Safe</NavDropdown.Item>
+                        <NavDropdown.Item href="/gluten-free">Gluten Free</NavDropdown.Item>
+                        <NavDropdown.Item href="/vegetarian">Vegetarian</NavDropdown.Item>
+                        <NavDropdown.Item href="/dog-safe">Dog Safe</NavDropdown.Item>
                     </NavDropdown>
                         <Form className="d-flex ps-md-3">
                         <Form.Control type="search" placeholder="Search" className="me-2 bg-l-cream" aria-label="Search"

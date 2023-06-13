@@ -35,3 +35,18 @@
     margin-bottom:.5rem;
 
 }
+
+.recipe-row-link div{
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.recipe-row-link{
+    text-decoration: none;
+    color: var(--dark-gray);
+}
+
+.recipe-row-link div:hover{
+    background-color: var(--light-cream);
+    
+}

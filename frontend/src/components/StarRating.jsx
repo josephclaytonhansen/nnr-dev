@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const StarRating = ({rating, text}) => {
     return(
         <>
-        <div className='rating' style = {{display:'flex'}}>
+        <div className='rating balloon-tooltip' style = {{display:'flex'}} aria-label={`out of ${text} reviews`} data-balloon-pos="down">
             <div>
                 
                     <FontAwesomeIcon icon = {faStar} className='icon-red'></FontAwesomeIcon>
@@ -17,7 +17,6 @@ const StarRating = ({rating, text}) => {
                     
 
             </div>
-            <span>{ text && text}</span>
         </div>
         </>
     )
