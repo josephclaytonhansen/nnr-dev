@@ -15,7 +15,7 @@ const Recipe = ({recipe}) => {
                 <>
                 <Row className = 'd-flex align-items-center'><Col md ={9} sm = {12}><h1>{recipe.name}</h1></Col>
                 <Col md={3} sm = {8} xs = {12}>
-                    <GFV recipe={recipe}/>
+                    <GFV fontSize='2.6rem'/>
                 </Col>
                 </Row>
                 

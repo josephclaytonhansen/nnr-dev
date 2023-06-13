@@ -8,6 +8,7 @@
     --light-purple: #A391B9;
     --cream: rgb(248, 243, 237);
     --light-cream: rgb(248, 244, 244);
+    --dark-gray: #2c2929;
 }
 main{
     padding: max(1rem, 2vw);

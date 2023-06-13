@@ -1,0 +1,28 @@
+.tag-badge{
+    text-decoration: none;
+    background-color: var(--lighter-blue);
+    color: var(--dark-gray);
+    margin-left: 4px;
+    margin-right: 4px;
+    transition: all 0.3s cubic-bezier(.41,1.29,.64,1);
+}
+
+.tag-badge:hover{
+    background-color: var(--light-blue);
+    color: var(--cream);
+}
+
+.tag-badge-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+}
+
+.tag-badge-container > *:first-child{
+     margin-left: 0;
+}
+
+.tag-badge-container > *:last-child{
+    margin-right: 0;
+}

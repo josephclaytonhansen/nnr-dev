@@ -8,7 +8,7 @@ import 'balloon-css'
 import '../css/Recipe.css'
 
 
-const GFV = () => {
+const GFV = ({fontSize}) => {
     const recipe = JSON.parse(sessionStorage.getItem("recipe"))
     const isGlutenFree = recipe.isGlutenFree
     const isVegetarian = recipe.isVegetarian
@@ -17,35 +17,35 @@ const GFV = () => {
     return(
         <>
         <Row className = 'display-desktop'> 
-            <Col className = 'd-flex justify-content-start' style = {{gap:'2.5rem'}}>
+            <Col className = 'd-flex justify-content-start' style = {{gap:fontSize}}>
                 {isGlutenFree ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
+                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {fontSize} color = {'#1A5276'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {fontSize} className = {'icon-red'}/>
                     </span>
                 )}
                 {isVegetarian ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Vegetarian" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw  balloon-tooltip-danger' aria-label="Not vegetarian" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-7 left-.25 down-.25" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
+                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-7 left-.25 down-.25" fontSize = {fontSize} color = {'#1A5276'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {fontSize} className = {'icon-red'}/>
                     </span>
                 )}
                 {isDogSafe ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Safe for dogs" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faDog} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faDog} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw  balloon-tooltip-danger' aria-label="Unsafe for dogs" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faDog} transform="shrink-8 left-1" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
+                    <FontAwesomeIcon icon ={faDog} transform="shrink-8 left-1" fontSize = {fontSize} color = {'#1A5276'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {fontSize} className = {'icon-red'}/>
                     </span>
                 )}
 

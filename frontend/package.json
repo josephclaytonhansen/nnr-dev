@@ -2,9 +2,10 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://b4081b5eafee1f.lhr.life/",
+  "proxy": "https://54a3a099dfc598.lhr.life/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
