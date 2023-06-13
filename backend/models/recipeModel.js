@@ -1,11 +1,12 @@
 import mongoose from 'mongoose'
 
 const recipeSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    name: {type: String, required: true, index:true},
     ingredients: [{
         name: {
             type: String,
-            required: true
+            required: true,
+            index: true,
         },
         amount: {
             type: Number,
@@ -15,7 +16,7 @@ const recipeSchema = new mongoose.Schema({
         unit: {
             type: String,
             required: true
-        },
+        }, index: true,
     }],
     instructions: [{
         step: {
@@ -34,15 +35,18 @@ const recipeSchema = new mongoose.Schema({
     }],
     cuisine: {
         type: String,
-        required: true
+        required: true,
+        index: true,
     },
     tags: [{
         type: String,
-        required: true
+        required: true,
+        index: true,
     }],
     source: {
         type: String,
-        required: false
+        required: false,
+        index: true,
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
@@ -86,6 +90,7 @@ const recipeSchema = new mongoose.Schema({
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",
+        index: true,
     }],
     timeToMake: {
         type: Number,
@@ -95,6 +100,7 @@ const recipeSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true,
+        index: true,
     },
     feeds: {
         type: Number,
@@ -107,9 +113,7 @@ const recipeSchema = new mongoose.Schema({
         default: false
     }
 
-}, {timestamps: true, autoIndex: true})
-
-recipeSchema.index({name: 'text', content: 'text', tags: 'text', ingredients: 'text', instructions: 'text', cuisine: 'text', author: 'text', source: 'text', meal: 'text', slug: 'text'})
+}, {timestamps: true, autoIndex: false})
 
 recipeSchema.pre('validate', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
@@ -122,8 +126,7 @@ recipeSchema.post('save', async function (next){
     next()
     
 })
-
-
 const Recipe = mongoose.model("Recipe", recipeSchema)
+
 Recipe.createIndexes()
 export default Recipe
