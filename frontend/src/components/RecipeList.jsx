@@ -16,23 +16,23 @@ const RecipeList = () => {
                     {recipes.map((recipe) => (
                         <ListGroup.Item key={recipe.id}>
                             <Row className = 'align-items-center'>
-                                <Col md={3}>
-                                    <strong style={{fontSize: `130%`}}>{recipe.name}</strong>
+                                <Col lg = {3} md={4} sm = {12}>
+                                    <strong style={{fontSize: `130%`}}><p>{recipe.name}<span className='display-mobile' style = {{display:'inline!important'}}> - Ready at {now.add(recipe.timeToMake, 'minute').format('h:mm a')}</span></p></strong>
                                 </Col>
-                                <Col md={1}>
+                                <Col lg = {1} md={8} sm={12}>
                                     <GFV recipe={recipe} fontSize='1.6rem'/>
                                 </Col>
-                                {recipe.numReviews > 0 ? (<Col md={2}>
+                                {recipe.numReviews > 0 ? (<Col md={2} className = 'display-desktop justify-content-center'>
                                     <StarRating rating={recipe.rating} text={`${recipe.numReviews} reviews`} />
                                 </Col>) : (
-                                    <Col md={2} style = {{textAlign:'center'}}>
+                                    <Col md={2} style = {{textAlign:'center'}}  className = 'display-desktop justify-content-center'>
                                         <span>No reviews</span>
                                     </Col>
                                 )}
-                                <Col md={4}>
+                                <Col md={4} sm={12} className = 'display-desktop'>
                                     <Tags tags={recipe.tags}/>
                                 </Col>
-                                <Col md={2}>
+                                <Col md={2} className='display-desktop'>
                                     {`Ready at ${now.add(recipe.timeToMake, 'minute').format('h:mm a')}`}
                                 </Col>
                                 

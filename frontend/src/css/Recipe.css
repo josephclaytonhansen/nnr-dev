@@ -26,3 +26,12 @@
 .tag-badge-container > *:last-child{
     margin-right: 0;
 }
+
+.badges-mobile .col-sm-4{
+    width:33%;
+}
+
+.badges-mobile{
+    margin-bottom:.5rem;
+
+}

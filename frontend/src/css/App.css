@@ -75,7 +75,7 @@ header{
     --balloon-font-size: 1rem;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 992px){
 .display-mobile{
     display: flex!important;
 }
@@ -84,7 +84,7 @@ header{
 }
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 992px){
 .display-mobile{
     display: none!important;
 }

@@ -51,7 +51,7 @@ const GFV = ({fontSize}) => {
 
             </Col>
         </Row>
-        <Row className = 'display-mobile justify-content-end '>
+        <Row className = 'display-mobile justify-content-end badges-mobile'>
                     {isGlutenFree && (<Col sm={4}><div className = 'bg-d-blue custom-badge' variant = 'light'>Gluten free</div></Col>)}
                     {!isGlutenFree && (<Col sm={4}><div className = 'bg-red custom-badge'>Not gluten free</div></Col>)}
                     {isVegetarian && (<Col sm={4}><div className = 'bg-d-blue custom-badge'>Vegetarian</div></Col>)}
