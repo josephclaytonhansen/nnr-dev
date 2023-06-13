@@ -13,7 +13,7 @@ const passportConfig = () => {
         try {
             const userExists = await User.findOne({email: {$eq: email}})
             if (userExists) {
-                return done(null, false, {message: 'Email already taken'})
+                return done(null, false, {message: 'Incorrect email or password'})
             } else {
                 const user = await User.create({email, password})
                 return done(null, user)

@@ -1,0 +1,27 @@
+.balloon-tooltip{
+    --balloon-font-size: 1rem;
+    --balloon-color: slategray;
+}
+
+.balloon-tooltip-danger{
+    --balloon-color: tomato;
+    --balloon-font-size: 1rem;
+}
+
+@media screen and (max-width: 768px){
+.display-mobile{
+    display: flex!important;
+}
+.display-desktop{
+    display: none!important;
+}
+}
+
+@media screen and (min-width: 768px){
+.display-mobile{
+    display: none!important;
+}
+.display-desktop{
+    display: flex!important;
+}
+}

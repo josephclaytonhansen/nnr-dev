@@ -12,6 +12,7 @@
 * remark-gfm https://www.npmjs.com/package/remark-gfm
 * react-toastify https://fkhadra.github.io/react-toastify/introduction
 * react-boostrap https://react-bootstrap.github.io/
+* balloon-css https://kazzkiq.github.io/balloon.css/
 * react-icons https://react-icons.github.io/react-icons/
 
 ### backend packages

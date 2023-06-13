@@ -1,6 +1,7 @@
 import React from "react"
 import Ingredients from "./Ingredients"
 import Instructions from "./Instructions"
+import Servings from "./Servings"
 import GFV from "./GFV"
 import '../css/Recipe.css'
 import {Row, Col, Container} from "react-bootstrap"
@@ -19,8 +20,10 @@ const Recipe = ({recipe}) => {
                 </Row>
                 
                 <Container>
-                <Row>
-                    <Col md={6} sm={12}><Ingredients recipe={recipe}/></Col>
+                <Row className = 'display-desktop'>
+                    <Col md={6} sm={12}>
+                        <Ingredients/>
+                        </Col>
                 
                <Col md={6} sm={12}><Instructions recipe={recipe}/></Col> 
                 </Row>
