@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, withRouter  } from 'react-route
 import AdminRecipesScreen from './screens/AdminRecipesScreen'
 import RecipeById from './screens/RecipeByIdScreen'
 import RecipeBySlug from './screens/RecipeBySlugScreen'
+import './css/App.css'
 
 function App() {
   return (

@@ -14,41 +14,38 @@ const GFV = () => {
     const isVegetarian = recipe.isVegetarian
     const isDogSafe = recipe.dogSafe
 
-    
-
-
     return(
         <>
         <Row className = 'display-desktop'> 
             <Col className = 'd-flex justify-content-start' style = {{gap:'2.5rem'}}>
                 {isGlutenFree ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-2" color={'#1A5276'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
                     <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} color={'tomato'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
                     </span>
                 )}
                 {isVegetarian ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Vegetarian" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-2" color={'#1A5276'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faSeedling} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw  balloon-tooltip-danger' aria-label="Not vegetarian" data-balloon-pos="down">
                     <FontAwesomeIcon icon ={faSeedling} transform="shrink-7 left-.25 down-.25" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} color={'tomato'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
                     </span>
                 )}
                 {isDogSafe ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Safe for dogs" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faDog} transform="shrink-2" color={'#1A5276'} fontSize = {'3rem'}/>
+                    <FontAwesomeIcon icon ={faDog} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'3rem'}/>
                     </span>
                 ) : (
                     <span className='fa-layers fa-fw  balloon-tooltip-danger' aria-label="Unsafe for dogs" data-balloon-pos="down">
                     <FontAwesomeIcon icon ={faDog} transform="shrink-8 left-1" fontSize = {'3rem'} color = {'#1A5276'}/>
-                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} color={'tomato'}/>
+                    <FontAwesomeIcon icon ={faBan} fontSize = {'3rem'} className = {'icon-red'}/>
                     </span>
                 )}
 

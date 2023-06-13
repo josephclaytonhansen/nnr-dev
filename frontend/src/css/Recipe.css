@@ -1,10 +1,18 @@
+.icon-dark-blue{
+    color: var(--dark-blue);
+}
+
+.icon-red{
+    color: var(--red);
+}
+
 .balloon-tooltip{
     --balloon-font-size: 1rem;
-    --balloon-color: slategray;
+    --balloon-color: var(--light-blue);
 }
 
 .balloon-tooltip-danger{
-    --balloon-color: tomato;
+    --balloon-color: var(--red);
     --balloon-font-size: 1rem;
 }
 
