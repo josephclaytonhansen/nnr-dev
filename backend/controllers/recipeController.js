@@ -198,8 +198,9 @@ const getRecipesDogSafe = asyncHandler(async (req, res) => {
 // @route GET /api/recipes/search/:query
 // @access Public
 const getRecipesBySearch = asyncHandler(async (req, res) => {
-    const query = req.params.query
-    const recipes = await Recipe.find({$text: {$search: query, $caseSensitive: false, $diacriticSensitive: true}})
+    const query = req.params.search
+    const recipes = await Recipe.find({$text: {$search: query}})
+
 
     if (recipes) {
         res.json(recipes)

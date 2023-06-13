@@ -56,17 +56,17 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
         }),
         getRecipesGlutenFree: builder.query({
             query: () => ({
-                url: `${RECIPES_URL}/safe/gluten-free`,
+                url: `${RECIPES_URL}/gf/gluten-free`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesVegetarian: builder.query({
             query: () => ({
-                url: `${RECIPES_URL}/safe/vegetarian`,
+                url: `${RECIPES_URL}/v/vegetarian`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesDogSafe: builder.query({
             query: () => ({
-                url: `${RECIPES_URL}/safe/dog-safe`,
+                url: `${RECIPES_URL}/ds/dog-safe`,
             }), keepUnusedDataFor: 5,
         }),
         getRecipesBySearch: builder.query({

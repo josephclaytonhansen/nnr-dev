@@ -3,8 +3,21 @@ import { LinkContainer } from "react-router-bootstrap"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {} from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from "react-router-dom"
 
 const Header = () => {
+    const history = useHistory()
+
+    const handleKeyDown = (e) => {
+        //if key is enter
+        if(e.keyCode === 13){
+            //get the value of the search bar
+            const search = e.target.value
+            //redirect to search page
+            history.push(`/search/${search}`)
+        }
+    }
+
     return(
         <header>
             <Navbar className='bg-purple main-header' variant = "dark" fixed='top' expand='lg' >
@@ -48,7 +61,8 @@ const Header = () => {
                         <NavDropdown.Item href="/recipes/dog-safe">Dog Safe</NavDropdown.Item>
                     </NavDropdown>
                         <Form className="d-flex ps-md-3">
-                        <Form.Control type="search" placeholder="Search" className="me-2 bg-l-cream" aria-label="Search"/>
+                        <Form.Control type="search" placeholder="Search" className="me-2 bg-l-cream" aria-label="Search"
+                        onKeyDown={handleKeyDown}/>
                     </Form>
                     </Nav>
                     </Navbar.Collapse>
