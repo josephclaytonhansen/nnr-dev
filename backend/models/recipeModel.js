@@ -16,7 +16,7 @@ const recipeSchema = new mongoose.Schema({
         unit: {
             type: String,
             required: true
-        }, index: true,
+        },
     }],
     instructions: [{
         step: {
