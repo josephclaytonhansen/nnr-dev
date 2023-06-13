@@ -109,6 +109,8 @@ const recipeSchema = new mongoose.Schema({
 
 }, {timestamps: true, autoIndex: true})
 
+recipeSchema.index({name: 'text', content: 'text', tags: 'text', ingredients: 'text', instructions: 'text', cuisine: 'text', author: 'text', source: 'text', meal: 'text', slug: 'text'})
+
 recipeSchema.pre('validate', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
     next()
@@ -123,4 +125,5 @@ recipeSchema.post('save', async function (next){
 
 
 const Recipe = mongoose.model("Recipe", recipeSchema)
+Recipe.createIndexes()
 export default Recipe
