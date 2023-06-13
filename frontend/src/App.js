@@ -9,6 +9,7 @@ import Cuisine from './screens/CuisineScreen'
 import GlutenFree from './screens/GlutenFreeScreen'
 import Vegetarian from './screens/VegetarianScreen'
 import DogSafe from './screens/DogSafeScreen'
+import Meal from './screens/MealScreen'
 import './css/App.css'
 import Header from './components/Header'
 
@@ -26,6 +27,8 @@ function App() {
           <Route path="/cuisines/:cuisine" component={withRouter(Cuisine)} />
           <Route path="/gluten-free" component={withRouter(GlutenFree)} />
           <Route path="/vegetarian" component={withRouter(Vegetarian)} />
+          <Route path="/dog-safe" component={withRouter(DogSafe)} />
+          <Route path="/meal/:meal" component={withRouter(Meal)} />
           <Route path="/" component={withRouter(AdminRecipesScreen)} exact index={true} />
           
         </Switch>

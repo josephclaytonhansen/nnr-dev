@@ -30,10 +30,10 @@ const Header = () => {
                     <Nav>
                         <Nav.Link href="/recipes">Recent</Nav.Link>
                         <NavDropdown title="By Meal" id="">
-                            <NavDropdown.Item href="/recipes/breakfast">Breakfast</NavDropdown.Item>
-                            <NavDropdown.Item href="/recipes/lunch">Lunch</NavDropdown.Item>
-                            <NavDropdown.Item href="/recipes/dinner">Dinner</NavDropdown.Item>
-                            <NavDropdown.Item href="/recipes/dessert">Dessert</NavDropdown.Item>
+                            <NavDropdown.Item href="/meal/breakfast">Breakfast</NavDropdown.Item>
+                            <NavDropdown.Item href="/meal/lunch">Lunch</NavDropdown.Item>
+                            <NavDropdown.Item href="/meal/dinner">Dinner</NavDropdown.Item>
+                            <NavDropdown.Item href="/meal/dessert">Dessert</NavDropdown.Item>
                         </NavDropdown>
                     
                     <NavDropdown title="Cuisines" id="">
