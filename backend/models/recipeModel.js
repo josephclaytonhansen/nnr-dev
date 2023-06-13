@@ -99,7 +99,7 @@ const recipeSchema = new mongoose.Schema({
 
 
 
-}, {timestamps: true})
+}, {timestamps: true, autoIndex: true})
 
 recipeSchema.pre('validate', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
