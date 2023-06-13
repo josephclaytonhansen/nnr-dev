@@ -4,19 +4,16 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {} from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from "react-router-dom"
+import {toast} from 'react-toastify'
 
 const Header = () => {
     const history = useHistory()
-
-    const handleKeyDown = (e) => {
-        //if key is enter
-        if(e.keyCode === 13){
-            //get the value of the search bar
-            const search = e.target.value
-            //redirect to search page
-            history.push(`/search/${search}`)
-        }
-    }
+    const handleKeyDown = async (e) => {
+        if (e.key === 'Enter'){
+        e.preventDefault()
+        //for some reason history isn't working here
+        window.location.href = `/search/${e.target.value}`
+    }}
 
     return(
         <header>
