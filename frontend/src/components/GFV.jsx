@@ -16,7 +16,9 @@ const GFV = ({fontSize}) => {
 
     return(
         <>
-        <Row className = 'display-desktop'> 
+        {recipe &&(
+            <>
+            <Row className = 'display-desktop'> 
             <Col className = 'd-flex justify-content-start' style = {{gap:fontSize}}>
                 {isGlutenFree ? (
                     <span className='fa-layers fa-fw balloon-tooltip' aria-label="Gluten free" data-balloon-pos="down">
@@ -59,6 +61,9 @@ const GFV = ({fontSize}) => {
                     {isDogSafe && (<Col sm={4}><div className = 'bg-d-blue custom-badge'>Safe for dogs</div></Col>)}
                     {!isDogSafe && (<Col sm={4}><div className = 'bg-red custom-badge'>Unsafe for dogs</div></Col>)}
         </Row>
+        </>
+        )}
+        
         </>
     )
 
