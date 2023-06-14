@@ -16,10 +16,24 @@ const Internal = ({recipe}) => {
     const [deleteRecipe, {isLoading: loadingDeleteRecipe}] = useDeleteRecipeMutation()
 
     const submitHandler = async(e) => {
+        console.log(recipe._id)
         e.preventDefault()
         if(recipe._id){
             try{
-                const res = await updateRecipe(recipe._id, recipe).unwrap()
+                recipe.name = name
+                recipe.timeToMake = timeToMake
+                recipe.ingredients = ingredients
+                recipe.instructions = instructions
+                recipe.feeds = feeds
+                recipe.image = image
+                recipe.content = content
+                recipe.meal = meal
+                recipe.cuisine = cuisine
+                recipe.tags = tags
+                recipe.source = source
+                recipe.comments = comments
+                
+                const res = await updateRecipe({id: recipe._id, data: recipe}).unwrap()
                 toast.success("Recipe updated")
             } catch(err){
                 toast.error(err?.data?.message || err.error)
