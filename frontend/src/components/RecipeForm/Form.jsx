@@ -32,7 +32,7 @@ const Internal = ({recipe}) => {
                 recipe.tags = tags
                 recipe.source = source
                 recipe.comments = comments
-                
+
                 const res = await updateRecipe({id: recipe._id, data: recipe}).unwrap()
                 toast.success("Recipe updated")
             } catch(err){
@@ -136,9 +136,6 @@ const Internal = ({recipe}) => {
                                         <Col sm={12}>  
                                             <Form.Label><h3>Ingredients</h3></Form.Label>
                                         </Col>
-                                        <Col>
-                                            <Button variant='success'>Add</Button>
-                                        </Col>
                                     </Row>
                                     <Row>
                                         <Col md = {2}>
@@ -169,16 +166,14 @@ const Internal = ({recipe}) => {
                                     </Row>
                                     ))}
                                     
-                                </Form.Group>                       
+                                </Form.Group>  
+                                <Button variant='success'>Add</Button>                     
                             </Col>
                             <Col lg = {6} md = {12}>
                                 <Form.Group controlId='instructions'>
                                     <Row className = 'my-3'>
                                         <Col sm={12}>
                                             <Form.Label><h3>Instructions</h3></Form.Label>
-                                        </Col>
-                                        <Col>
-                                            <Button variant='success'>Add</Button>
                                         </Col>
                                     </Row>
                                     
@@ -204,6 +199,7 @@ const Internal = ({recipe}) => {
                                         </Row>
                                     ))}
                                 </Form.Group>
+                                <Button variant='success'>Add</Button>
                             </Col>
                         </Row>
                         </ListGroup.Item>
