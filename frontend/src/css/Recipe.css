@@ -50,3 +50,8 @@
     background-color: var(--light-cream);
     
 }
+
+.list-group-hover:hover{
+    transition: background-color 0.3s;
+    background-color: var(--bs-list-group-action-hover-bg);
+}

@@ -11,39 +11,8 @@ const RecipeForm = ({recipe}) => {
     const [createRecipe, {isLoading: loadingCreateRecipe}] = useCreateRecipeMutation()
     const [deleteRecipe, {isLoading: loadingDeleteRecipe}] = useDeleteRecipeMutation()
 
-    const submitHandler = async(e) => {
-        e.preventDefault()
-        if(data._id){
-            try{
-                const res = await updateRecipe(data._id, data).unwrap()
-                toast.success("Recipe updated")
-            } catch(err){
-                toast.error(err?.data?.message || err.error)
-            }
-        } else {
-            try{
-                const res = await createRecipe(data).unwrap()
-                toast.success("Recipe created")
-            } catch(err){
-                toast.error(err?.data?.message || err.error)
-            }
-        }
-    }
-
-    const deleteHandler = async(e) => {
-        e.preventDefault()
-        if(data._id){
-            try{
-                const res = await deleteRecipe(data._id).unwrap()
-                toast.success("Recipe deleted")
-            } catch(err){
-                toast.error(err?.data?.message || err.error)
-            }
-        }
-    }
-
     return(
-        <Internal recipe={data} submit={submitHandler} deleteF={deleteHandler}/>
+        <Internal recipe={data}/>
     )
 }
 
