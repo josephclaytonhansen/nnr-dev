@@ -8,11 +8,17 @@ import 'balloon-css'
 import '../css/Recipe.css'
 
 
-const GFV = ({fontSize}) => {
-    const recipe = JSON.parse(sessionStorage.getItem("recipe"))
-    const isGlutenFree = recipe.isGlutenFree
-    const isVegetarian = recipe.isVegetarian
-    const isDogSafe = recipe.dogSafe
+const GFV = ({fontSize, recipe}) => {
+    
+    if (!recipe) {
+        const recipe = JSON.parse(sessionStorage.getItem("recipe"))
+        if (!recipe){
+            return null
+        }
+    }
+    const isGlutenFree = recipe.isGlutenFree || false
+    const isVegetarian = recipe.isVegetarian || false
+    const isDogSafe = recipe.dogSafe || false
 
     return(
         <>
