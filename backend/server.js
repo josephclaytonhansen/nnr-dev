@@ -63,7 +63,7 @@ app.use("/api/recipes", recipeRoutes)
 
 
 
-app.post("/api/users/register", passport.authenticate('local-signup', {session: false}), (req, res, next) => {
+app.post("/api/users/register", passport.authenticate('local-signup'), (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*')
     res.json({
         user: req.user
@@ -72,7 +72,7 @@ app.post("/api/users/register", passport.authenticate('local-signup', {session: 
 
 app.post(
     "/api/users/login",
-    passport.authenticate('local-login', { session: false }),
+    passport.authenticate('local-login'),
     (req, res, next) => {
       // login
       jwt.sign({user: req.user}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
@@ -90,10 +90,18 @@ app.post(
    )
 
 //Passport protected routes
-app.post("/api/comment", passport.authenticate('jwt', {session: false}), (req, res, next) => {
+//Comment
+app.post("/api/comment", passport.authenticate('can-comment'), (req, res, next) => {
     res.json({
         message: "Comment posted"
     })
+})
+
+//Create recipe
+app.post("/api/recipe", passport.authenticate('can-author'), (req, res, next) => {
+  res.json({
+      message: "Recipe posted"
+  })
 })
 
 app.use(notFound)

@@ -113,4 +113,6 @@ export const {
     useGetRecipesDogSafeQuery,
     useGetRecipesBySearchQuery,
     useUpdateRecipeMutation,
+    useDeleteRecipeMutation,
+    useCreateRecipeMutation,
  } = recipesApiSlice
