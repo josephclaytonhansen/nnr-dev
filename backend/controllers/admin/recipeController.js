@@ -83,7 +83,7 @@ const createRecipeById = asyncHandler(async (req, res) => {
 const deleteRecipeById = asyncHandler(async (req, res) => {
     const recipe = await Recipe.findById(req.params.id)
     if (recipe) {
-        await recipe.remove()
+        await recipe.deleteOne()
         res.json({message: 'Recipe removed'})
     } else {
         res.status(404)

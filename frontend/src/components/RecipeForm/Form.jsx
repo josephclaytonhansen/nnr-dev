@@ -1,19 +1,25 @@
 import { Link } from 'react-router-dom'
-import {ListGroup, Row, Col, InputGroup, Form, Container, Badge, FormGroup, FormControl, Button, Image} from 'react-bootstrap'
+import {ListGroup, Row, Col, InputGroup, Form, Container, Badge, FormGroup, FormControl, Button, Image, Modal} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faCheck, faFlag, faClock } from '@fortawesome/free-solid-svg-icons'
 import 'balloon-css'
 import GFV from '../GFV'
 import '../../css/Recipe.css'
-import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useCreateRecipeMutation, useDeleteRecipeMutation, useUpdateRecipeMutation } from '../../slices/recipesApiSlice'
+import { useHistory } from 'react-router-dom'
+import {useState} from 'react'
+import { useEffect } from 'react'
 
 const Internal = ({recipe}) => {
+
+    const history = useHistory()
 
     const [updateRecipe, {isLoading: loadingUpdateRecipe}] = useUpdateRecipeMutation()
     const [createRecipe, {isLoading: loadingCreateRecipe}] = useCreateRecipeMutation()
     const [deleteRecipe, {isLoading: loadingDeleteRecipe}] = useDeleteRecipeMutation()
+
+    const [modalShow, setModalShow] = useState(false)
 
     const submitHandler = async(e) => {
         console.log(recipe._id)
@@ -54,6 +60,7 @@ const Internal = ({recipe}) => {
             try{
                 const res = await deleteRecipe(recipe._id).unwrap()
                 toast.success("Recipe deleted")
+                history.push('/admin/')
             } catch(err){
                 toast.error(err?.data?.message || err.error)
             }
@@ -448,10 +455,16 @@ const Internal = ({recipe}) => {
                                     </Row>
                             </ListGroup.Item>
                         </ListGroup>
-                        <Button type='submit' variant='primary'>Submit</Button>
+                        <Row className = 'd-flex'>
+                            <Col className='flex-fill' xl={6}><Button type='submit' className='w-100 btn btn-lg' variant='primary'>Submit</Button></Col>
+                        
+                        <Col className='flex-fill' xl = {6}><Button variant='danger' className='w-100 btn btn-lg' onClick={deleteHandler}>Delete</Button></Col>
+                        </Row>
+
                     </Form>
                 </Col>
             </Row>
+            
         </Container>
     )
 }
