@@ -228,13 +228,13 @@ const Internal = ({recipe}) => {
                                             }}></Form.Control>
                                         </Col>
                                         <Col md = {1}>
-                                            <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                                            <Button variant='danger' onClick={(e) => {deleteIngredient(index)}}><FontAwesomeIcon icon={faTrashAlt}/></Button>
                                         </Col>
                                     </Row>
                                     ))}
                                     
                                 </Form.Group>  
-                                <Button variant='success'>Add</Button>                     
+                                <Button variant='success' onClick={addIngredient}>Add</Button>                     
                             </Col>
                             <Col lg = {6} md = {12}>
                                 <Form.Group controlId='instructions'>
@@ -265,12 +265,12 @@ const Internal = ({recipe}) => {
                                             }}></Form.Control>
                                         </Col>
                                         <Col md = {1}>
-                                            <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                                            <Button variant='danger' onClick={(e) => {deleteInstruction(index)}}><FontAwesomeIcon icon={faTrashAlt}/></Button>
                                         </Col>
                                         </Row>
                                     ))}
                                 </Form.Group>
-                                <Button variant='success'>Add</Button>
+                                <Button variant='success' onClick={addInstruction}>Add</Button>
                             </Col>
                         </Row>
                         </ListGroup.Item>
