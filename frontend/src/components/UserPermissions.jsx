@@ -18,6 +18,8 @@ const UserPermissions = ({ permissions }) => {
     let comment = null
     let special = null
 
+    let colors = ['icon-dark-blue', 'icon-dark-blue', 'icon-dark-blue']
+
 
     if (permissions.includes('is-user')){
         isUser = faUser
@@ -71,15 +73,20 @@ const UserPermissions = ({ permissions }) => {
     }
 
     if (isUser !== null && isModerator === null && isAdmin === null){
-        user = isUser
+        user = null
     } else if (isUser !== null && isModerator !== null && isAdmin === null){
         user = isModerator
+        colors[0] = 'icon-strong-purple'
     } else if (isUser !== null && isModerator === null && isAdmin !== null){
         user = isAdmin
     }
 
-    if (isAuthor !== null){
+    if (isAuthor !== null && isAdmin === null){
         user = isAuthor
+        colors[0] = 'icon-light-blue'
+    } else if (isAuthor !== null && isAdmin !== null){
+        user = isAdmin
+        colors[0] = 'icon-strong-blue'
     }
 
     if (isCommentor !== null && isSelfCommentEditor === null){
@@ -90,8 +97,10 @@ const UserPermissions = ({ permissions }) => {
 
     if (isBanned !== null){
         special = isBanned
+        colors[2] = 'icon-red'
     } else if (isFlagger !== null){
         special = isFlagger
+        colors[2] = 'icon-light-purple'
     } else if (isSelfEmailEditor !== null){
         special = isSelfEmailEditor
     }
@@ -109,7 +118,7 @@ const UserPermissions = ({ permissions }) => {
                 if(permissionIcon !== null){
                     return(
                         <Col key = {index} className = 'd-flex justify-content-center flex-grow-0 flex-shrink-0'>
-                            <FontAwesomeIcon icon = {permissionIcon} fontSize = {'1.4rem'} className = 'icon icon-dark-blue' />
+                            <FontAwesomeIcon icon = {permissionIcon} fontSize = {'1.4rem'} className = {`icon ${colors[index]}`} />
                         </Col>
                     )
                 }
