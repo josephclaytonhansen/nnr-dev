@@ -90,6 +90,39 @@ const Internal = ({recipe}) => {
         }
     }
 
+    const updateIngredient = (index, field, value) => {
+        let temp = [...ingredients]
+        temp[index][field] = value
+        setIngredients(temp)
+        recipe.ingredients = ingredients
+    }
+
+    const updateIngredientName = (index, name) => {
+        updateIngredient(index, 'name', name)
+    }
+
+    const updateIngredientAmount = (index, amount) => {
+        updateIngredient(index, 'amount', amount)
+    }
+
+    const updateIngredientUnit = (index, unit) => {
+        updateIngredient(index, 'unit', unit)
+    }
+
+    const addIngredient = (name='', amount='', unit='') => {
+        let temp = [...ingredients]
+        temp.push({name:name, amount:amount, unit:unit})
+        setIngredients(temp)
+        recipe.ingredients = ingredients
+    }
+
+    const deleteIngredient = (index) => {
+        let temp = [...ingredients]
+        temp.splice(index, 1)
+        setIngredients(temp)
+        recipe.ingredients = ingredients
+    }
+
 
     return(
         <Container>
@@ -152,13 +185,19 @@ const Internal = ({recipe}) => {
                                         <Row className='my-1'>
                                         <Col md = {2}>
                                             
-                                            <Form.Control type='number' value={ingredient.amount} ></Form.Control>
+                                            <Form.Control type='number' value={ingredient.amount} onChange={(e) => {
+                                                updateIngredientAmount(index, e.target.value)
+                                            }} ></Form.Control>
                                         </Col>
                                         <Col md = {3}>
-                                            <Form.Control type='text' value={ingredient.unit} placeholder='single' ></Form.Control>
+                                            <Form.Control type='text' value={ingredient.unit} placeholder='single' onChange={(e) => {
+                                                updateIngredientUnit(index, e.target.value)
+                                            }} ></Form.Control>
                                         </Col>
                                         <Col md = {6}>
-                                            <Form.Control type='text' value={ingredient.name} ></Form.Control>
+                                            <Form.Control type='text' value={ingredient.name} onChange={(e) => {
+                                                updateIngredientName(index, e.target.value)
+                                            }}></Form.Control>
                                         </Col>
                                         <Col md = {1}>
                                             <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt}/></Button>
