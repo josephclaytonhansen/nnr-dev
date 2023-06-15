@@ -21,6 +21,12 @@ const users = [
         password: 'password',
         permissions: 'is-user.is-moderator.is-commentor.is-flagger.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor',
         email: 'email4@email.com'
+    },
+    {
+        displayName: "Test User (Admin)",
+        password: 'password',
+        permissions: 'is-user.is-admin.is-moderator.is-author.is-commentor.is-flagger.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor',
+        email: 'email5@email.com'
     }
 ]
 
