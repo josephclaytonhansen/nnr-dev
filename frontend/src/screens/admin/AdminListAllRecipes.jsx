@@ -21,7 +21,7 @@ const AdminListAllRecipes = () => {
                     <Loader/>
                 ) : error ? (
                     <>
-                    <Message variant='dark'>error?.data?.message? || error?.error?</Message>
+                    <Message variant='dark'>{error.error}{error.data.message}</Message>
                     <AdminList/>
                     </>
                 ) : (
