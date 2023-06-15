@@ -16,12 +16,12 @@ const AdminListAllRecipes = () => {
             <Container>
             <h1 style = {{marginBottom: "2rem"}}>All recipes</h1>
                 {recipes ? (
-                    <AdminList/>
+                    <AdminList p ={recipes}/>
                 ) : isLoading ? (
                     <Loader/>
                 ) : error ? (
                     <>
-                    <Message variant='dark'>There has been an error; showing cached recipes. Please refresh the page.</Message>
+                    <Message variant='dark'>error?.data?.message? || error?.error?</Message>
                     <AdminList/>
                     </>
                 ) : (

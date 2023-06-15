@@ -1,0 +1,39 @@
+import React from "react"
+import { Container, Row, Col, ListGroup, Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+
+const AdminListUsers = () => {
+    const users = JSON.parse(sessionStorage.getItem("users"))
+
+    return(
+        <Row>
+        <Col lg = {4} md = {6}>
+        {users && (
+            <ListGroup variant='flush'>
+                {users.map((recipe) => (
+                    <ListGroup.Item key={recipe.id}>
+                        <Link to = {`/recipes/${recipe.slug}`} className = "recipe-row-link">
+                        <Row className = ''>
+                            <Col lg = {11} md = {9}>
+                                <strong><p>{recipe.name}</p></strong>
+                            </Col>
+                            <Col lg = {1} md= {2}>
+                                <Button variant='light' className='btn'>
+                                <Link to={`/admin/recipe/${recipe._id}`}><FontAwesomeIcon icon={faEdit}/></Link>
+                                </Button>
+                            </Col>
+
+                        </Row>
+                        </Link>
+                    </ListGroup.Item>
+                ))}
+
+            </ListGroup>)}
+            </Col>
+        </Row>
+    )
+}
+
+export default AdminListUsers
