@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter  } from 'react-router-dom'
 import AdminRecipesScreen from './screens/AdminRecipesScreen'
+import AdminListAllRecipes from './screens/admin/AdminListAllRecipes'
 import CRUDRecipesScreen from './screens/admin/CRUDRecipesScreen'
 import RecipeById from './screens/RecipeByIdScreen'
 import RecipeBySlug from './screens/RecipeBySlugScreen'
@@ -35,6 +36,7 @@ function App() {
           <Route path="/recipes" component={withRouter(ListAllRecipes)} />
 
           <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
+          <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
 
 
           <Route path="/" component={withRouter(AdminRecipesScreen)} exact index={true} />
