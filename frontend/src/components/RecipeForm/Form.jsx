@@ -123,6 +123,34 @@ const Internal = ({recipe}) => {
         recipe.ingredients = ingredients
     }
 
+    const updateInstruction = (index, field, value) => {
+        let temp = [...instructions]
+        temp[index][field] = value
+        setInstructions(temp)
+        recipe.instructions = instructions
+    }
+
+    const updateInstructionName = (index, name) => {
+        updateInstruction(index, 'name', name)
+    }
+
+    const updateInstructionDetails = (index, details) => {
+        updateInstruction(index, 'details', details)
+    }
+
+    const addInstruction = (name='', details='') => {
+        let temp = [...instructions]
+        temp.push({name:name, details:details})
+        setInstructions(temp)
+        recipe.instructions = instructions
+    }
+
+    const deleteInstruction = (index) => {
+        let temp = [...instructions]
+        temp.splice(index, 1)
+        setInstructions(temp)
+        recipe.instructions = instructions
+    }
 
     return(
         <Container>
@@ -227,10 +255,14 @@ const Internal = ({recipe}) => {
                                     {instructions.map((instruction, index) => (
                                         <Row className='my-1'>
                                         <Col md = {6}>
-                                            <Form.Control type='text' as="textarea" value={instruction.name} ></Form.Control>
+                                            <Form.Control type='text' as="textarea" value={instruction.name} onChange={(e) => {
+                                                updateInstructionName(index, e.target.value)
+                                            }} ></Form.Control>
                                         </Col>
                                         <Col md = {5}>
-                                            <Form.Control type='text' as="textarea" value={instruction.details} ></Form.Control>
+                                            <Form.Control type='text' as="textarea" value={instruction.details} onChange={(e) => {
+                                                updateInstructionDetails(index, e.target.value)
+                                            }}></Form.Control>
                                         </Col>
                                         <Col md = {1}>
                                             <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt}/></Button>
