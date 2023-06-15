@@ -1,4 +1,4 @@
-import asyncHandler from "../../middleware/asyncHandler"
+import asyncHandler from '../../middleware/asyncHandler.js'
 import User from "../../models/userModel.js"
 
 // @desc    Create user
@@ -124,4 +124,14 @@ const deleteUserById = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 })
+
+export {
+    getUsers,
+    getUserById,
+    getUserByIdAdmin,
+    getUserByEmail,
+    createUser,
+    updateUserById,
+    deleteUserById,
+}
 

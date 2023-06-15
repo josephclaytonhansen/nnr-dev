@@ -21,3 +21,5 @@ router.route('/:id').delete(deleteUserById)
 //Public routes
 router.route('/:id').get(getUserById)
 router.route('/register').post(createUser)
+
+export default router
