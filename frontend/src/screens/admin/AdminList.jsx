@@ -6,9 +6,14 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const AdminList = () => {
     const recipes = JSON.parse(sessionStorage.getItem("recipes"))
-    const recipesCol1 = recipes.slice(0, Math.ceil(recipes.length/3))
-    const recipesCol2 = recipes.slice(Math.ceil(recipes.length/3), Math.ceil(recipes.length/3)*2)
-    const recipesCol3 = recipes.slice(Math.ceil(recipes.length/3)*2, recipes.length)
+    
+    let recipesCopy = [...recipes]
+    recipesCopy.sort((a, b) => (a.dateModified > b.dateModified) ? -1 : 1)
+
+    const recipesCol1 = recipesCopy.slice(0, Math.ceil(recipes.length/3))
+    const recipesCol2 = recipesCopy.slice(Math.ceil(recipes.length/3), Math.ceil(recipes.length/3)*2)
+    const recipesCol3 = recipesCopy.slice(Math.ceil(recipes.length/3)*2, recipes.length)
+
     return(
         <Row>
         <Col lg = {4} md = {6}>

@@ -10,7 +10,7 @@
     --light-cream: rgb(248, 244, 244);
     --dark-gray: #2c2929;
     --strong-blue: rgb(46, 102, 187);
-    --strong-purple: rgb(98, 54, 163);
+    --strong-purple: rgb(122, 76, 190);
 }
 main{
     padding: max(2rem, 1vw);
