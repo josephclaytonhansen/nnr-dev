@@ -27,7 +27,18 @@ const users = [
         password: 'password',
         permissions: 'is-user.is-admin.is-moderator.is-author.is-commentor.is-flagger.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor',
         email: 'email5@email.com'
-    }
+    },
+    {
+        displayName: "John Doe",
+        password: 'password',
+        email: "john@email.com",
+    },
+    {
+        displayName: "Jane Doe",
+        password: 'password',
+        email: "jane@email.com",
+    },
+
 ]
 
 export default users
