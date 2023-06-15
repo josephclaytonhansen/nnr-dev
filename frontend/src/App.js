@@ -13,6 +13,7 @@ import DogSafe from './screens/DogSafeScreen'
 import Meal from './screens/MealScreen'
 import ListAllRecipes from './screens/ListAllRecipesScreen'
 import './css/App.css'
+import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
     <Header></Header>
     <Router>
         <Switch>
-          
+
           <Route path="/recipes/id/:id" component={withRouter(RecipeById)} />
           <Route path="/recipes/:slug" component={withRouter(RecipeBySlug)} />
           <Route path="/search/:query" component={withRouter(SearchResults)} />

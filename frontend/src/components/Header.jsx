@@ -34,6 +34,7 @@ const Header = () => {
                             <NavDropdown.Item href="/meal/lunch">Lunch</NavDropdown.Item>
                             <NavDropdown.Item href="/meal/dinner">Dinner</NavDropdown.Item>
                             <NavDropdown.Item href="/meal/dessert">Dessert</NavDropdown.Item>
+                            <NavDropdown.Item href="/meal/snack">Snack</NavDropdown.Item>
                         </NavDropdown>
                     
                     <NavDropdown title="Cuisines" id="">
