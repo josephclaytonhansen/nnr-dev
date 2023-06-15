@@ -16,7 +16,7 @@ const AdminListAllRecipes = () => {
             <Container>
             <h1 style = {{marginBottom: "2rem"}}>All recipes</h1>
                 {recipes ? (
-                    <AdminList p ={recipes}/>
+                    <AdminList/>
                 ) : isLoading ? (
                     <Loader/>
                 ) : error ? (
