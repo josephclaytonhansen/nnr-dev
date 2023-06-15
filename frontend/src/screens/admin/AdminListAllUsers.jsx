@@ -17,7 +17,7 @@ const AdminListAllUsers = () => {
             <Container>
             <h1 style = {{marginBottom: "2rem"}}>All users</h1>
                 {users ? (
-                    <AdminList p ={'users'}/>
+                    <AdminListUsers/>
                 ) : isLoading ? (
                     <Loader/>
                 ) : error ? (
