@@ -20,7 +20,7 @@ const Recipe = ({recipe}) => {
                 </Row>
                 
                 <Container>
-                <Row className="my-4">
+                <Row className="my-4 gy-2">
                 <Col lg = {5} md={6} sm={12}><Card><Card.Body><Ingredients recipe={recipe}/></Card.Body></Card></Col> 
                 
                <Col lg = {7} md={6} sm={12}><Card><Card.Body><Instructions recipe={recipe}/></Card.Body></Card></Col> 

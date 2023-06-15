@@ -39,7 +39,7 @@ const GFV = (props) => {
     if (onClicksUse){
         return(
             <>
-            <Row className = 'display-desktop'> 
+            <Row className = ''> 
             <Col className = 'd-flex justify-content-start' style = {{gap:fontSize}}>
             {isGlutenFree ? (
                <Button width={fontSize} height={fontSize} id='gluten free' variant = 'light' onClick={toggleOnClick}>
@@ -138,6 +138,40 @@ const GFV = (props) => {
 
             )}
             </Col>
+            </Row>
+            <Row className = 'display-mobile me-auto justify-content-start align-items-center align-content-center' style={{marginTop: '1rem'}}>
+            <Col style = {{width:'2.1rem'}}  className='flex-shrink-0 flex-grow-0'>
+            {isGlutenFree ? (
+                <FontAwesomeIcon  icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
+            ) : (
+                <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
+                <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
+                <FontAwesomeIcon id="not gluten free" icon ={faBan} fontSize = {'2rem'} className = {'icon-red'} />
+                </span>
+            )}
+            </Col>
+            <Col style = {{width:'2.1rem'}} className='flex-shrink-0 flex-grow-0'>
+
+            {isVegetarian ? (
+                <FontAwesomeIcon  icon ={faSeedling} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
+            ) : (
+                <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not vegetarian" data-balloon-pos="down">
+                <FontAwesomeIcon icon ={faSeedling} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
+                <FontAwesomeIcon id="not vegetarian" icon ={faBan} fontSize = {'2rem'} className = {'icon-red'} />
+                </span>
+            )}
+            </Col>
+            <Col style = {{width:'2.1rem'}} className='flex-shrink-0 flex-grow-0'>
+                {isDogSafe ? (
+                    <FontAwesomeIcon  icon ={faDog} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
+                ) : (
+                    <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not safe for dogs" data-balloon-pos="down">
+                    <FontAwesomeIcon icon ={faDog} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
+                    <FontAwesomeIcon id="not safe for dogs" icon ={faBan} fontSize = {'2rem'} className = {'icon-red'} />
+                    </span>
+                )}
+            </Col>
+
             </Row>
             </>
 
