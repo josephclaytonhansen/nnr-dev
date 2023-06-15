@@ -12,16 +12,19 @@ const AdminListUsers = () => {
         <Col lg = {4} md = {6}>
         {users && (
             <ListGroup variant='flush'>
-                {users.map((recipe) => (
-                    <ListGroup.Item key={recipe.id}>
-                        <Link to = {`/recipes/${recipe.slug}`} className = "recipe-row-link">
+                {users.map((user) => (
+                    <ListGroup.Item key={user.id}>
+                        <Link className = "recipe-row-link">
                         <Row className = ''>
                             <Col lg = {11} md = {9}>
-                                <strong><p>{recipe.name}</p></strong>
+                                <p><strong>{user.displayName}</strong><br/>
+                                {user.email}<br/>
+                                {user.password}<br/>
+                                {user.permissions}</p>
                             </Col>
                             <Col lg = {1} md= {2}>
                                 <Button variant='light' className='btn'>
-                                <Link to={`/admin/recipe/${recipe._id}`}><FontAwesomeIcon icon={faEdit}/></Link>
+                                <Link><FontAwesomeIcon icon={faEdit}/></Link>
                                 </Button>
                             </Col>
 
