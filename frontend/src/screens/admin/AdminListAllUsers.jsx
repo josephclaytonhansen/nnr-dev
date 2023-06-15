@@ -9,9 +9,6 @@ import Message from "../../components/Message"
 
 const AdminListAllUsers = () => {
     const {data:users, isLoading, error} = useGetUsersQuery()
-    if (users){
-        sessionStorage.setItem("users", JSON.stringify(users))
-    }
     return(
         <main>
             <Container>
