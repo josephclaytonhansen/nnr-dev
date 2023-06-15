@@ -3,7 +3,7 @@ import Ingredients from "./Ingredients"
 import Instructions from "./Instructions"
 import GFV from "./GFV"
 import '../css/Recipe.css'
-import {Row, Col, Container} from "react-bootstrap"
+import {Row, Col, Container, Card} from "react-bootstrap"
 
 const Recipe = ({recipe}) => {
     if (recipe){
@@ -13,19 +13,17 @@ const Recipe = ({recipe}) => {
             <Container className="recipe">
             {recipe && (
                 <>
-                <Row className = 'd-flex align-items-center'><Col md ={9} sm = {12}><h1>{recipe.name}</h1></Col>
+                <Row className = 'd-flex align-items-center'><Col lg = {9} md ={6} sm = {12}><h1>{recipe.name}</h1></Col>
                 <Col lg = {3} md={6} sm = {8} xs = {12}>
                     <GFV fontSize='2.6rem' recipe={recipe}/>
                 </Col>
                 </Row>
                 
                 <Container>
-                <Row>
-                    <Col md={6} sm={12}>
-                        <Ingredients/>
-                        </Col>
+                <Row className="my-4">
+                <Col lg = {5} md={6} sm={12}><Card><Card.Body><Ingredients recipe={recipe}/></Card.Body></Card></Col> 
                 
-               <Col md={6} sm={12}><Instructions recipe={recipe}/></Col> 
+               <Col lg = {7} md={6} sm={12}><Card><Card.Body><Instructions recipe={recipe}/></Card.Body></Card></Col> 
                 </Row>
                 </Container>
                 </>

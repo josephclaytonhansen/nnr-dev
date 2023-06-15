@@ -11,7 +11,7 @@
     --dark-gray: #2c2929;
 }
 main{
-    padding: max(1rem, 2vw);
+    padding: max(2rem, 1vw);
 }
 
 header{
