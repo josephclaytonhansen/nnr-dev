@@ -16,6 +16,20 @@ main{
     padding: max(2rem, 1vw);
 }
 
+footer *{
+    text-decoration: none!important;
+
+}
+
+#footer-hover-row{
+    transition: all 0.3s ease-in-out;
+}
+
+#footer-arrow{
+    transition: transform 0.2s ease-in-out;
+    transition: opacity 0.3s;
+}
+
 header{
     padding-bottom:max(4%, 6vh);
 }
@@ -97,6 +111,20 @@ header{
 
 .bg-l-cream{
     background-color: var(--light-cream)!important;
+}
+
+.bg-d-gray{
+    background-color: var(--dark-gray)!important;
+    color: var(--cream)!important;
+}
+
+.bg-d-gray a{
+    color: var(--cream)!important;
+    transition: all 0.2s ease-in-out;
+}
+
+.bg-d-gray a:hover{
+    color: var(--lighter-blue)!important;
 }
 
 .balloon-tooltip{

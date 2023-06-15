@@ -17,6 +17,7 @@ import ListAllRecipes from './screens/ListAllRecipesScreen'
 import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -44,7 +45,9 @@ function App() {
           <Route path="/" component={withRouter(AdminRecipesScreen)} exact index={true} />
           
         </Switch>
+        <Footer></Footer>
     </Router>
+    
     </>
   )
 }
