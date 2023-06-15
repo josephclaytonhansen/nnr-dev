@@ -7,6 +7,7 @@ import connectDB from './config/db.js'
 import passport from 'passport'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
 import recipeRoutes from "./routes/recipeRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 import cors from 'cors'
 
 
@@ -60,6 +61,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/recipes", recipeRoutes)
+app.use("/api/users", userRoutes)
 
 
 
