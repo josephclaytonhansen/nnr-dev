@@ -155,7 +155,6 @@ recipeSchema.pre('validate', async function (next){
 
 recipeSchema.post('save', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
-    next()
     
 })
 const Recipe = mongoose.model("Recipe", recipeSchema)
