@@ -28,8 +28,8 @@ function App() {
         <Switch>
 
           <Route path="/recipes/id/:id" component={withRouter(RecipeById)} />
-          <Route path="/recipes/:slug" component={withRouter(RecipeBySlug)} />
           <Route path="/recipes/plain-text/:slug" component={withRouter(PlainTextRecipe)}/>
+          <Route path="/recipes/:slug" component={withRouter(RecipeBySlug)} />
           <Route path="/search/:query" component={withRouter(SearchResults)} />
           <Route path="/tags/:tag" component={withRouter(Tag)} />
           <Route path="/cuisines/:cuisine" component={withRouter(Cuisine)} />

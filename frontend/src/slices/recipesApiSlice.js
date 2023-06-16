@@ -120,4 +120,5 @@ export const {
     useUpdateRecipeMutation,
     useDeleteRecipeMutation,
     useCreateRecipeMutation,
+    useGetRecipeBySlugPlainTextQuery
  } = recipesApiSlice
