@@ -50,7 +50,7 @@ const GFV = (props) => {
             ) : (
                 <Button width={fontSize} height={fontSize} id='gluten free' variant = 'light' onClick={toggleOnClick}>
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
+                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-7 left-2" fontSize = {fontSize} className = {'icon-dark-blue'} />
                     <FontAwesomeIcon icon ={faBan} fontSize = {fontSize} className = {'icon-red'} />
                     </span>
                     </Button>
@@ -104,7 +104,7 @@ const GFV = (props) => {
             ) : (
 
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
+                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-7 left-2" fontSize = {fontSize} className = {'icon-dark-blue'} />
                     <FontAwesomeIcon id="not gluten free" icon ={faBan} fontSize = {fontSize} className = {'icon-red'} />
                     </span>
 
@@ -139,13 +139,13 @@ const GFV = (props) => {
             )}
             </Col>
             </Row>
-            <Row className = 'display-mobile me-auto justify-content-start align-items-center align-content-center' style={{marginTop: '1rem'}}>
+            <Row className = 'display-mobile me-auto justify-content-start align-items-center align-content-center gx-5' style={{marginTop: '1rem'}}>
             <Col style = {{width:'2.1rem'}}  className='flex-shrink-0 flex-grow-0'>
             {isGlutenFree ? (
                 <FontAwesomeIcon  icon ={faWheatAwnCircleExclamation} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
             ) : (
                 <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
+                <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-7 left-2" fontSize = {'2rem'} className = {'icon-dark-blue'} />
                 <FontAwesomeIcon id="not gluten free" icon ={faBan} fontSize = {'2rem'} className = {'icon-red'} />
                 </span>
             )}

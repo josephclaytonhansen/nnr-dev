@@ -7,16 +7,26 @@ import {Row, Col, Container, Card, Image} from "react-bootstrap"
 import remarkGfm from "remark-gfm"
 import ReactMarkdown from "react-markdown"
 import Comments from "./Comments"
+import ShareBar from "./ShareBar"
 
 const Recipe = ({recipe}) => {
     if (recipe){
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
             <main>
+                <ShareBar/>
             <Container>
             {recipe && (
                 <>
-                <Row className = 'd-flex align-items-center'><Col lg = {9} md ={6} sm = {12}><h1>{recipe.name}</h1></Col>
+                <Row className = 'd-flex align-items-center'>
+                    <Col lg = {9} md ={6} sm = {12}>
+                        <Row>
+                            <Col>
+                            <h1>{recipe.name}</h1>
+                            </Col>
+                        </Row>
+
+                    </Col>
                 <Col lg = {3} md={6} sm = {8} xs = {12}>
                     <GFV fontSize='2.6rem' recipe={recipe}/>
                 </Col>

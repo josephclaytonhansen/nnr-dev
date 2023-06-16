@@ -6,6 +6,7 @@ import AdminScreen from './screens/admin/AdminScreen'
 import CRUDRecipesScreen from './screens/admin/CRUDRecipesScreen'
 import RecipeById from './screens/RecipeByIdScreen'
 import RecipeBySlug from './screens/RecipeBySlugScreen'
+import PlainTextRecipe from './screens/PlainTextRecipe'
 import SearchResults from './screens/SearchResultsScreen'
 import Tag from './screens/TagScreen'
 import Cuisine from './screens/CuisineScreen'
@@ -28,6 +29,7 @@ function App() {
 
           <Route path="/recipes/id/:id" component={withRouter(RecipeById)} />
           <Route path="/recipes/:slug" component={withRouter(RecipeBySlug)} />
+          <Route path="/recipes/plain-text/:slug" component={withRouter(PlainTextRecipe)}/>
           <Route path="/search/:query" component={withRouter(SearchResults)} />
           <Route path="/tags/:tag" component={withRouter(Tag)} />
           <Route path="/cuisines/:cuisine" component={withRouter(Cuisine)} />

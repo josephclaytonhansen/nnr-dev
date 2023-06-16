@@ -19,6 +19,11 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
                 url: `${RECIPES_URL}/slug/${slug}`,
             }), keepUnusedDataFor: 5,
         }),
+        getRecipeBySlugPlainText : builder.query({
+            query: (slug) => ({
+                url: `${RECIPES_URL}/slug/plain-text/${slug}`,
+            }), keepUnusedDataFor: 5,
+        }), 
         getRecipesByTag: builder.query({
             query: (tag) => ({
                 url: `${RECIPES_URL}/tag/${tag}`,
