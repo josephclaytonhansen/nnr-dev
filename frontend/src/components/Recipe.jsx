@@ -3,14 +3,16 @@ import Ingredients from "./Ingredients"
 import Instructions from "./Instructions"
 import GFV from "./GFV"
 import '../css/Recipe.css'
-import {Row, Col, Container, Card} from "react-bootstrap"
+import {Row, Col, Container, Card, Image} from "react-bootstrap"
+import remarkGfm from "remark-gfm"
+import ReactMarkdown from "react-markdown"
 
 const Recipe = ({recipe}) => {
     if (recipe){
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
             <main>
-            <Container className="recipe">
+            <Container>
             {recipe && (
                 <>
                 <Row className = 'd-flex align-items-center'><Col lg = {9} md ={6} sm = {12}><h1>{recipe.name}</h1></Col>
@@ -26,6 +28,27 @@ const Recipe = ({recipe}) => {
                <Col lg = {7} md={6} sm={12}><Card><Card.Body><Instructions recipe={recipe}/></Card.Body></Card></Col> 
                 </Row>
                 </Container>
+                {recipe.content.length > 0 && (
+                    <Container>
+                    <Row className="my-4 gy-2">
+                        <Col sm={12}>
+                        <Card>
+                            <Card.Body>
+                            <Row className="gy-2">
+                                <Col>
+                                <ReactMarkdown children = {recipe.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                                </Col>
+                                <Col sm={12} lg = {4}>
+                                <Image src={recipe.image} rounded fluid/>
+                                </Col>
+                            </Row>
+                            </Card.Body>
+                        </Card>
+                        </Col>
+                    </Row>
+                </Container>
+                )}
+                
                 </>
             )}
                         
