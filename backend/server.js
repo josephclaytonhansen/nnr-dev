@@ -37,9 +37,9 @@ const apiLimiter = rateLimit({
 // Apply the rate limiting middleware to API calls only
 app.use('/api', apiLimiter)
 
-/* const helmet = require('helmet')
+import helmet from 'helmet'
 app.use(helmet())
- */
+
 
 app.disable('x-powered-by')
 
