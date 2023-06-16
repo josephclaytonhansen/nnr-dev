@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import {ListGroup, Row, Col, InputGroup, Form, Container, Badge, FormGroup, FormControl, Button, Image, Modal} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faCheck, faFlag, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faCheck, faFlag, faClock, faStar } from '@fortawesome/free-solid-svg-icons'
 import 'balloon-css'
 import GFV from '../GFV'
 import '../../css/Recipe.css'
@@ -20,6 +20,13 @@ const Internal = ({recipe}) => {
     const [deleteRecipe, {isLoading: loadingDeleteRecipe}] = useDeleteRecipeMutation()
 
     const [modalShow, setModalShow] = useState(false)
+
+    const deleteCommentHandler = async (index) => {
+        let temp = [...comments]
+        temp.splice(index, 1)
+        setComments(temp)
+        recipe.comments = comments
+    }
 
     const submitHandler = async(e) => {
         console.log(recipe._id)
@@ -418,33 +425,33 @@ const Internal = ({recipe}) => {
                                                 </Col>
                                                 <Col lg = {11} md = {9}>
                                                     {comments.map((comment, index) => (
-                                                        <Row className = "my-3 gx-5 gy-2">
-                                                        <Col lg = {6}>
+                                                        <Row className = "my-3 gx-5 gy-2 d-flex">
+                                                        <Col lg = {6}  className = 'flex-grow-1 flex-shrink-0'>
                                                         <Form.Control type='text' as='textarea' value={comment.comment} onChange = {(e) => {setComments(e.target.value)}} ></Form.Control>
                                                         </Col>
-                                                        <Col lg = {1}>
-                                                            {comment.rating && comment.rating}
+                                                        <Col lg = {1}  className = 'flex-grow-0 flex-shrink-1'>
+                                                            {comment.rating && comment.rating}<FontAwesomeIcon className ='mx-1' icon={faStar}></FontAwesomeIcon>
                                                         </Col>
-                                                        <Col lg = {1}>
+                                                        <Col lg = {1} className = 'flex-grow-0 flex-shrink-1'>
                                                         {comment.flags}
                                                             {comment.flagged ? (
-                                                                <FontAwesomeIcon icon={faFlag} className='text-danger'/>
+                                                                <FontAwesomeIcon icon={faFlag} className='text-danger mx-1'/>
                                                             ) : (
-                                                                <FontAwesomeIcon icon={faCheck} className='text-success'/>
+                                                                <FontAwesomeIcon icon={faCheck} className='text-success mx-1'/>
                                                             )}
                                                         </Col>
-                                                        <Col lg = {1}>
+                                                        <Col lg = {1}  className = 'flex-grow-0 flex-shrink-1'>
                                                             {comment.pending ? (
                                                                 <FontAwesomeIcon icon={faClock} className='text-warning'/>
                                                             ) : (
                                                                 <FontAwesomeIcon icon={faCheck} className='text-success'/>
                                                             )}
                                                         </Col>
-                                                        <Col lg = {2}>
-                                                            {comment.user.email}
+                                                        <Col lg ={2}>
+                                                            {comment.user.email || comment.user || comment.user._id}
                                                         </Col>
-                                                        <Col lg = {1}>
-                                                            <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                                                        <Col lg = {1}  className = 'flex-grow-0 flex-shrink-1'>
+                                                            <Button variant='danger'><FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteCommentHandler(index)}/></Button>
                                                         </Col>
                                                         </Row>
                                                     ))}

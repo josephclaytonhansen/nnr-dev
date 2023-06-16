@@ -22,7 +22,8 @@ const Recipe = ({recipe}) => {
                     <Col lg = {9} md ={6} sm = {12}>
                         <Row>
                             <Col>
-                            <h1>{recipe.name}</h1>
+                            <h1 className = 'm-0'>{recipe.name}</h1>
+                            <p>Takes {recipe.timeToMake} minutes to make</p>
                             </Col>
                         </Row>
 
@@ -74,6 +75,11 @@ const Recipe = ({recipe}) => {
                         
             </Container>
             </main>
+        )
+    } else {
+        return(
+            <>
+            </>
         )
     }
     
