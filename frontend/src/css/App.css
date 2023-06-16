@@ -11,6 +11,7 @@
     --dark-gray: #2c2929;
     --strong-blue: rgb(46, 102, 187);
     --strong-purple: rgb(122, 76, 190);
+    --light-gray: #82868a;
 }
 main{
     padding: max(2rem, 1vw);
@@ -40,6 +41,10 @@ header{
 
 .icon-red{
     color: var(--red);
+}
+
+.icon-light-gray{
+    color: var(--light-gray);
 }
 
 .icon-light-red{
@@ -80,8 +85,8 @@ header{
 }
 
 .bg-red{
-    background-color: var(--red);
-    color: var(--cream);
+    background-color: var(--red)!important;
+    color: var(--cream)!important;
 }
 
 .bg-l-red{

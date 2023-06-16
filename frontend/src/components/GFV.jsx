@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {ListGroup, Row, Col, InputGroup, Form, Container, Badge, Button} from 'react-bootstrap'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDog, faBan, faSeedling, faAppleAlt, faWheatAlt } from '@fortawesome/free-solid-svg-icons'
+import { faDog, faBan, faSeedling, faAppleAlt, faWheatAwnCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 import 'balloon-css'
 import '../css/Recipe.css'
 
@@ -44,13 +44,13 @@ const GFV = (props) => {
             {isGlutenFree ? (
                <Button width={fontSize} height={fontSize} id='gluten free' variant = 'light' onClick={toggleOnClick}>
                <span className='fa-layers fa-fw balloon-tooltip' aria-label="Gluten free" data-balloon-pos="down">
-               <FontAwesomeIcon  icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize} />
+               <FontAwesomeIcon  icon ={faWheatAwnCircleExclamation} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize} />
                </span>
                </Button> 
             ) : (
                 <Button width={fontSize} height={fontSize} id='gluten free' variant = 'light' onClick={toggleOnClick}>
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
+                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
                     <FontAwesomeIcon icon ={faBan} fontSize = {fontSize} className = {'icon-red'} />
                     </span>
                     </Button>
@@ -98,13 +98,13 @@ const GFV = (props) => {
             {isGlutenFree ? (
 
                <span className='fa-layers fa-fw balloon-tooltip' aria-label="Gluten free" data-balloon-pos="down">
-               <FontAwesomeIcon  icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize} />
+               <FontAwesomeIcon  icon ={faWheatAwnCircleExclamation} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {fontSize} />
                </span>
  
             ) : (
 
                     <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                    <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
+                    <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {fontSize} className = {'icon-dark-blue'} />
                     <FontAwesomeIcon id="not gluten free" icon ={faBan} fontSize = {fontSize} className = {'icon-red'} />
                     </span>
 
@@ -142,10 +142,10 @@ const GFV = (props) => {
             <Row className = 'display-mobile me-auto justify-content-start align-items-center align-content-center' style={{marginTop: '1rem'}}>
             <Col style = {{width:'2.1rem'}}  className='flex-shrink-0 flex-grow-0'>
             {isGlutenFree ? (
-                <FontAwesomeIcon  icon ={faWheatAlt} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
+                <FontAwesomeIcon  icon ={faWheatAwnCircleExclamation} transform="shrink-2" className = {'icon-dark-blue'} fontSize = {'2rem'} />
             ) : (
                 <span className='fa-layers fa-fw balloon-tooltip-danger' aria-label="Not gluten free" data-balloon-pos="down">
-                <FontAwesomeIcon icon ={faWheatAlt} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
+                <FontAwesomeIcon icon ={faWheatAwnCircleExclamation} transform="shrink-8" fontSize = {'2rem'} className = {'icon-dark-blue'} />
                 <FontAwesomeIcon id="not gluten free" icon ={faBan} fontSize = {'2rem'} className = {'icon-red'} />
                 </span>
             )}

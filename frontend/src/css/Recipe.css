@@ -55,3 +55,12 @@
     transition: background-color 0.3s;
     background-color: var(--bs-list-group-action-hover-bg);
 }
+
+.gray-comment, .gray-comment *{
+    color: var(--light-gray);
+
+}
+
+.deleted-comment, .deleted-comment *{
+    text-decoration: line-through!important;
+}

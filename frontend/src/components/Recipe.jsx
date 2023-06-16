@@ -6,6 +6,7 @@ import '../css/Recipe.css'
 import {Row, Col, Container, Card, Image} from "react-bootstrap"
 import remarkGfm from "remark-gfm"
 import ReactMarkdown from "react-markdown"
+import Comments from "./Comments"
 
 const Recipe = ({recipe}) => {
     if (recipe){
@@ -48,6 +49,15 @@ const Recipe = ({recipe}) => {
                     </Row>
                 </Container>
                 )}
+                <Container>
+                <Row className="my-4 gy-2">
+                    <Col sm={12}>
+
+                        <Comments comments={recipe.comments}/>
+                        
+                    </Col>
+                </Row>
+                </Container>
                 
                 </>
             )}
