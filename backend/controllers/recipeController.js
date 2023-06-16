@@ -37,6 +37,20 @@ const getRecipeBySlug = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Get recipe by slug (plain text)
+// @route   GET /api/recipes/plain-text/:slug
+// @access  Public
+const getRecipeBySlugPlainText = asyncHandler(async (req, res) => {
+    const recipe = await Recipe.findOne({slug: {$eq: req.params.slug}})
+
+    if (recipe) {
+        res.json(recipe)
+    } else {
+        res.status(404)
+        throw new Error('Recipe not found')
+    }
+})
+
 // @desc    Get recipes by tag
 // @route   GET /api/recipes/tag/:tag
 // @access  Public
@@ -225,6 +239,7 @@ export {
     getRecipesGlutenFree,
     getRecipesVegetarian,
     getRecipesDogSafe,
-    getRecipesBySearch
+    getRecipesBySearch,
+    getRecipeBySlugPlainText
 
 }
