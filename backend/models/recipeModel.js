@@ -88,9 +88,41 @@ const recipeSchema = new mongoose.Schema({
         default: 1
     },
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
-        index: true,
+        //type: mongoose.Schema.Types.ObjectId,
+        //ref: "Comment",
+        //index: true,
+        comment: {
+            type: String,
+            required: true,
+            unique: false,
+        },
+        flags: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        flagged: {
+            type: Boolean,
+            required: true,
+            default: false,
+        },
+        pending: {
+            type: Boolean,
+            required: true,
+            default: true,
+        },
+        rating:{
+            type: Number,
+            required: false,
+            default: 5
+        },
+        user: {
+            type: String,
+            required: true,
+            unique: false,
+        },
+
+
     }],
     timeToMake: {
         type: Number,
