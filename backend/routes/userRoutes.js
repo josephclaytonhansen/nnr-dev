@@ -8,7 +8,10 @@ import {
     updateUserById,
     deleteUserById,
     getUserByIdAdmin,
+    registerUser
 } from '../controllers/admin/userController.js'
+
+import User from '../models/userModel.js'
 
 //Admin routes (needs protect/admin middleware)
 router.route('/').get(getUsers)
@@ -22,6 +25,8 @@ router.route('/email/:email').get(getUserByEmail)
 router.route('/:id').get(getUserById)
 
 //Public routes
+router.route('/register').post(registerUser)
+
 
 
 export default router

@@ -17,7 +17,7 @@ const port = process.env.PORT || 8080
 
 const app = express()
 connectDB()
-passport.initialize()
+app.use(passport.initialize())
 passportConfig(passport)
 
 const corsOptions = {
@@ -66,13 +66,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/recipes", recipeRoutes)
 app.use("/api/users", userRoutes)
-
-app.post("/api/users/register", passport.authenticate('local-signup'), (req, res, next) => {
-  res.set('Access-Control-Allow-Origin', '*')
-    res.json({
-        user: req.user
-    })
-})
 
 app.post(
     "/api/users/login",

@@ -1,5 +1,6 @@
 import asyncHandler from '../../middleware/asyncHandler.js'
 import User from "../../models/userModel.js"
+import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../../config/authenticate.js'
 
 
 // @desc    Get all users
@@ -93,6 +94,33 @@ const deleteUserById = asyncHandler(async (req, res) => {
     }
 })
 
+//@desc     Register new user
+const registerUser = asyncHandler(async (req, res) => {
+    const {email, password} = req.body
+    const userExists = await User.findOne({email: {$eq: email}})
+    if (userExists) {
+        res.status(400)
+        throw new Error('User already exists')
+    } else {
+        const user = await User.create({
+            email: req.body.email,
+            password: req.body.password,
+        })
+        if (user) {
+            const token = getToken({_id: user._id})
+            const refreshToken = getRefreshToken({_id: user._id})
+            user.refreshToken.push({refreshToken})
+            user.save()
+            res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS)
+            res.send({success: true, token: token})
+            
+        } else {
+            res.status(400)
+            throw new Error('Invalid user data')
+        }
+    }
+})
+
 export {
     getUsers,
     getUserById,
@@ -100,5 +128,6 @@ export {
     getUserByEmail,
     updateUserById,
     deleteUserById,
+    registerUser,
 }
 

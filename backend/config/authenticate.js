@@ -7,7 +7,7 @@ const COOKIE_OPTIONS = {
     secure: !dev,
     signed: true,
     sameSite: 'none',
-    maxAge: eval(process.env.REFRESH_TOKEN_EXPIRY) * 1000,
+    maxAge: 60 * 60 * 24 * 30 * 1000,
 }
 
 const getToken = (user) => {
