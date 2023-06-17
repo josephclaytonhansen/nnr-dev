@@ -15,6 +15,7 @@ const port = process.env.PORT || 8080
 
 const app = express()
 connectDB()
+passport.initialize()
 
 const corsOptions = {
     origin:' *',

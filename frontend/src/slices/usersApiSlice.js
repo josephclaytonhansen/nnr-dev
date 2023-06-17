@@ -20,10 +20,10 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
             query: (email) => ({}), keepUnusedDataFor: 5,
         }),
         createUser: builder.mutation({
-            query: (newUser) => ({
-                url: USERS_URL,
+            query: (user) => ({
+                url: `${USERS_URL}/register`,
                 method: 'POST',
-                body: newUser,
+                body: user,
             }), 
         }),
         updateUser: builder.mutation({

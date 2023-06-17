@@ -1,6 +1,5 @@
 import passport from 'passport'
-import pkg from 'passport-local'
-const { LocalStrategy } = pkg
+import { Strategy as LocalStrategy } from 'passport-local'
 import { JwtStrategy, fromHeader } from 'passport-jwt'
 import User from '../models/userModel.js'
 
