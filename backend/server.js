@@ -52,7 +52,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 //Cookie parser middleware
-app.use(cookieParser())
+app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')

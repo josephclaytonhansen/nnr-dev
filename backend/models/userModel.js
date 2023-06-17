@@ -1,5 +1,13 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
+import passportLocalMongoose from 'passport-local-mongoose'
+
+const Session = new mongoose.Schema({
+    refreshToken: {
+        type: String,
+        default: '',
+    },
+})
 
 const userSchema = new mongoose.Schema({
     displayName: {
@@ -22,6 +30,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: false,
         default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor'
+    },
+    refreshToken: {
+        type: [Session],
     },
 
 })
@@ -62,6 +73,15 @@ userSchema.methods.matchPassword = async function (password) {
         throw new Error(error)
     }
 }
+
+userSchema.set('toJSON', {
+    transform: (document, ret, options) => {
+        delete ret.refreshToken
+        return ret
+    }
+})
+
+userSchema.plugin(passportLocalMongoose)
 
 const User = mongoose.model('User', userSchema)
 export default User

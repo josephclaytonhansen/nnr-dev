@@ -4,6 +4,7 @@ import { ExtractJwt } from 'passport-jwt'
 import { Strategy as JwtStrategy } from 'passport-jwt'
 import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js'
+import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../config/authenticate.js'
 
 const passportConfig = (passport) => {
     passport.use("local-signup", new LocalStrategy({
@@ -23,12 +24,14 @@ const passportConfig = (passport) => {
             return done(error)
         }
     })),
-    passport.use("local-login", new LocalStrategy({
+    passport.use("local-login", new JwtStrategy({
         usernameField: 'email',
-        passwordField: 'password'},
-        async (email, password, done) => {
+        passwordField: 'password',
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.JWT_SECRET,},
+        async (jwt_payload, done) => {
             try {
-                const user = await User.findOne({email: {$eq: email}})
+                const user = await User.findOne({_id: {$eq: jwt_payload._id}})
                 if (!user) {
                     return done(null, false, {message: 'Incorrect email or password'})
                 }
@@ -43,6 +46,7 @@ const passportConfig = (passport) => {
             }
         }
     )),
+
     passport.use("can-comment", new JwtStrategy({
         jwtFromRequest: ExtractJwt.fromHeader("authorization"),
         secretOrKey: process.env.JWT_SECRET,}, async (payload, done) => {
