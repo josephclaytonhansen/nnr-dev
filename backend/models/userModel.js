@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: false,
-        default: `User-${Math.floor(100000 + Math.random() * 900000).toString()}`
+        default: `User-${Math.floor(Date.now() / Math.random()).toString()}`
     },
     email: {
         type: String,

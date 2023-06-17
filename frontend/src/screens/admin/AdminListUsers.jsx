@@ -11,11 +11,16 @@ const AdminListUsers = () => {
 
     const usersCopy = [...users]
     usersCopy.sort((a, b) => (a.displayName > b.displayName) ? 1 : -1)
+    const length = usersCopy.length
+    const each = length/4
+    const indices = [0, Math.ceil(each), Math.ceil(each*2), Math.ceil(each*3), length]
 
-    const usersCol1 = usersCopy.slice(0, Math.ceil(users.length/4))
-    const usersCol2 = usersCopy.slice(Math.ceil(users.length/4), Math.ceil(users.length/2))
-    const usersCol3 = usersCopy.slice(Math.ceil(users.length/2), Math.ceil(users.length/4)*3)
-    const usersCol4 = usersCopy.slice(Math.ceil(users.length/4)*3, users.length)
+    //split users into four equal slices
+    const usersCol1 = usersCopy.slice(indices[0], indices[1])
+    const usersCol2 = usersCopy.slice(indices[1], indices[2])
+    const usersCol3 = usersCopy.slice(indices[2], indices[3])
+    const usersCol4 = usersCopy.slice(indices[3], indices[4])
+
 
     if (usersCopy){
     return(
