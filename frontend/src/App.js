@@ -15,6 +15,7 @@ import Vegetarian from './screens/VegetarianScreen'
 import DogSafe from './screens/DogSafeScreen'
 import Meal from './screens/MealScreen'
 import Why from './screens/WhyScreen'
+import UserRegister from './screens/UserRegisterScreen'
 import ListAllRecipes from './screens/ListAllRecipesScreen'
 import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -41,6 +42,8 @@ function App() {
           <Route path="/recipes" component={withRouter(ListAllRecipes)} />
 
           <Route path="/why" component={withRouter(Why)}/>
+
+          <Route path="/register" component={withRouter(UserRegister)} />
 
           <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
           <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
