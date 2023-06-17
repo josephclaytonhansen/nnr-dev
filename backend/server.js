@@ -10,11 +10,15 @@ import recipeRoutes from "./routes/recipeRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import cors from 'cors'
 
+import passportConfig from './config/passportConfig.mjs'
+
 
 const port = process.env.PORT || 8080
 
 const app = express()
 connectDB()
+passport.initialize()
+passportConfig(passport)
 
 const corsOptions = {
     origin:' *',
@@ -62,8 +66,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/recipes", recipeRoutes)
 app.use("/api/users", userRoutes)
-
-
 
 app.post("/api/users/register", passport.authenticate('local-signup'), (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*')

@@ -1,38 +1,6 @@
 import asyncHandler from '../../middleware/asyncHandler.js'
 import User from "../../models/userModel.js"
 
-// @desc    Create user
-// @route   POST /api/users
-// @access  Public
-const createUser = asyncHandler(async (req, res) => {
-    const {
-        displayName,
-        email,
-        password,
-    } = req.body
-    const userExists = await User.findOne({ email: {$eq: email} })
-    if (userExists) {
-        res.status(400)
-        throw new Error('User already exists')
-    } else {
-        const user = await User.create({
-            displayName,
-            email,
-            password,
-        })
-        if (user) {
-            res.status(201).json({
-                _id: user._id,
-                displayName: user.displayName,
-                email: user.email,
-                password: user.password,
-            })
-        } else {
-            res.status(400)
-            throw new Error('Invalid user data')
-        }
-    }
-})
 
 // @desc    Get all users
 // @route   GET /api/users
@@ -130,7 +98,6 @@ export {
     getUserById,
     getUserByIdAdmin,
     getUserByEmail,
-    createUser,
     updateUserById,
     deleteUserById,
 }

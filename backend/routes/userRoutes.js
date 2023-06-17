@@ -5,7 +5,6 @@ import {
     getUsers,
     getUserById,
     getUserByEmail,
-    createUser,
     updateUserById,
     deleteUserById,
     getUserByIdAdmin,
@@ -23,6 +22,6 @@ router.route('/email/:email').get(getUserByEmail)
 router.route('/:id').get(getUserById)
 
 //Public routes
-router.route('/register').post(createUser)
+
 
 export default router

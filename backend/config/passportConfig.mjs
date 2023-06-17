@@ -1,10 +1,11 @@
-import passport from 'passport'
-import pkg from 'passport-local'
-const { LocalStrategy } = pkg
-import { JwtStrategy, fromHeader } from 'passport-jwt'
+
+import { Strategy as LocalStrategy } from 'passport-local'
+import { ExtractJwt } from 'passport-jwt'
+import { Strategy as JwtStrategy } from 'passport-jwt'
+import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js'
 
-const passportConfig = () => {
+const passportConfig = (passport) => {
     passport.use("local-signup", new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
