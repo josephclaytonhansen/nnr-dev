@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://641b064d2ab8a.lhr.life'
+export const BASE_URL = 'https://4035c41779580f.lhr.life'
 export const RECIPES_URL = `/api/recipes`
 export const USERS_URL = `/api/users`
 export const COMMENTS_URL = `/api/comments`

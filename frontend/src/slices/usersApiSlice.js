@@ -26,6 +26,13 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
                 body: user,
             }), 
         }),
+        loginUser: builder.mutation({
+            query: (user) => ({
+                url: `${USERS_URL}/login`,
+                method: 'POST',
+                body: user,
+            }), 
+        }),
         updateUser: builder.mutation({
             query: ({ userId, updatedUser }) => ({
                 url: `${USERS_URL}/${userId}`,
@@ -50,4 +57,5 @@ export const {
     useCreateUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
+    useLoginUserMutation,
 } = recipesApiSlice
