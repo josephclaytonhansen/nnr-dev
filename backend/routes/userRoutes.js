@@ -1,5 +1,6 @@
 import express from 'express'
 const router = express.Router()
+import passport from 'passport'
 
 import {
     getUsers,
@@ -8,7 +9,8 @@ import {
     updateUserById,
     deleteUserById,
     getUserByIdAdmin,
-    registerUser
+    registerUser,
+    loginUser,
 } from '../controllers/admin/userController.js'
 
 import User from '../models/userModel.js'
@@ -26,6 +28,7 @@ router.route('/:id').get(getUserById)
 
 //Public routes
 router.route('/register').post(registerUser)
+router.route('/login').post(passport.authenticate('local'), loginUser)
 
 
 

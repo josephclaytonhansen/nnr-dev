@@ -12,6 +12,9 @@ import cors from 'cors'
 
 import passportConfig from './config/passportConfig.mjs'
 
+import Strategy from 'passport-local'
+import User from './models/userModel.js'
+
 
 const port = process.env.PORT || 8080
 
@@ -19,6 +22,9 @@ const app = express()
 connectDB()
 app.use(passport.initialize())
 passportConfig(passport)
+
+passport.use(new Strategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
 
 const corsOptions = {
     origin:' *',
@@ -66,25 +72,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/recipes", recipeRoutes)
 app.use("/api/users", userRoutes)
-
-app.post(
-    "/api/users/login",
-    passport.authenticate('local-login'),
-    (req, res, next) => {
-      // login
-      jwt.sign({user: req.user}, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
-        if(err) {
-          return res.json({
-            message: "Failed to login",
-            token: null,
-          });
-        }
-        res.json({
-          token
-        })
-      })
-    }
-   )
 
 //Passport protected routes
 //Comment
