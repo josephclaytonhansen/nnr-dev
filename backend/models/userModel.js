@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    username: {
+        type: String,
+    },
     password: {
         type:String,
         required: true,
@@ -40,10 +43,9 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
     try{
         const user = this
-        if (!user.isModified('password')) return next()
-        const passwordSalt = await bcrypt.genSalt(12)
-        const passwordHash = await bcrypt.hash(user.password, passwordSalt)
-        user.password = passwordHash
+       
+
+        user.username = user.email
         
         next()
     } catch (error) {
@@ -54,10 +56,8 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('validate', async function (next) {
     try{
         const user = this
-        if (!user.isModified('password')) return next()
-        const passwordSalt = await bcrypt.genSalt(12)
-        const passwordHash = await bcrypt.hash(user.password, passwordSalt)
-        user.password = passwordHash
+        
+        user.username = user.email
         
         next()
     } catch (error) {

@@ -2,6 +2,7 @@ import express from 'express'
 //import routes
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
 dotenv.config()
 import connectDB from './config/db.js'
 import passport from 'passport'
@@ -10,30 +11,54 @@ import recipeRoutes from "./routes/recipeRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import cors from 'cors'
 
-import passportConfig from './config/passportConfig.mjs'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
-import Strategy from 'passport-local'
+import {Strategy as LocalStrategy} from 'passport-local'
 import User from './models/userModel.js'
+import './strategies/JwtStrategy.js'
 
-
-const port = process.env.PORT || 8080
+const corsOptions = {
+  origin:' *',
+  credentials: true,
+  optionSuccessStatus: 200
+}
 
 const app = express()
 connectDB()
-app.use(passport.initialize())
-passportConfig(passport)
-
-passport.use(new Strategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-
-const corsOptions = {
-    origin:' *',
-    credentials: true,
-    optionSuccessStatus: 200
-}
 
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
+
+const port = process.env.PORT || 8000
+
+const localStrategy = new LocalStrategy(
+    {usernameField: 'email',
+    passwordField: 'password'},
+    User.authenticate()
+)
+
+// Body parser middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
+}))
+
+app.use(passport.initialize())
+passport.use('local', localStrategy)
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+app.use(passport.session())
+
+app.use("/api/recipes", recipeRoutes)
+app.use("/api/users", userRoutes)
+
+
 
 import rateLimit from 'express-rate-limit'
 
@@ -53,10 +78,6 @@ app.use(helmet())
 
 app.disable('x-powered-by')
 
-// Body parser middleware
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
 //Cookie parser middleware
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
@@ -68,24 +89,6 @@ app.use(function(req, res, next) {
 app.get("/", (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
     res.send("API is running")
-})
-
-app.use("/api/recipes", recipeRoutes)
-app.use("/api/users", userRoutes)
-
-//Passport protected routes
-//Comment
-app.post("/api/comment", passport.authenticate('can-comment'), (req, res, next) => {
-    res.json({
-        message: "Comment posted"
-    })
-})
-
-//Create recipe
-app.post("/api/recipe", passport.authenticate('can-author'), (req, res, next) => {
-  res.json({
-      message: "Recipe posted"
-  })
 })
 
 app.use(notFound)
