@@ -55,11 +55,6 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 app.use(passport.session())
 
-app.use("/api/recipes", recipeRoutes)
-app.use("/api/users", userRoutes)
-
-
-
 import rateLimit from 'express-rate-limit'
 
 const apiLimiter = rateLimit({
@@ -89,6 +84,25 @@ app.use(function(req, res, next) {
 app.get("/", (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
     res.send("API is running")
+})
+
+
+app.use("/api/recipes", recipeRoutes)
+app.use("/api/users", userRoutes)
+
+app.post('/register', function (req, res) {
+  User.register(
+    new User({ 
+      email: req.body.email, 
+      username: req.body.email 
+    }), req.body.password, function (err, msg) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send({ message: "Successful" })
+      }
+    }
+  )
 })
 
 app.use(notFound)

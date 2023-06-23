@@ -9,8 +9,6 @@ import {
     updateUserById,
     deleteUserById,
     getUserByIdAdmin,
-    registerUser,
-
 } from '../controllers/admin/userController.js'
 
 import User from '../models/userModel.js'
@@ -29,25 +27,5 @@ router.route('/email/:email').get(getUserByEmail)
 router.route('/:id').get(getUserById)
 
 //Public routes
-router.route('/register').post(registerUser)
-router.post('/login', passport.authenticate('local', (err, req, res, next) => {
-
-    if (err) { return next(err) }
-
-/*     const token = getToken({_id: req.user._id})
-    const refreshToken = getRefreshToken({_id: req.user._id})
-    User.findById(req.user._id).then(
-        user => {
-            user.refreshToken.push({refreshToken})
-            user.save().then(
-                res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS),
-                res.send({success: true, token: 'Bearer '+token})
-            ).catch(err => next(err))
-        }
-    ).catch(err => next(err)) */
-
-}))
-
-
 
 export default router
