@@ -27,5 +27,22 @@ router.route('/email/:email').get(getUserByEmail)
 router.route('/:id').get(getUserById)
 
 //Public routes
+router.route('/register').post((req, res, next) => {
+    User.register(
+        new User({ 
+          email: req.body.email, 
+          username: req.body.email 
+        }), req.body.password, function (err, msg) {
+          if (err) {
+            res.send(err)
+          } else {
+            passport.authenticate('local')(req, res, function () {
+                res.send({ message: "Successful" })
+            })
+
+          }
+        }
+      )
+})
 
 export default router

@@ -35,7 +35,14 @@ const port = process.env.PORT || 8000
 const localStrategy = new LocalStrategy(
     {usernameField: 'email',
     passwordField: 'password'},
-    User.authenticate()
+    function(username, password, done) {
+        User.authenticate()(username, password, function(err, user) {
+            if (err) return done(err)
+            if (!user) return done(null, false)
+            return done(null, user)
+        })
+    }
+    
 )
 
 // Body parser middleware
@@ -45,14 +52,18 @@ app.use(express.urlencoded({extended: false}))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week,
+    },
 }))
 
-app.use(passport.initialize())
+
 passport.use('local', localStrategy)
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+app.use(passport.initialize())
 app.use(passport.session())
 
 import rateLimit from 'express-rate-limit'
@@ -88,22 +99,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/recipes", recipeRoutes)
-
-app.post('api/users/register', function (req, res) {
-  res.header('Access-Control-Allow-Origin', '*')
-  User.register(
-    new User({ 
-      email: req.body.email, 
-      username: req.body.email 
-    }), req.body.password, function (err, msg) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.send({ message: "Successful" })
-      }
-    }
-  )
-})
+app.use("/api/users", userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
