@@ -16,7 +16,7 @@ import MongoStore from 'connect-mongo'
 
 import {Strategy as LocalStrategy} from 'passport-local'
 import User from './models/userModel.js'
-import './strategies/JwtStrategy.js'
+
 
 const corsOptions = {
   origin:' *',
