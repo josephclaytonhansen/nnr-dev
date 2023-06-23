@@ -36,13 +36,26 @@ router.route('/register').post((req, res, next) => {
           if (err) {
             res.send(err)
           } else {
-            passport.authenticate('local')(req, res, function () {
-                res.send({ message: "Successful" })
-            })
+            passport.authenticate('local', (err, user, info) => {
+                if(err) {
+                    res.status(203).send(err)
+                } else {
+                    if(user) {
+                        req.login(user, err => {
+                            req.session.user = user
+                            console.log(req.session)
+                            res.status(200).send(user._id)
+                        })
+                    } else {
+                        res.status(202).send(info)
+                    }
+                }
+            })(req, res, next)
 
           }
         }
       )
 })
+
 
 export default router

@@ -55,7 +55,10 @@ app.use(session({
     saveUninitialized: true,
     store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+        expires: 1000 * 60 * 60 * 24 * 7, // 1 week
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'none',
     },
 }))
 
@@ -89,6 +92,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
+  console.log(req.session)
   next()
 })
 
@@ -99,6 +103,16 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/recipes", recipeRoutes)
+
+
+app.post('/api/users/login', passport.authenticate('local'), (err, req, res, next) => {
+  if (err) {
+    res.status(203).send(err)
+    next(err)
+} else {
+  res.status(200).send(req.user._id)}
+})
+
 app.use("/api/users", userRoutes)
 
 app.use(notFound)
