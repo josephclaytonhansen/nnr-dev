@@ -88,9 +88,8 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/recipes", recipeRoutes)
-app.use("/api/users", userRoutes)
 
-app.post('/register', function (req, res) {
+app.post('api/users/register', function (req, res) {
   User.register(
     new User({ 
       email: req.body.email, 
