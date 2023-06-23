@@ -9,8 +9,6 @@ import {
     updateUserById,
     deleteUserById,
     getUserByIdAdmin,
-    registerUser,
-
 } from '../controllers/admin/userController.js'
 
 import User from '../models/userModel.js'
@@ -29,25 +27,35 @@ router.route('/email/:email').get(getUserByEmail)
 router.route('/:id').get(getUserById)
 
 //Public routes
-router.route('/register').post(registerUser)
-router.post('/login', passport.authenticate('local', (err, req, res, next) => {
+router.route('/register').post((req, res, next) => {
+    User.register(
+        new User({ 
+          email: req.body.email, 
+          username: req.body.email 
+        }), req.body.password, function (err, msg) {
+          if (err) {
+            res.send(err)
+          } else {
+            passport.authenticate('local', (err, user, info) => {
+                if(err) {
+                    res.status(203).send(err)
+                } else {
+                    if(user) {
+                        req.login(user, err => {
+                            req.session.user = user
+                            console.log(req.session)
+                            res.status(200).send(user._id)
+                        })
+                    } else {
+                        res.status(202).send(info)
+                    }
+                }
+            })(req, res, next)
 
-    if (err) { return next(err) }
-
-/*     const token = getToken({_id: req.user._id})
-    const refreshToken = getRefreshToken({_id: req.user._id})
-    User.findById(req.user._id).then(
-        user => {
-            user.refreshToken.push({refreshToken})
-            user.save().then(
-                res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS),
-                res.send({success: true, token: 'Bearer '+token})
-            ).catch(err => next(err))
+          }
         }
-    ).catch(err => next(err)) */
-
-}))
-
+      )
+})
 
 
 export default router

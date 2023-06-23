@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type:String,
-        required: true,
     },
     permissions: {
         type: String,
@@ -65,14 +64,6 @@ userSchema.pre('validate', async function (next) {
     }
 })
 
-userSchema.methods.matchPassword = async function (password) {
-    try {
-        const user = this
-        return await bcrypt.compare(password, user.password)
-    } catch (error) {
-        throw new Error(error)
-    }
-}
 
 userSchema.set('toJSON', {
     transform: (document, ret, options) => {
