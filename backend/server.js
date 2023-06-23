@@ -90,6 +90,7 @@ app.get("/", (req, res) => {
 app.use("/api/recipes", recipeRoutes)
 
 app.post('api/users/register', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*')
   User.register(
     new User({ 
       email: req.body.email, 
