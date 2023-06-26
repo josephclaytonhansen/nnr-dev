@@ -57,5 +57,31 @@ router.route('/register').post((req, res, next) => {
       )
 })
 
+router.route('/login').post((req, res, next) => {
+    User.findOne({email: {$eq: req.body.email}}).then(user => {
+        if(user) {
+            passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, (err, user, info) => {
+                if(err) {
+                    res.status(203).send(err)
+                } else {
+                    if(user) {
+                        req.login(user, err => {
+                            req.session.user = user
+                            console.log(req.session)
+                            res.status(200).send(user._id)
+                            
+                            
+                        })
+                    } else {
+                        res.status(202).send(info)
+                    }
+                }
+            })(req, res, next)
+        } else {
+            res.status(202).send('User not found')
+        }
+    }).catch(err => console.log(err))
+})
+
 
 export default router
