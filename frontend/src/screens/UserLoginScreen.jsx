@@ -26,7 +26,7 @@ const UserLogin = () => {
                                 <h1 className="mx-auto">Login</h1>
                             </Card.Title>
                             <Card.Body>
-                                <Form.Group controlId="email">
+                                <Form.Group controlId="username">
                                     <Row className = 'd-flex align-items-center my-3'>
                                         <Col sm={2} lg ={1} className="mt-2">
                                             <Form.Label >Email</Form.Label>
