@@ -4,15 +4,22 @@ import {toast } from "react-toastify"
 import {Form, Button, Row, Col, Container, Card} from "react-bootstrap"
 import PasswordStrengthBar from 'react-password-strength-bar'
 import { useState } from "react"
+import {useHistory} from "react-router-dom"
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
 
+    const history = useHistory()
+
     const submitHandler = async (e) => {
         e.preventDefault()
-        loginUser({ email, password }).unwrap()
+        loginUser({ email, password }).unwrap().then(() => {
+            history.push('/')
+            toast.success('Login successful')
+        }
+            )
     }
 
     return(
@@ -26,7 +33,7 @@ const UserLogin = () => {
                                 <h1 className="mx-auto">Login</h1>
                             </Card.Title>
                             <Card.Body>
-                                <Form.Group controlId="username">
+                                <Form.Group controlId="email">
                                     <Row className = 'd-flex align-items-center my-3'>
                                         <Col sm={2} lg ={1} className="mt-2">
                                             <Form.Label >Email</Form.Label>
