@@ -8,18 +8,20 @@ import UserPermissions from "../../components/UserPermissions"
 
 const AdminListUsers = () => {
     const {data:users, isLoading, error} = useGetUsersQuery()
+    if (!users) {window.location.href=window.location.origin} else {
 
-    const usersCopy = [...users]
+    const usersCopy = [...users] || []
     usersCopy.sort((a, b) => (a.displayName > b.displayName) ? 1 : -1)
     const length = usersCopy.length
     const each = length/4
     const indices = [0, Math.ceil(each), Math.ceil(each*2), Math.ceil(each*3), length]
 
     //split users into four equal slices
-    const usersCol1 = usersCopy.slice(indices[0], indices[1])
-    const usersCol2 = usersCopy.slice(indices[1], indices[2])
-    const usersCol3 = usersCopy.slice(indices[2], indices[3])
-    const usersCol4 = usersCopy.slice(indices[3], indices[4])
+    const usersCol1 = usersCopy.slice(indices[0], indices[1]) || []
+    const usersCol2 = usersCopy.slice(indices[1], indices[2]) || []
+    const usersCol3 = usersCopy.slice(indices[2], indices[3]) || []
+    const usersCol4 = usersCopy.slice(indices[3], indices[4]) || []
+    
 
 
     if (usersCopy){
@@ -130,7 +132,7 @@ const AdminListUsers = () => {
             </ListGroup>)}
             </Col>
         </Row>
-    )}
+    )}}
 }
 
 export default AdminListUsers
