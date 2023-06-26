@@ -14,9 +14,10 @@ import {
 import User from '../models/userModel.js'
 
 import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../config/authenticate.js'
+import {admin} from '../middleware/authMiddleware.js'
 
 //Admin routes (needs protect/admin middleware)
-router.route('/').get(getUsers)
+router.route('/').get(admin, getUsers)
 router.route('/:id').get(getUserByIdAdmin)
 router.route('/:id').put(updateUserById)
 router.route('/:id').delete(deleteUserById)
@@ -44,7 +45,7 @@ router.route('/register').post((req, res, next) => {
                     if(user) {
                         req.login(user, err => {
                             req.session.user = user
-                            console.log(req.session)
+                            console.log(req.session.user)
                             res.status(200).send(user._id)
                         })
                     } else {
