@@ -6,6 +6,8 @@ const Comments = ({comments}) => {
 
     const canSeeFlaggedComments = true
     const canSeePendingComments = true
+    
+
     //REPLACE with real user data!
 
     return(
