@@ -34,13 +34,21 @@ const port = process.env.PORT || 8000
 
 const localStrategy = new LocalStrategy(
     {usernameField: 'email',
-    passwordField: 'password'},
+    passwordField: 'password',
+    passReqToCallback: true
+    },
     function(username, password, done) {
-        User.authenticate()(username, password, function(err, user) {
-            if (err) return done(err)
-            if (!user) return done(null, false)
-            return done(null, user)
-        })
+      console.log(username)
+      User.findOne({email: username}).then(user => {
+        if(!user) {
+          return done(null, false, {message: 'Incorrect username'})
+        }
+        if(!user.validPassword(password)) {
+          return done(null, false, {message: 'Incorrect password'})
+        }
+        return done(null, user)
+      }).catch(err => console.log(err))
+
     }
     
 )
@@ -64,7 +72,7 @@ app.use(session({
 }))
 
 
-passport.use('local', localStrategy)
+passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 app.use(passport.initialize())
@@ -106,13 +114,10 @@ app.get("/", (req, res) => {
 app.use("/api/recipes", recipeRoutes)
 
 
-app.post('/api/users/login', passport.authenticate('local'), (err, req, res, next) => {
+app.post('/api/users/login', passport.authenticate(), (err, req, res, next) => {
   if (err) {
-    res.status(203).send(err)
-    next(err)
-} else {
-  res.status(200).send(req.user._id)}
-})
+   
+    next(err)}})
 
 app.use("/api/users", userRoutes)
 
