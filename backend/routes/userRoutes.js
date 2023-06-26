@@ -34,7 +34,7 @@ router.route('/register').post((req, res, next) => {
           username: req.body.email 
         }), req.body.password, function (err, msg) {
           if (err) {
-            res.send(err)
+            res.send(err.replace(/ /g, '-'))
           } else {
             passport.authenticate('local', (err, user, info) => {
                 if(err) {
