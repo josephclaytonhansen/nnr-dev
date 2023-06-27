@@ -22,7 +22,7 @@ import { COOKIE_OPTIONS } from './config/authenticate.js'
 
 
 const corsOptions = {
-  origin:' *',
+  origin:'http://localhost:3000',
   credentials: true,
   optionSuccessStatus: 200
 }
@@ -98,7 +98,7 @@ app.disable('x-powered-by')
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
   next()
