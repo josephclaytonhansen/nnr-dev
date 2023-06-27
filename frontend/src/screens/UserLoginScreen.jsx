@@ -6,6 +6,7 @@ import PasswordStrengthBar from 'react-password-strength-bar'
 import { useState, useContext } from "react"
 import {useHistory} from "react-router-dom"
 import {UserContext } from "../context/userContext"
+import { BASE_URL } from '../constants'
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
@@ -18,13 +19,37 @@ const UserLogin = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault()
-        loginUser({ email, password }).unwrap().then(() => {
-            setUserContext(oldValues => {return {...oldValues, token: loginUser.token}})
-            history.push('/')
-            toast.success('Login successful')
+
+        fetch(BASE_URL + "/api/users/login", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({ username: email, password }),
+          })
+            .then(async response => {
+
+              if (!response.ok) {
+                if (response.status === 400) {
+                  toast.error("Please fill all the fields correctly!")
+                } else if (response.status === 401) {
+                  toast.error("Invalid email and password combination.")
+                } else {
+                  toast.error("Something went wrong")
+                }
+              } else {
+                const data = await response.json()
+                setUserContext(oldValues => {
+                  return { ...oldValues, token: data.token }
+                })
+              }
+            })
+            .catch(error => {
+              toast.error("Something went wrong")
+            })
         }
-            )
-    }
+        
+            
+    
 
     return(
         <main>

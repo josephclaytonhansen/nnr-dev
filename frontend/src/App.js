@@ -22,8 +22,12 @@ import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import {useContext, useState  } from 'react'
+import { UserContext } from './context/userContext'
 
 function App() {
+  const [userContext, setUserContext] = useContext(UserContext)
+  console.log('userContext: ', userContext)
   return (
     <>
     <Header></Header>
@@ -47,9 +51,17 @@ function App() {
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
 
-          <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
-          <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
-          <Route path="/admin" component={withRouter(AdminScreen)} />
+          {userContext.token && userContext.user.permissions.includes('admin') ? (
+            <>
+                      <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
+                      <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
+                      <Route path="/admin" component={withRouter(AdminScreen)} />
+            </>
+          ) : (
+            <></>
+          )}
+
+
 
 
           <Route path="/" component={withRouter(AdminRecipesScreen)} exact index={true} />
@@ -59,7 +71,7 @@ function App() {
     </Router>
     
     </>
-  )
+  ) 
 }
 
 export default App
