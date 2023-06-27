@@ -7,7 +7,9 @@ import RecipeList from "../components/RecipeList"
 import Message from "../components/Message"
 
 const ListAllRecipes = () => {
-    const {data:recipes, isLoading, error} = useGetRecipesQuery()
+    const {data:data, isLoading, error} = useGetRecipesQuery()
+    const recipes = data?.recipes
+    const user = data?.user
     if (recipes){
         sessionStorage.setItem("recipes", JSON.stringify(recipes))
     }

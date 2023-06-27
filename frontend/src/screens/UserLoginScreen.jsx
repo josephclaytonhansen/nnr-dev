@@ -3,19 +3,23 @@ import React from "react"
 import {toast } from "react-toastify"
 import {Form, Button, Row, Col, Container, Card} from "react-bootstrap"
 import PasswordStrengthBar from 'react-password-strength-bar'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import {useHistory} from "react-router-dom"
+import {UserContext } from "../context/userContext"
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [userContext, setUserContext] = useContext(UserContext)
+    
 
     const history = useHistory()
 
     const submitHandler = async (e) => {
         e.preventDefault()
         loginUser({ email, password }).unwrap().then(() => {
+            setUserContext(oldValues => {return {...oldValues, token: loginUser.token}})
             history.push('/')
             toast.success('Login successful')
         }
