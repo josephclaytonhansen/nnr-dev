@@ -15,7 +15,7 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
 import {Strategy as LocalStrategy} from 'passport-local'
-import JwtStrategy from './strategies/JwtStrategy.js'
+import jwtStrategy from './strategies/JwtStrategy.js'
 import User from './models/userModel.js'
 
 import { COOKIE_OPTIONS } from './config/authenticate.js'
