@@ -46,8 +46,11 @@ router.route('/register').post((req, res, next) => {
                         req.login(user, err => {
                             req.session.user = user
                             console.log(req.session.user)
+                            const token = getToken(user._id)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(user._id)
+                            res.cookie('refreshToken', getRefreshToken(user._id), COOKIE_OPTIONS)
+                            user.refreshToken.push(getRefreshToken(user._id))
+                            res.status(200).send({success: true, token})
                         })
                     } else {
                         res.status(202).send(info)
@@ -70,9 +73,12 @@ router.route('/login').post((req, res, next) => {
                     if(user) {
                         req.login(user, err => {
                             req.session.user = user
-                            console.log(req.session)
+                            console.log(req.session.user)
+                            const token = getToken(user._id)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(user._id)
+                            res.cookie('refreshToken', getRefreshToken(user._id), COOKIE_OPTIONS)
+                            user.refreshToken.push(getRefreshToken(user._id))
+                            res.status(200).send({success: true, token})
                             
                             
                         })

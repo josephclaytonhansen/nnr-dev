@@ -10,12 +10,12 @@ const COOKIE_OPTIONS = {
     maxAge: 60 * 60 * 24 * 30 * 1000,
 }
 
-const getToken = (email) => {
-    return jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: eval(process.env.SESSION_EXPIRY)})
+const getToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: eval(process.env.SESSION_EXPIRY)})
 }
 
-const getRefreshToken = (user) => {
-    const refreshToken = jwt.sign({user}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY)})
+const getRefreshToken = (id) => {
+    const refreshToken = jwt.sign({id}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY)})
     return refreshToken
 }
 
