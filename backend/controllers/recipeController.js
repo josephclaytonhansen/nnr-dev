@@ -6,7 +6,8 @@ import Recipe from '../models/recipeModel.js'
 // @access  Public
 const getRecipes = asyncHandler(async (req, res) => {
     const recipes = await Recipe.find({})
-    res.json(recipes)
+    const user = req.user? req.user : 'none'
+    res.json({'recipes': recipes, 'user': user})
 })
 
 // @desc    Get recipe by id

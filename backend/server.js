@@ -17,6 +17,8 @@ import MongoStore from 'connect-mongo'
 import {Strategy as LocalStrategy} from 'passport-local'
 import User from './models/userModel.js'
 
+import { COOKIE_OPTIONS } from './config/authenticate.js'
+
 
 const corsOptions = {
   origin:' *',
@@ -61,6 +63,7 @@ app.use(session({
         expires: 1000 * 60 * 60 * 24 * 7, // 1 week
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'none',
+        user: {},
     },
 }))
 
@@ -94,6 +97,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
   next()
 })
 

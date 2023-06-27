@@ -8,7 +8,8 @@ import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../../config/authentica
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
     const users = await User.find({})
-    res.json(users)
+    const user = req.user || req.session.user || req.session.passport.user
+    res.json({'users': users, 'user': user})
 })
 
 // @desc    Get user by id
