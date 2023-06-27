@@ -125,4 +125,11 @@ router.post("/refreshToken", (req, res) => {
     }
 })
 
+router.route('/logout').get((req, res) => {
+    req.logout()
+    res.clearCookie('user', COOKIE_OPTIONS)
+    res.clearCookie('refreshToken', COOKIE_OPTIONS)
+    res.status(200).send({success: true})
+})
+
 export default router
