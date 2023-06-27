@@ -51,7 +51,7 @@ function App() {
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
 
-          {userContext.token && userContext.user.permissions.includes('admin') ? (
+          {userContext.token ? (
             <>
                       <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
                       <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />

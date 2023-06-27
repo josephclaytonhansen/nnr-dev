@@ -24,9 +24,10 @@ const UserLogin = () => {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({ username: email, password }),
+            body: JSON.stringify({ email: email, password }),
           })
             .then(async response => {
+                console.log(response)
 
               if (!response.ok) {
                 if (response.status === 400) {
@@ -38,6 +39,7 @@ const UserLogin = () => {
                 }
               } else {
                 const data = await response.json()
+                console.log(data)
                 setUserContext(oldValues => {
                   return { ...oldValues, token: data.token }
                 })
