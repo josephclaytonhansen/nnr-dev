@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://b58c5460c72be4.lhr.life/",
+  "proxy": "https://f0244971da8a36.lhr.life/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -17,6 +17,7 @@
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.8",
     "framer-motion": "^10.12.16",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-country-region-selector": "^3.6.1",
