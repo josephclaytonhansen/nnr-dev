@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router()
 import passport from 'passport'
+import {authToken, verifyToken} from '../config/userAuthToken.js'
 
 import {
     getUsers,
@@ -12,6 +13,7 @@ import {
 } from '../controllers/admin/userController.js'
 
 import User from '../models/userModel.js'
+import authSession from '../models/userModel.js'
 
 import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../config/authenticate.js'
 import {admin} from '../middleware/authMiddleware.js'
@@ -35,7 +37,7 @@ router.route('/register').post((req, res, next) => {
           username: req.body.email 
         }), req.body.password, function (err, msg) {
           if (err) {
-            const sanitized = sanitized.replace(/[^a-zA-Z0-9 ]/g, '')
+            const sanitized = err.message.replace(/[^a-zA-Z0-9 ]/g, '')
             res.send(sanitized)
           } else {
             passport.authenticate('local', (err, user, info) => {
@@ -69,6 +71,7 @@ router.route('/login').post((req, res, next) => {
                 } else {
                     if(user) {
                         req.login(user, err => {
+                            user.authSession = new authSession({user: user._id})
                             req.session.user = user
                             console.log(req.session)
                             res.cookie('user', user._id, COOKIE_OPTIONS)

@@ -2,12 +2,14 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import passportLocalMongoose from 'passport-local-mongoose'
 
-const Session = new mongoose.Schema({
-    refreshToken: {
-        type: String,
-        default: '',
+const authSessionSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
 })
+
+const authSession = mongoose.model('authSession', authSessionSchema)
 
 const userSchema = new mongoose.Schema({
     displayName: {
@@ -33,8 +35,8 @@ const userSchema = new mongoose.Schema({
         unique: false,
         default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor'
     },
-    refreshToken: {
-        type: [Session],
+    authSession: {
+        type: authSessionSchema,
     },
 
 })
@@ -45,6 +47,7 @@ userSchema.pre('save', async function (next) {
        
 
         user.username = user.email
+        user.authSession = new authSession ({user: user._id})
         
         next()
     } catch (error) {
@@ -57,6 +60,8 @@ userSchema.pre('validate', async function (next) {
         const user = this
         
         user.username = user.email
+        //set user.authSession to a new Session object with user._id as the value of user
+        user.authSession = new authSession ({user: user._id})
         
         next()
     } catch (error) {

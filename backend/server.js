@@ -7,12 +7,32 @@ dotenv.config()
 import connectDB from './config/db.js'
 import passport from 'passport'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
-import recipeRoutes from "./routes/recipeRoutes.js"
-import userRoutes from "./routes/userRoutes.js"
+
 import cors from 'cors'
 
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
+
+const app = express()
+connectDB()
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  secure: process.env.NODE_ENV === 'production',
+  store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
+  cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      expires: 1000 * 60 * 60 * 24 * 7, // 1 week
+      secure: false,
+      sameSite: 'none',
+      path: '/',
+  },
+}))
+
+import recipeRoutes from "./routes/recipeRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 import {Strategy as LocalStrategy} from 'passport-local'
 import User from './models/userModel.js'
@@ -21,13 +41,10 @@ import { COOKIE_OPTIONS } from './config/authenticate.js'
 
 
 const corsOptions = {
-  origin:' *',
+  origin:'http://localhost:3000',
   credentials: true,
   optionSuccessStatus: 200
 }
-
-const app = express()
-connectDB()
 
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
@@ -51,21 +68,6 @@ const localStrategy = new LocalStrategy(
 // Body parser middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    secure: process.env.NODE_ENV === 'production',
-    store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-        expires: 1000 * 60 * 60 * 24 * 7, // 1 week
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
-        user: {},
-    },
-}))
 
 
 passport.use('local', localStrategy)
@@ -96,14 +98,15 @@ app.disable('x-powered-by')
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
+  console.log(req.session.user)
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
   next()
 })
 
 app.get("/", (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*')
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.send("API is running")
 })
 

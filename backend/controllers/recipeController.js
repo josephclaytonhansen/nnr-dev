@@ -1,13 +1,19 @@
 import asyncHandler from '../middleware/asyncHandler.js'
 import Recipe from '../models/recipeModel.js'
+import {authToken, verifyToken} from '../config/userAuthToken.js'
 
 // @desc    Get all recipes
 // @route   GET /api/recipes
 // @access  Public
 const getRecipes = asyncHandler(async (req, res) => {
     const recipes = await Recipe.find({})
-    const user = req.user? req.user : 'none'
-    res.json({'recipes': recipes, 'user': user})
+    console.log(req.user)
+    if (req.user){
+    const token = authToken(req.user)
+    res.json({'recipes': recipes, 'token': token})}
+    else {
+        res.json({'recipes':recipes, 'token': null})
+    }
 })
 
 // @desc    Get recipe by id
