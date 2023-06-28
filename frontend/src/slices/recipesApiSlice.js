@@ -5,7 +5,8 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getRecipes: builder.query({
             query: () => ({
-                url: RECIPES_URL,
+                url: `${RECIPES_URL}/all`,
+                credentials: 'include',
             }),
             keepUnusedDataFor: 5,
         }),
