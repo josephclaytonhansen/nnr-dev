@@ -73,7 +73,7 @@ const ShareBar = () => {
             </Col>
 
                 <Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'pinterest'><a href = 
-                {`http://pinterest.com/pin/create/button/?url=${window.location.href}`} target='_blank'>
+                {`http://pinterest.com/pin/create/button/?url=${window.location.href}`} target='_blank' rel="noopener noreferrer">
                 <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
                     <FaPinterestP style={{fontSize: '1.5rem', marginTop: '.3rem', marginLeft: '.3rem'}}/>
                     </div></a>
@@ -83,7 +83,7 @@ const ShareBar = () => {
                  <FaFacebookF style={{fontSize: '1.5rem', marginTop: '.3rem', marginLeft: '.3rem'}}/>
                  </div>
          </Col><Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'twitter'>
-             <a href = {`https://twitter.com/intent/tweet?url=${window.location.href}`}><div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
+             <a href = {`https://twitter.com/intent/tweet?url=${window.location.href}`} rel="noopener noreferrer"><div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
                  <FaTwitter style={{fontSize: '1.5rem', marginTop: '.4rem', marginLeft: '.35rem'}}/>
                  </div></a>
          </Col>
