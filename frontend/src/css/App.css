@@ -1,6 +1,6 @@
 :root{
-    --dark-blue: #405563;
-    --red: #ff6347;
+    --dark-blue: rgb(64, 85, 99);
+    --red: rgb(255, 99, 71);
     --light-red: #ff8c7f;
     --light-blue: slategray;
     --lighter-blue: #a6bdd4;
@@ -176,4 +176,17 @@ header{
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: var(--bs-badge-border-radius);
+}
+
+.carousel-inner-home{
+    background-color: rgba(64, 85, 99, 0.8);
+    right: 0!important;
+    bottom: 0!important;
+    left: 0!important;
+    padding-bottom: 2.25rem!important;
+    text-align: center;
+}
+
+.slide .carousel-inner{
+    border-radius:8px!important;
 }

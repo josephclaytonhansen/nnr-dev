@@ -84,5 +84,14 @@
         z-index:9999;
 
     }
+}
 
+.print-only{
+    display: none;
+}
+
+@media print{
+    .print-only{
+        display: block;
+    }
 }

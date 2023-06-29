@@ -11,6 +11,7 @@ import SearchResults from './screens/SearchResultsScreen'
 import Tag from './screens/TagScreen'
 import Cuisine from './screens/CuisineScreen'
 import GlutenFree from './screens/GlutenFreeScreen'
+import Home from './screens/HomeScreen'
 import Vegetarian from './screens/VegetarianScreen'
 import DogSafe from './screens/DogSafeScreen'
 import Meal from './screens/MealScreen'
@@ -52,7 +53,7 @@ function App() {
           <Route path="/admin" component={withRouter(AdminScreen)} />
 
 
-          <Route path="/" component={withRouter(AdminRecipesScreen)} exact index={true} />
+          <Route path="/" component={withRouter(Home)} exact index={true} />
           
         </Switch>
         <Footer></Footer>

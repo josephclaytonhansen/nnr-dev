@@ -14,8 +14,8 @@ const Recipe = ({recipe}) => {
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
             <main>
-                <ShareBar/>
-            <Container>
+                <ShareBar />
+            <Container className='d-print-none'>
             {recipe && (
                 <>
                 <Row className = 'd-flex align-items-center'>
@@ -60,7 +60,7 @@ const Recipe = ({recipe}) => {
                     </Row>
                 </Container>
                 )}
-                <Container>
+                <Container className = 'd-print-none'>
                 <Row className="my-4 gy-2">
                     <Col sm={12}>
 
@@ -69,6 +69,28 @@ const Recipe = ({recipe}) => {
                     </Col>
                 </Row>
                 </Container>
+                <Container className = 'print-only'>
+            <h1>
+                {recipe.name}
+
+            </h1>
+            <h2>
+                Ingredients
+            </h2>
+            <ul>
+                {recipe.ingredients.map((ingredient) => (
+                    <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+                ))}
+            </ul>
+            <h2>
+                Instructions
+            </h2>
+            <ol>
+                {recipe.instructions.map((instruction) => (
+                    <li>{instruction.name} {instruction.details}</li>
+                ))}
+            </ol>
+            </Container>
                 
                 </>
             )}

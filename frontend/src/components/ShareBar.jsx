@@ -23,7 +23,7 @@ const ShareBar = () => {
       }
 
     const unFurl = async() => {
-        const divs = ['pinterest', 'facebook', 'twitter', 'email']
+        const divs = ['pinterest', 'facebook', 'twitter']
         for (let i = 0; i < divs.length; i++){
             await delay(50)
             document.getElementById(divs[i]).style.opacity = 1
@@ -32,7 +32,7 @@ const ShareBar = () => {
     }
 
     const furl = async() => {
-        const divs = ['pinterest', 'facebook', 'twitter', 'email'].reverse()
+        const divs = ['pinterest', 'facebook', 'twitter'].reverse()
         for (let i = 0; i < divs.length; i++){
             await delay(50)
             document.getElementById(divs[i]).style.opacity = 0
@@ -52,7 +52,7 @@ const ShareBar = () => {
 
 
     return(
-        <div style = {{position:'fixed'}} className = 'shareBar'>
+        <div style = {{position:'fixed'}} className = 'shareBar d-print-none'>
         <Row className = 'd-flex align-items-center gy-2' style = {{flexDirection:'column'}}>
             <Col className = 'flex-shrink-0 flex-grow-0'>
                 <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'} aria-label="Plain text version" data-balloon-pos="right">
@@ -60,7 +60,7 @@ const ShareBar = () => {
                     </div>
             </Col>
             <Col className = 'flex-shrink-0 flex-grow-0'>
-                <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'} aria-label="Print" data-balloon-pos="right">
+                <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'} aria-label="Print" data-balloon-pos="right" onClick={() => window.print()}>
                     <FontAwesomeIcon icon = {faPrint} style={{fontSize: '1.5rem', marginTop: '.3rem', marginLeft: '.3rem'}}/>
                     </div>
             </Col>
@@ -72,25 +72,22 @@ const ShareBar = () => {
                     </div>
             </Col>
 
-                <Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'pinterest'>
+                <Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'pinterest'><a href = 
+                {`http://pinterest.com/pin/create/button/?url=${window.location.href}`} target='_blank'>
                 <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
                     <FaPinterestP style={{fontSize: '1.5rem', marginTop: '.3rem', marginLeft: '.3rem'}}/>
-                    </div>
+                    </div></a>
             </Col>
              <Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'facebook'>
              <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
                  <FaFacebookF style={{fontSize: '1.5rem', marginTop: '.3rem', marginLeft: '.3rem'}}/>
                  </div>
          </Col><Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'twitter'>
-             <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
+             <a href = {`https://twitter.com/intent/tweet?url=${window.location.href}`}><div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
                  <FaTwitter style={{fontSize: '1.5rem', marginTop: '.4rem', marginLeft: '.35rem'}}/>
-                 </div>
+                 </div></a>
          </Col>
-         <Col className = 'flex-shrink-0 flex-grow-0' style={{opacity:0}} id = 'email'>
-             <div style = {{width: '2.2rem', height: '2.2rem', borderRadius:'100%'}} className = {'d-flex me-auto share-bar-icon balloon-tooltip'}>
-                 <FaPaperPlane style={{fontSize: '1.5rem', marginTop: '.35rem', marginLeft: '.25rem'}}/>
-                 </div>
-         </Col>
+         
          
         </Row>
         </div>
