@@ -11,10 +11,10 @@ const SingleComment = ({comment, classNames = ''}) => {
     const editCommentHandler = () => {}
     const deleteCommentHandler = () => {}
 
-    const canFlag = true
-    const canEdit = true
-    const canDelete = true
-    const canModerate = true
+    const canFlag = false
+    const canEdit = false
+    const canDelete = false
+    const canModerate = false
     const commentUserName = 'testUser'
     //REPLACE with real user data!
 

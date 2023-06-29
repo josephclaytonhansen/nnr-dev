@@ -4,8 +4,8 @@ import SingleComment from "./SingleComment"
 
 const Comments = ({comments}) => {
 
-    const canSeeFlaggedComments = true
-    const canSeePendingComments = true
+    const canSeeFlaggedComments = false
+    const canSeePendingComments = false
     
 
     //REPLACE with real user data!

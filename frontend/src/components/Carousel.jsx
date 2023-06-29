@@ -9,9 +9,9 @@ const HomeCarousel = ({recipes, classes}) => {
     }
 
     const recipesWithImages = recipes.filter((recipe) => recipe.image)
-    //choose 5 random recipes from recipesWithImages
     const randomRecipes = []
-    let maxLength = recipesWithImages.length > 5 ? 5 : recipesWithImages.length
+    let maxLength = Math.min(4, recipesWithImages.length)
+    console.log(maxLength)
     while (randomRecipes.length < maxLength){
         let randomIndex = Math.floor(Math.random() * recipesWithImages.length)
         let randomRecipe = recipesWithImages[randomIndex]
@@ -23,12 +23,13 @@ const HomeCarousel = ({recipes, classes}) => {
     return (
 
         <Carousel className = {classes} activeIndex={index} onSelect={handleSelect}>
-            {recipesWithImages.map((recipe) => (
+            {randomRecipes.map((recipe) => (
                 <Carousel.Item key={recipe.id} style = {{maxHeight: `40vh`, overflow:`hidden`}}>
                     <img style = {{margin:`auto`}} className="d-block w-100" src={recipe.image} alt={recipe.name} />
                     <Link to = {`/recipes/${recipe.slug}`}>
                     <Carousel.Caption className = 'bg-purple w-100 carousel-inner-home' style = {{}}>
                         <h3>{recipe.name}</h3>
+
                     </Carousel.Caption>
                     </Link>
                 </Carousel.Item>

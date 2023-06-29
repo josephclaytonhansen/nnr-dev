@@ -1,10 +1,11 @@
-import { Nav, NavDropdown, NavLink, Navbar, Container, Form, FormControl, FormGroup, Button } from "react-bootstrap"
+import { Nav, NavDropdown, NavLink, Navbar, Container, Form, FormControl, FormGroup, Button, ProgressBar } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {} from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from "react-router-dom"
 import {toast} from 'react-toastify'
+import { useEffect, useState } from "react"
 
 const Header = () => {
     const history = useHistory()
@@ -15,6 +16,23 @@ const Header = () => {
         const sanitized = e.target.value.replace(/[^a-zA-Z ]/g, "")
         window.location.href = `/search/${sanitized}`
     }}
+
+
+
+        const [scrollPosition, setPosition] = useState({ scrollX: 0, scrollY: 0 })
+     
+        useEffect(() => {
+         function updatePosition() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+             setPosition({ scrollX: window.scrollX, scrollY: scrollPercent })
+         }
+     
+         window.addEventListener('scroll', updatePosition)
+         updatePosition()
+     
+         return () => window.removeEventListener('scroll', updatePosition)
+        }, [])
+     
 
     return(
         <header>
@@ -72,6 +90,7 @@ const Header = () => {
                     
                 </Container>
             </Navbar>
+            <ProgressBar className = 'header-scroll' now = {scrollPosition.scrollY} style = {{position:'fixed', top:'60px', width: '100vw',zIndex:9999}}/>
         </header>
     )
 }
