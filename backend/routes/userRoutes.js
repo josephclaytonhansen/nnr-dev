@@ -46,8 +46,6 @@ router.route('/register').post((req, res, next) => {
                 } else {
                     if(user) {
                         user.authSession = new authSession({user: user._id})
-                        sessionStorage.setItem('auth', authToken(user._id))
-                        console.log(sessionStorage.getItem('auth'))
                         req.login(user, err => {
                             req.session.user = user
                             console.log(req.session.user)
@@ -69,23 +67,11 @@ router.route('/login').post((req, res, next) => {
     User.findOne({email: {$eq: req.body.email}}).then(user => {
         console.log("\nLogging in user...\n")
         if(user) {
-            passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, (err, user, info) => {
-                if(err) {
-                    res.status(203).send(err)
-                } else {
-                    if(user) {
-                        req.login(user, err => {
-                            user.authSession = new authSession({user: user._id})
-                            req.session.user = user
-                            res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
-                            
-                            
-                        })
-                    } else {
-                        res.status(202).send(info)
-                    }
-                }
+            passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, function(err, user, info){
+                if(user){
+                user.authSession = new authSession({user: user._id})
+                res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+            }
             })(req, res, next)
         } else {
             res.status(202).send('User not found')

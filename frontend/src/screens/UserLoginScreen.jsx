@@ -3,22 +3,26 @@ import React from "react"
 import {toast } from "react-toastify"
 import {Form, Button, Row, Col, Container, Card} from "react-bootstrap"
 import PasswordStrengthBar from 'react-password-strength-bar'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import {useHistory} from "react-router-dom"
+import { set } from "mongoose"
+import { AuthContext } from "../utils/authContext"
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const [token, setToken] = useState('')
+    const [state, setState] = useContext(AuthContext)
 
     const history = useHistory()
 
     const submitHandler = async (e) => {
         e.preventDefault()
-        loginUser({ email, password }).unwrap().then(() => {
-            history.push('/')
+        loginUser({ email, password }).unwrap().then((response) => {
+            setState(state => ({ ...state, token: response.auth }))
+            sessionStorage.setItem('token', response.auth)
             toast.success('Login successful')
+            history.push('/')
         }
             )
     }
