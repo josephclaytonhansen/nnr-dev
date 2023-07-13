@@ -45,6 +45,8 @@ router.route('/register').post((req, res, next) => {
                     res.status(203).send(err)
                 } else {
                     if(user) {
+                        user.authSession = new authSession({user: user._id})
+                        sessionStorage.setItem('auth', authToken(user._id))
                         req.login(user, err => {
                             req.session.user = user
                             console.log(req.session.user)
@@ -75,6 +77,7 @@ router.route('/login').post((req, res, next) => {
                             req.session.user = user
                             console.log(req.session)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
+                            sessionStorage.setItem('auth', authToken(user._id))
                             res.status(200).send(user._id)
                             
                             

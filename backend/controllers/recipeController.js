@@ -8,9 +8,14 @@ import {authToken, verifyToken} from '../config/userAuthToken.js'
 const getRecipes = asyncHandler(async (req, res) => {
     const recipes = await Recipe.find({})
     console.log(req.user)
+    console.log(sessionStorage.getItem('auth'))
     if (req.user){
     const token = authToken(req.user)
     res.json({'recipes': recipes, 'token': token})}
+    else if (sessionStorage.getItem('auth')){
+        const token = sessionStorage.getItem('auth')
+        res.json({'recipes': recipes, 'token': token})
+    }
     else {
         res.json({'recipes':recipes, 'token': null})
     }
