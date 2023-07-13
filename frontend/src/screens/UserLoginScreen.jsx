@@ -10,6 +10,7 @@ const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [token, setToken] = useState('')
 
     const history = useHistory()
 

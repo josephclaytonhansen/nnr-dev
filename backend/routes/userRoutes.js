@@ -78,7 +78,7 @@ router.route('/login').post((req, res, next) => {
                             user.authSession = new authSession({user: user._id})
                             req.session.user = user
                             res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(JSON.stringify(authToken(user)))
+                            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
                             
                             
                         })
