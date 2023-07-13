@@ -47,6 +47,7 @@ router.route('/register').post((req, res, next) => {
                     if(user) {
                         user.authSession = new authSession({user: user._id})
                         sessionStorage.setItem('auth', authToken(user._id))
+                        console.log(sessionStorage.getItem('auth'))
                         req.login(user, err => {
                             req.session.user = user
                             console.log(req.session.user)
@@ -66,6 +67,7 @@ router.route('/register').post((req, res, next) => {
 
 router.route('/login').post((req, res, next) => {
     User.findOne({email: {$eq: req.body.email}}).then(user => {
+        console.log("\nLogging in user...\n")
         if(user) {
             passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, (err, user, info) => {
                 if(err) {
@@ -75,9 +77,9 @@ router.route('/login').post((req, res, next) => {
                         req.login(user, err => {
                             user.authSession = new authSession({user: user._id})
                             req.session.user = user
-                            console.log(req.session)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
-                            sessionStorage.setItem('auth', authToken(user._id))
+                            sessionStorage.setItem('auth', authToken(user))
+                            console.log(sessionStorage.getItem('auth'))
                             res.status(200).send(user._id)
                             
                             
