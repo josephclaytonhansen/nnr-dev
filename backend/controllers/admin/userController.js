@@ -1,6 +1,7 @@
 import asyncHandler from '../../middleware/asyncHandler.js'
 import User from "../../models/userModel.js"
 import {getToken, getRefreshToken, COOKIE_OPTIONS} from '../../config/authenticate.js'
+import authSession from '../../models/userModel.js'
 
 
 // @desc    Get all users
@@ -18,7 +19,7 @@ const getUsers = asyncHandler(async (req, res) => {
 const getUserById = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
     if (user) {
-        res.json([user.displayName, user.email, user.password])
+        res.json([user.displayName, user.email, user.permissions, user.authSession._id])
     } else {
         res.status(404)
         throw new Error('User not found')
@@ -31,7 +32,7 @@ const getUserById = asyncHandler(async (req, res) => {
 const getUserByIdAdmin = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
     if (user) {
-        res.json([user.displayName, user.email, user.password, user.permissions])
+        res.json([user.displayName, user.email, user.permissions, user.authSession._id])
     } else {
         res.status(404)
         throw new Error('User not found')

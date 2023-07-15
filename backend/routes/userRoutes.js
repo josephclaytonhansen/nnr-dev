@@ -45,12 +45,15 @@ router.route('/register').post((req, res, next) => {
                     res.status(203).send(err)
                 } else {
                     if(user) {
-                        user.authSession = new authSession({user: user._id})
+                        
                         req.login(user, err => {
                             req.session.user = user
                             console.log(req.session.user)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
                             res.status(200).send(user._id)
+                        })
+                        user.save().then(user => {
+                            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
                         })
                     } else {
                         res.status(202).send(info)
@@ -74,11 +77,14 @@ router.route('/login').post((req, res, next) => {
             if (!isMatch) {
                 res.status(401).json({message: "Incorrect credentials"})
             } else {
-                user.authSession = new authSession({user: user._id})
+                
                 req.login(user, err => {
                     req.session.user = user
                 })
-                res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+                user.save().then(user => {
+                    res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+                })
+                
             }
 
             
