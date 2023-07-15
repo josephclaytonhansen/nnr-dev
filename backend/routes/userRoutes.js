@@ -48,7 +48,6 @@ router.route('/register').post((req, res, next) => {
                         
                         req.login(user, err => {
                             req.session.user = user
-                            console.log(req.session.user)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
                             res.status(200).send(user._id)
                         })
