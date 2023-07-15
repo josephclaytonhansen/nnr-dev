@@ -78,15 +78,15 @@ app.use(passport.session())
 import rateLimit from 'express-rate-limit'
 
 const recipesLimiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	max: 500, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+	windowMs: 30 * 60 * 1000,
+	max: 500,
+	standardHeaders: true,
+	legacyHeaders: false,
 })
 
 const usersLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 300,
+  windowMs: 30 * 60 * 1000, // 15 minutes
+  max: 200,
   standardHeaders: true,
   legacyHeaders: false,
 })
@@ -114,7 +114,7 @@ app.disable('x-powered-by')
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
-  console.log(req.rateLimit, req.path)
+  console.log("\nRate limit remaining: ", req.rateLimit.remaining, "\nTo path:",  req.path)
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
