@@ -64,17 +64,18 @@ router.route('/register').post((req, res, next) => {
 })
 
 router.route('/login').post((req, res, next) => {
-    User.findOne({email: {$eq: req.body.email}}).then(user => {
+    
         console.log("\nLogging in user...\n")
-        if(user) {
+
             passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, function(err, user, info){
-                user.authSession = new authSession({user: user._id})
-                res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+                User.findOne({email: {$eq: req.body.email}}).then(user => {
+                    user.authSession = new authSession({user: user._id})
+                    res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+                }).catch(err => console.log(err))
+                
             })(req, res, next)
-        } else {
-            res.status(202).send('User not found')
-        }
-    }).catch(err => console.log(err))
+
+    
 })
 
 
