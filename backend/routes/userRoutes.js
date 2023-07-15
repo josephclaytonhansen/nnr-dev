@@ -68,12 +68,8 @@ router.route('/login').post((req, res, next) => {
         console.log("\nLogging in user...\n")
         if(user) {
             passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, function(err, user, info){
-                if(err || !user) {
-                    res.status(503)
-            } else {
                 user.authSession = new authSession({user: user._id})
                 res.status(200).send(JSON.stringify({"auth":authToken(user)}))
-            }
             })(req, res, next)
         } else {
             res.status(202).send('User not found')
