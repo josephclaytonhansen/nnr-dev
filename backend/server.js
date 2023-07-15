@@ -77,15 +77,32 @@ app.use(passport.session())
 
 import rateLimit from 'express-rate-limit'
 
-const apiLimiter = rateLimit({
+const recipesLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
-	max: 300, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	max: 500, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
 
+const usersLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
 // Apply the rate limiting middleware to API calls only
-app.use('/api', apiLimiter)
+app.use('/api/recipes', recipesLimiter)
+app.use('/api/users', usersLimiter)
+app.use('/api/users/login', loginLimiter)
+app.use('/api/users/register', loginLimiter)
 
 import helmet from 'helmet'
 app.use(helmet())
