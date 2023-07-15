@@ -44,6 +44,20 @@ const ListAllRecipes = () => {
                         setUser(responseJSON)
                         console.log(responseJSON, user)
                         const userAuthSession = user.authSession
+                        if (userAuthSession != session){
+                            sessionStorage.removeItem("token")
+                            setUser("none")
+                            setToken("")
+                            if (! toast.isActive('error')){
+                                toast.error("Session expired. Please log in again.", {toastId: 'error'})
+                            } else {
+                                toast.update("Session expired. Please log in again.", {toastId: 'error'})
+                            }
+
+                        } else {
+                            //validate permissions
+                            const userPermissions = user.permissions
+                        }
     
                 }).catch(e => {
                     if (! toast.isActive('error')){
