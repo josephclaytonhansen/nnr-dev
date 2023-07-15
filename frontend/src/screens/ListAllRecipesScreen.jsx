@@ -24,35 +24,36 @@ const ListAllRecipes = () => {
 
     if (recipes){
         sessionStorage.setItem("recipes", JSON.stringify(recipes))
-    }
-    if (auth && user === "none" && !complete && sessionStorage.getItem("token") != null){
-        const decode = jwt(auth)
-        const session = decode.session
-        const auser = decode.user
-        console.log(decode)
-        complete = true
-        
-        if (auser && user === "none"){
-            fetch(`${BASE_URL}/api/users/${auser}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            }).then((res) => res.json())
-            .then((responseJSON) => {
-
-                    setUser(responseJSON)
-                    console.log(responseJSON, user)
-                    const userAuthSession = user.authSession
-
-            }).catch(e => {
-                if (! toast.isActive('error')){
-                toast.error(e.message, {toastId: 'error'})}
-            })
+        if (auth && user === "none" && !complete && sessionStorage.getItem("token") != null){
+            const decode = jwt(auth)
+            const session = decode.session
+            const auser = decode.user
+            console.log(decode)
+            complete = true
             
+            if (auser && user === "none"){
+                fetch(`${BASE_URL}/api/users/${auser}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                }).then((res) => res.json())
+                .then((responseJSON) => {
+    
+                        setUser(responseJSON)
+                        console.log(responseJSON, user)
+                        const userAuthSession = user.authSession
+    
+                }).catch(e => {
+                    if (! toast.isActive('error')){
+                    toast.error(e.message, {toastId: 'error'})}
+                })
+                
+            }
         }
     }
+
     
 
     return(
