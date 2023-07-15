@@ -66,10 +66,11 @@ router.route('/register').post((req, res, next) => {
 router.route('/login').post((req, res, next) => {
     
         console.log("\nLogging in user...\n")
+        console.log(req.body)
 
             
         User.findOne({email: {$eq: req.body.email}}).then(async user => {
-            const isMatch = await user.matchPassword(password)
+            const isMatch = await user.matchPassword(req.body.password)
             if (!isMatch) {
                 res.status(401).send("Incorrect credentials")
             } else {
@@ -77,9 +78,10 @@ router.route('/login').post((req, res, next) => {
                 req.login(user, err => {
                     req.session.user = user
                 })
+                res.status(200).send(JSON.stringify({"auth":authToken(user)}))
             }
 
-            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+            
         }).catch(err => console.log(err))
 
     
