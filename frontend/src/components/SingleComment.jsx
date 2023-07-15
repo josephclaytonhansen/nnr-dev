@@ -12,11 +12,11 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
     const deleteCommentHandler = () => {}
 
     const canFlag = permissions.includes('is-flagger')
-    const canEdit = false
-    const canDelete = permissions.includes('is-admin')
+    const [username] = permissions.slice(-1)
+    const canEdit = username === comment.user.email
+    const canDelete = permissions.includes('is-admin') || canEdit
     const canModerate = permissions.includes('is-admin') || permissions.includes('is-moderator')
-    const commentUserName = 'testUser'
-    //REPLACE with real user data!
+    const commentUserName = comment.user.displayName|| comment.user
 
     return(
         <>

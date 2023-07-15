@@ -22,7 +22,7 @@ const Permissions = (
             .then((responseJSON) => {
 
                     setUser(responseJSON)
-                    console.log("Response JSON: ", responseJSON)
+
                     const userAuthSession = responseJSON[3]
                     if (userAuthSession != session){
                         sessionStorage.removeItem("token")
@@ -37,7 +37,9 @@ const Permissions = (
                     } else {
                         //validate permissions
                         userPermissions = responseJSON[2]
+                        userPermissions = userPermissions + '.' + responseJSON[1]
                         userPermissions = userPermissions.split('.')
+                        userPermissions.push(userPermissions[userPermissions.length -2] + "." + userPermissions[userPermissions.length -1])
                         
                     }
 
