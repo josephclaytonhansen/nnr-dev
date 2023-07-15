@@ -18,13 +18,23 @@ const UserLogin = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault()
+        try{
         loginUser({ email, password }).unwrap().then((response) => {
+            if (response.originalStatus !=401){
             setState(state => ({ ...state, token: response.auth }))
             sessionStorage.setItem('token', response.auth)
             toast.success('Login successful')
-            history.push('/')
-        }
-            )
+            history.push('/')} else {
+                toast.error('Invalid email or password')
+            }
+        }).catch(e => {
+                if (! toast.isActive('error')){
+                toast.error('Invalid email or password', {toastId: 'error'})}
+            })
+        } catch(e){
+                if (! toast.isActive('error')){
+                toast.error('Invalid email or password', {toastId: 'error'})}
+            }
     }
 
     return(
