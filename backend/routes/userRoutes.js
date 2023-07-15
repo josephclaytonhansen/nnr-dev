@@ -72,7 +72,7 @@ router.route('/login').post((req, res, next) => {
         User.findOne({email: {$eq: req.body.email}}).then(async user => {
             const isMatch = await user.matchPassword(req.body.password)
             if (!isMatch) {
-                res.status(401).send("Incorrect credentials")
+                res.status(401).json({message: "Incorrect credentials"})
             } else {
                 user.authSession = new authSession({user: user._id})
                 req.login(user, err => {
