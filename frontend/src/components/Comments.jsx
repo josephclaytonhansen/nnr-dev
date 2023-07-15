@@ -2,13 +2,10 @@ import React from "react"
 import {Row, Col, Container, ListGroup} from "react-bootstrap"
 import SingleComment from "./SingleComment"
 
-const Comments = ({comments}) => {
+const Comments = ({comments, permissions}) => {
 
-    const canSeeFlaggedComments = false
-    const canSeePendingComments = false
-    
-
-    //REPLACE with real user data!
+    const canSeeFlaggedComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
+    const canSeePendingComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
 
     return(
         <>
@@ -18,26 +15,26 @@ const Comments = ({comments}) => {
                         comment && !comment.pending ? (
                             comment.flags > 0 && canSeeFlaggedComments ? (
                                 <ListGroup.Item key={comment._id}>
-                                <SingleComment comment={comment} classNames={'gray-comment deleted-comment'}/>
+                                <SingleComment comment={comment} permissions = {permissions} classNames={'gray-comment deleted-comment'}/>
                             </ListGroup.Item>
 
                             ) : comment.flags > 0 && !canSeeFlaggedComments ? null : 
                             (
                                 <ListGroup.Item key={comment._id}>
-                                <SingleComment comment={comment} />
+                                <SingleComment permissions = {permissions} comment={comment} />
                             </ListGroup.Item>
                             )
 
                         ) : comment && comment.pending && canSeePendingComments ? (
                             comment.flags > 0 && canSeeFlaggedComments ? (
                                 <ListGroup.Item key={comment._id}>
-                                <SingleComment comment={comment} classNames={'gray-comment'}/>
+                                <SingleComment permissions = {permissions} comment={comment} classNames={'gray-comment'}/>
                             </ListGroup.Item>
 
                             ) : comment.flags > 0 && !canSeeFlaggedComments ? null : 
                             (
                                 <ListGroup.Item key={comment._id}>
-                                <SingleComment comment={comment} />
+                                <SingleComment permissions = {permissions} comment={comment} />
                             </ListGroup.Item>
                             )
                         ) : null

@@ -1,11 +1,15 @@
+let userPermissions = 'none'
+
 const Permissions = (
     auth, user, setUser, setToken, complete, jwt, BASE_URL, toast
 ) => {
+    
     if (auth && user === "none" && !complete && sessionStorage.getItem("token") != null){
         const decode = jwt(auth)
         const session = decode.session
         const auser = decode.user
         complete = true
+        
         
         if (auser && user === "none"){
             fetch(`${BASE_URL}/api/users/${auser}`, {
@@ -32,8 +36,9 @@ const Permissions = (
 
                     } else {
                         //validate permissions
-                        const userPermissions = responseJSON[2]
-                        console.log("User permissions: ", userPermissions)
+                        userPermissions = responseJSON[2]
+                        userPermissions = userPermissions.split('.')
+                        
                     }
 
             }).catch(e => {
@@ -43,6 +48,7 @@ const Permissions = (
             
         }
     }
+    return userPermissions
 }
 
 export default Permissions
