@@ -1,10 +1,12 @@
 let userPermissions = 'none'
 
+
 const Permissions = (
     auth, user, setUser, setToken, complete, jwt, BASE_URL, toast
 ) => {
     
     if (auth && user === "none" && !complete && sessionStorage.getItem("token") != null){
+
         const decode = jwt(auth)
         const session = decode.session
         const auser = decode.user
