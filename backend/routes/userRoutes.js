@@ -68,11 +68,6 @@ router.route('/login').post((req, res, next) => {
         console.log("\nLogging in user...\n")
 
             passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, function(err, user, info){
-                User.findOne({email: {$eq: req.body.email}}).then(user => {
-                    user.authSession = new authSession({user: user._id})
-                    res.status(200).send(JSON.stringify({"auth":authToken(user)}))
-                }).catch(err => console.log(err))
-                
             })(req, res, next)
 
     
