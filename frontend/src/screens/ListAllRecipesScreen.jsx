@@ -11,64 +11,21 @@ import jwt from 'jwt-decode'
 import { AuthContext } from "../utils/authContext"
 import { BASE_URL } from "../constants"
 import { toast } from "react-toastify"
+import Permissions from "../utils/Permissions"
 
 const ListAllRecipes = () => {
     const {data:data, isLoading, error} = useGetRecipesQuery()
     const [user, setUser] = useState("none")
     const recipes = data?.recipes
     const [token, setToken] = useContext(AuthContext)
-    console.log(sessionStorage.getItem("token"))
     let auth = sessionStorage.getItem("token")
     let complete = false
 
 
     if (recipes){
         sessionStorage.setItem("recipes", JSON.stringify(recipes))
-        if (auth && user === "none" && !complete && sessionStorage.getItem("token") != null){
-            const decode = jwt(auth)
-            const session = decode.session
-            const auser = decode.user
-            console.log(decode)
-            complete = true
-            
-            if (auser && user === "none"){
-                fetch(`${BASE_URL}/api/users/${auser}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                }).then((res) => res.json())
-                .then((responseJSON) => {
-    
-                        setUser(responseJSON)
-                        console.log(responseJSON, user)
-                        const userAuthSession = user.authSession
-                        if (userAuthSession != session){
-                            sessionStorage.removeItem("token")
-                            setUser("none")
-                            setToken("")
-                            if (! toast.isActive('error')){
-                                toast.error("Session expired. Please log in again.", {toastId: 'error'})
-                            } else {
-                                toast.update("Session expired. Please log in again.", {toastId: 'error'})
-                            }
-
-                        } else {
-                            //validate permissions
-                            const userPermissions = user.permissions
-                        }
-    
-                }).catch(e => {
-                    if (! toast.isActive('error')){
-                    toast.error(e.message, {toastId: 'error'})}
-                })
-                
-            }
-        }
+        Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)
     }
-
-    
 
     return(
         <main>
