@@ -3,23 +3,38 @@ import React from "react"
 import {toast } from "react-toastify"
 import {Form, Button, Row, Col, Container, Card} from "react-bootstrap"
 import PasswordStrengthBar from 'react-password-strength-bar'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import {useHistory} from "react-router-dom"
+import { set } from "mongoose"
+import { AuthContext } from "../utils/authContext"
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [state, setState] = useContext(AuthContext)
 
     const history = useHistory()
 
     const submitHandler = async (e) => {
         e.preventDefault()
-        loginUser({ email, password }).unwrap().then(() => {
-            history.push('/')
+        try{
+        loginUser({ email, password }).unwrap().then((response) => {
+            if (response.originalStatus !=401){
+            setState(state => ({ ...state, token: response.auth }))
+            sessionStorage.setItem('token', response.auth)
             toast.success('Login successful')
-        }
-            )
+            history.push('/')} else {
+                toast.error('Invalid email or password')
+            }
+        }).catch(e => {
+                if (! toast.isActive('error')){
+                toast.error('Invalid email or password', {toastId: 'error'})}
+            })
+        } catch(e){
+                if (! toast.isActive('error')){
+                toast.error('Invalid email or password', {toastId: 'error'})}
+            }
     }
 
     return(

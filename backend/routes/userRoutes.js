@@ -45,11 +45,14 @@ router.route('/register').post((req, res, next) => {
                     res.status(203).send(err)
                 } else {
                     if(user) {
+                        
                         req.login(user, err => {
                             req.session.user = user
-                            console.log(req.session.user)
                             res.cookie('user', user._id, COOKIE_OPTIONS)
                             res.status(200).send(user._id)
+                        })
+                        user.save().then(user => {
+                            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
                         })
                     } else {
                         res.status(202).send(info)
@@ -63,31 +66,30 @@ router.route('/register').post((req, res, next) => {
 })
 
 router.route('/login').post((req, res, next) => {
-    User.findOne({email: {$eq: req.body.email}}).then(user => {
-        if(user) {
-            passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, (err, user, info) => {
-                if(err) {
-                    res.status(203).send(err)
-                } else {
-                    if(user) {
-                        req.login(user, err => {
-                            user.authSession = new authSession({user: user._id})
-                            req.session.user = user
-                            console.log(req.session)
-                            res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(user._id)
-                            
-                            
-                        })
-                    } else {
-                        res.status(202).send(info)
-                    }
-                }
-            })(req, res, next)
-        } else {
-            res.status(202).send('User not found')
-        }
-    }).catch(err => console.log(err))
+    
+        console.log("\nLogging in user...\n")
+        console.log(req.body)
+
+            
+        User.findOne({email: {$eq: req.body.email}}).then(async user => {
+            const isMatch = await user.matchPassword(req.body.password)
+            if (!isMatch) {
+                res.status(401).json({message: "Incorrect credentials"})
+            } else {
+                
+                req.login(user, err => {
+                    req.session.user = user
+                })
+                user.save().then(user => {
+                    res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+                })
+                
+            }
+
+            
+        }).catch(err => console.log(err))
+
+    
 })
 
 

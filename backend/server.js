@@ -7,6 +7,7 @@ dotenv.config()
 import connectDB from './config/db.js'
 import passport from 'passport'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
+import cron from 'node-cron'
 
 import cors from 'cors'
 
@@ -56,7 +57,6 @@ const localStrategy = new LocalStrategy(
     passwordField: 'password',
     },
     function(username, password, done) {
-      console.log(username)
       User.findOne({email: username}).then(user => {
         return done(null, user)
       }).catch(err => console.log(err))
@@ -71,8 +71,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 passport.use('local', localStrategy)
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -80,7 +79,7 @@ import rateLimit from 'express-rate-limit'
 
 const apiLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
-	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	max: 300, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
@@ -98,7 +97,7 @@ app.disable('x-powered-by')
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
-  console.log(req.session.user)
+  console.log(req.rateLimit, req.path)
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
@@ -118,6 +117,18 @@ app.use("/api/users", userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
+
+cron.schedule('*/30 * * * *', () => {
+  console.log('Removing authSessions');
+  User.find().then(users => {
+    users.forEach(user => {
+      console.log("Removing authSession for user: ", user.email)
+      user.authSession = null
+      user.save()
+      })
+    })
+  })
+
 
 
 app.listen(port, () => {console.log(`Server running on port ${port}`)})

@@ -24,9 +24,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
+
 function App() {
   return (
     <>
+
     <Header></Header>
     <Router>
         <Switch>
@@ -57,7 +59,9 @@ function App() {
           
         </Switch>
         <Footer></Footer>
+        
     </Router>
+
     
     </>
   )

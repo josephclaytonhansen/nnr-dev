@@ -5,18 +5,18 @@ import {Row, Col, Container, Card, Badge} from "react-bootstrap"
 import StarRating from "./StarRating"
 import  "../css/Recipe.css"
 
-const SingleComment = ({comment, classNames = ''}) => {
+const SingleComment = ({comment, permissions, classNames = ''}) => {
 
     const flagCommentHandler = () => {}
     const editCommentHandler = () => {}
     const deleteCommentHandler = () => {}
 
-    const canFlag = false
-    const canEdit = false
-    const canDelete = false
-    const canModerate = false
-    const commentUserName = 'testUser'
-    //REPLACE with real user data!
+    const canFlag = permissions.includes('is-flagger')
+    const [username] = permissions.slice(-1)
+    const canEdit = username === comment.user.email
+    const canDelete = permissions.includes('is-admin') || canEdit
+    const canModerate = permissions.includes('is-admin') || permissions.includes('is-moderator')
+    const commentUserName = comment.user.displayName|| comment.user
 
     return(
         <>

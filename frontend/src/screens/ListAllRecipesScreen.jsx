@@ -1,49 +1,31 @@
 import { useGetRecipesQuery } from "../slices/recipesApiSlice"
 import { useGetUserByIdQuery } from "../slices/usersApiSlice"
 import { useParams } from "react-router"
-import {useState } from "react"
+import {useState, useContext } from "react"
 import React from "react"
 import { Container } from "react-bootstrap"
 import Loader from "../components/Loader"
 import RecipeList from "../components/RecipeList"
 import Message from "../components/Message"
 import jwt from 'jwt-decode'
+import { AuthContext } from "../utils/authContext"
+import { BASE_URL } from "../constants"
+import { toast } from "react-toastify"
+import Permissions from "../utils/Permissions"
 
 const ListAllRecipes = () => {
     const {data:data, isLoading, error} = useGetRecipesQuery()
-    const {user, setUser} = useState("none")
+    const [user, setUser] = useState("none")
     const recipes = data?.recipes
-    const token = data?.token
+    const [token, setToken] = useContext(AuthContext)
+    let auth = sessionStorage.getItem("token")
+    let complete = false
 
 
     if (recipes){
         sessionStorage.setItem("recipes", JSON.stringify(recipes))
+        Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)
     }
-    if (token){
-        const decode = jwt(token)
-        const session = decode.session
-        user = decode.user
-        
-        if (user){
-            const userAuthSession = user.authSession
-            if (userAuthSession._id == session._id){
-                setUser(user)
-                fetch(`/api/users/${user._id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                }).then((res) => {
-                    if (res.status === 200) {
-                        setUser(res.json())
-
-                    }
-                })
-            }
-        }
-    }
-    
 
     return(
         <main>

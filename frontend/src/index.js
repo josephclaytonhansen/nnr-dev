@@ -11,12 +11,17 @@ import { ToastContainer } from 'react-toastify'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { AuthProvider } from './utils/authContext'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
   <React.StrictMode>
+    <AuthProvider>
     <Provider store={store}><App /><ToastContainer/></Provider>
+    </AuthProvider>
   </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

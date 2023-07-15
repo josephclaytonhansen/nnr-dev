@@ -7,7 +7,6 @@ import {authToken, verifyToken} from '../config/userAuthToken.js'
 // @access  Public
 const getRecipes = asyncHandler(async (req, res) => {
     const recipes = await Recipe.find({})
-    console.log(req.user)
     if (req.user){
     const token = authToken(req.user)
     res.json({'recipes': recipes, 'token': token})}

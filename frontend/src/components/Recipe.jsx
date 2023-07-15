@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown"
 import Comments from "./Comments"
 import ShareBar from "./ShareBar"
 
-const Recipe = ({recipe}) => {
+const Recipe = ({recipe, permissions}) => {
     if (recipe){
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
@@ -64,7 +64,7 @@ const Recipe = ({recipe}) => {
                 <Row className="my-4 gy-2">
                     <Col sm={12}>
 
-                        <Comments comments={recipe.comments}/>
+                        <Comments comments={recipe.comments} permissions = {permissions}/>
                         
                     </Col>
                 </Row>
