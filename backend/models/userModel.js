@@ -48,6 +48,15 @@ userSchema.pre('save', async function (next) {
 
         user.username = user.email
         user.authSession = new authSession ({user: user._id})
+
+        if (!user.isModified('password')) next()
+        // generate salt
+        const salt = await bcrypt.genSalt(12)
+        // hash the password
+        const hashedPassword = await bcrypt.hash(this.password, salt)
+         // replace plain text password with hashed password
+        this.password = hashedPassword
+
         
         next()
     } catch (error) {
@@ -62,6 +71,14 @@ userSchema.pre('validate', async function (next) {
         user.username = user.email
         //set user.authSession to a new Session object with user._id as the value of user
         user.authSession = new authSession ({user: user._id})
+
+        if (!user.isModified('password')) next()
+        // generate salt
+        const salt = await bcrypt.genSalt(12)
+        // hash the password
+        const hashedPassword = await bcrypt.hash(this.password, salt)
+         // replace plain text password with hashed password
+        this.password = hashedPassword
         
         next()
     } catch (error) {
@@ -77,7 +94,16 @@ userSchema.set('toJSON', {
     }
 })
 
-userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})
+
+UserSchema.methods.matchPassword = async function (password) {
+    try {
+      return await bcrypt.compare(password, this.password)
+    } catch (error) {
+      throw new Error(error)
+    }
+   };
+
+//userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})
 
 const User = mongoose.model('User', userSchema)
 export default User

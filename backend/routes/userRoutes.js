@@ -67,8 +67,20 @@ router.route('/login').post((req, res, next) => {
     
         console.log("\nLogging in user...\n")
 
-            passport.authenticate('local', {successRedirect:process.env.FRONT_END_URL}, function(err, user, info){
-            })(req, res, next)
+            
+        User.findOne({email: {$eq: req.body.email}}).then(async user => {
+            const isMatch = await user.matchPassword(password)
+            if (!isMatch) {
+                res.status(401).send("Incorrect credentials")
+            } else {
+                user.authSession = new authSession({user: user._id})
+                req.login(user, err => {
+                    req.session.user = user
+                })
+            }
+
+            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+        }).catch(err => console.log(err))
 
     
 })
