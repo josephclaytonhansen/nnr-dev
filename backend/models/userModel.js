@@ -90,6 +90,7 @@ userSchema.pre('validate', async function (next) {
 userSchema.set('toJSON', {
     transform: (document, ret, options) => {
         delete ret.refreshToken
+        delete ret.password
         return ret
     }
 })
