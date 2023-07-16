@@ -1,6 +1,7 @@
 import asyncHandler from '../../middleware/asyncHandler.js'
 import Recipe from '../../models/recipeModel.js'
 
+
 // @desc    Create recipe by id
 // @route   POST /api/recipes/id/:id
 // @access  Private/Admin

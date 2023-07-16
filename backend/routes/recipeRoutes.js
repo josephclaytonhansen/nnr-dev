@@ -26,11 +26,28 @@ import {
     updateRecipeById,
 } from '../controllers/admin/recipeController.js'
 
+import Recipe from '../models/recipeModel.js'
+
 
 //Admin routes (needs protect/admin middleware)
 router.route('/').post(createRecipeById)
 router.route('/id/:id').delete(deleteRecipeById)
 router.route('/id/:id').put(updateRecipeById)
+
+router.route('/create').post(
+    //create a new Recipe and return the ID 
+    (req, res, next) => {
+        Recipe.create({
+            author: req.body.author,
+        }, function (err, recipe) {}).then(recipe => {
+            if (err) {
+                res.status(203).send('Error creating recipe')
+            } else {
+            res.status(200).send(recipe._id)
+            }
+        })
+    }
+)
 
 //Public routes
 router.route('/all').get(getRecipes)

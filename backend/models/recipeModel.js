@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const recipeSchema = new mongoose.Schema({
-    name: {type: String, required: true, index:true},
+    name: {type: String, required: false, index:true},
     ingredients: [{
         name: {
             type: String,
@@ -35,12 +35,12 @@ const recipeSchema = new mongoose.Schema({
     }],
     cuisine: {
         type: String,
-        required: true,
+        required: false,
         index: true,
     },
     tags: [{
         type: String,
-        required: true,
+        required: false,
         index: true,
     }],
     source: {
