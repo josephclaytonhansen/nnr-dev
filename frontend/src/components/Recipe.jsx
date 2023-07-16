@@ -8,8 +8,12 @@ import remarkGfm from "remark-gfm"
 import ReactMarkdown from "react-markdown"
 import Comments from "./Comments"
 import ShareBar from "./ShareBar"
+import { faEdit } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
 
 const Recipe = ({recipe, permissions}) => {
+    const canEdit = permissions.includes('is-author')
     if (recipe){
         const recipe = JSON.parse(sessionStorage.getItem("recipe"))
         return(
@@ -22,7 +26,11 @@ const Recipe = ({recipe, permissions}) => {
                     <Col lg = {9} md ={6} sm = {12}>
                         <Row>
                             <Col>
-                            <h1 className = 'm-0'>{recipe.name}</h1>
+                            <h1 className = 'm-0'>{recipe.name} {canEdit && 
+                            <Link to={`/edit/${recipe.slug}`}>
+                                <FontAwesomeIcon icon={faEdit} className="icon-dark-blue icon-hover-dark-blue" />
+                                </Link>
+                            }</h1>
                             <p>Takes {recipe.timeToMake} minutes to make</p>
                             </Col>
                         </Row>
