@@ -23,12 +23,23 @@ import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Permissions from './utils/Permissions'
+import AdminButtons from './components/AdminButtons'
+import jwt from 'jwt-decode'
+import { toast } from 'react-toastify'
+import { BASE_URL } from './constants'
+import { useState } from 'react'
 
 
 function App() {
+  let complete = false
+  let auth = sessionStorage.getItem('token')
+  let [user, setUser] = useState('none')
+  let [token, setToken] = useState('none')
+  
   return (
     <>
-
+    {auth && <AdminButtons permissions={Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)}/>}
     <Header></Header>
     <Router>
         <Switch>
@@ -50,7 +61,7 @@ function App() {
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
 
-          <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
+          <Route path="/edit/:id" component={withRouter(CRUDRecipesScreen)} />
           <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
           <Route path="/admin" component={withRouter(AdminScreen)} />
 

@@ -134,6 +134,8 @@ const Home = () => {
     }
 
     return(
+        <>
+        
         <main>
             {recipes ? (
                 <Container>
@@ -250,6 +252,7 @@ const Home = () => {
             )}
             
         </main>
+        </>
     )
 }
 

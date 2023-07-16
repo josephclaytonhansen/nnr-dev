@@ -39,6 +39,15 @@ header{
     color: var(--dark-blue);
 }
 
+.icon-hover-dark-blue{
+    cursor: pointer;
+    transition: color 0.3s cubic-bezier(.41,1.29,.64,1);
+}
+
+.icon-hover-dark-blue:hover{
+    color: var(--light-blue);
+}
+
 .icon-red{
     color: var(--red);
 }
@@ -108,6 +117,10 @@ header{
 
 .bg-l-purple{
     background-color: var(--light-purple)!important;
+}
+
+.bg-strong-purple{
+    background-color: var(--strong-purple)!important;
 }
 
 .bg-cream{
