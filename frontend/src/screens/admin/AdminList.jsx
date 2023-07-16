@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const AdminList = () => {
-    const recipes = JSON.parse(sessionStorage.getItem("recipes"))
+    const recipes = JSON.parse(sessionStorage.getItem("recipes")).recipes
+    console.log(recipes)
     
     let recipesCopy = [...recipes]
     recipesCopy.sort((a, b) => (a.dateModified > b.dateModified) ? -1 : 1)

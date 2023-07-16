@@ -24,9 +24,18 @@ const AdminButtons = ({permissions}) => {
         }
     }
 
-    return (
+    const adminRecipesHandler = () => {
+        window.location.href = window.location.origin + `/admin-recipes`
+    }
 
-        <div style = {{position:'fixed', borderRadius: '12px 0 0 0', padding:'20px', bottom:'20px', right:'0px'}} className="bg-d-gray">
+    const adminUsersHandler = () => {
+        window.location.href = window.location.origin + `/admin-users`
+    }
+
+    return (
+<>
+        {(isAuthor || isAdmin) && (<div style = {{position:'fixed', borderRadius: '12px 0 0 0', padding:'20px', bottom:'20px', right:'0px'}} className="bg-d-gray">
+            
             <Row style = {{width:width, flexDirection:'row', }} className="d-flex">
                 {isAuthor && (
                 <Col>
@@ -35,13 +44,14 @@ const AdminButtons = ({permissions}) => {
                 {isAdmin && (
                     <>
                 <Col>
-                <Button className = 'bg-red button-bg-red'><h6 className = 'py-0 my-0'><FontAwesomeIcon icon={faList}></FontAwesomeIcon></h6></Button>
+                <Button className = 'bg-red button-bg-red'><h6 className = 'py-0 my-0' onClick = {adminRecipesHandler}><FontAwesomeIcon icon={faList}></FontAwesomeIcon></h6></Button>
                 </Col>
                 <Col>
-                <Button className = 'bg-red button-bg-red'><h6 className = 'py-0 my-0'><FontAwesomeIcon icon={faUsers}></FontAwesomeIcon></h6></Button>
+                <Button className = 'bg-red button-bg-red'><h6 className = 'py-0 my-0'onClick = {adminUsersHandler}><FontAwesomeIcon icon={faUsers}></FontAwesomeIcon></h6></Button>
                 </Col></>)}
             </Row>
-        </div>
+        </div>)}
+        </>
     )
 }
 

@@ -24,7 +24,9 @@ const UserLogin = () => {
             setState(state => ({ ...state, token: response.auth }))
             sessionStorage.setItem('token', response.auth)
             toast.success('Login successful')
-            history.push('/')} else {
+            history.push('/')
+            window.location.reload()
+        } else {
                 toast.error('Invalid email or password')
             }
         }).catch(e => {

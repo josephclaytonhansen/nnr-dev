@@ -18,6 +18,7 @@ import Meal from './screens/MealScreen'
 import Why from './screens/WhyScreen'
 import UserLogin from './screens/UserLoginScreen'
 import UserRegister from './screens/UserRegisterScreen'
+import AdminListAllUsers from './screens/admin/AdminListAllUsers'
 import ListAllRecipes from './screens/ListAllRecipesScreen'
 import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -62,8 +63,8 @@ function App() {
           <Route path="/login" component={withRouter(UserLogin)} />
 
           <Route path="/edit/:id" component={withRouter(CRUDRecipesScreen)} />
-          <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
-          <Route path="/admin" component={withRouter(AdminScreen)} />
+          <Route path="/admin-recipes" component={withRouter(AdminListAllRecipes)} />
+          <Route path="/admin-users" component={withRouter(AdminListAllUsers)} />
 
 
           <Route path="/" component={withRouter(Home)} exact index={true} />
