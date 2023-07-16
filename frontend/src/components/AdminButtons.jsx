@@ -15,8 +15,10 @@ const AdminButtons = ({permissions}) => {
 
     const createRecipeHandler = async () => {
         try{
-            const res = await createRecipe().unwrap()
+            const res = await createRecipe({author: permissions[0], name: "new recipe"}).unwrap()
             toast.success("Recipe created")
+            window.location.href = window.location.origin + `/edit/${res}`
+            
         } catch(err){
             toast.error(err?.data?.message || err.error)
         }
@@ -28,7 +30,7 @@ const AdminButtons = ({permissions}) => {
             <Row style = {{width:width, flexDirection:'row', }} className="d-flex">
                 {isAuthor && (
                 <Col>
-                <Button className = 'bg-red button-bg-red'><h6 className = 'py-0 my-0'><FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></h6></Button>
+                <Button className = 'bg-red button-bg-red' onClick = {createRecipeHandler}><h6 className = 'py-0 my-0'><FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></h6></Button>
                 </Col>)}
                 {isAdmin && (
                     <>

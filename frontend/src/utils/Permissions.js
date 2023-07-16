@@ -42,7 +42,7 @@ const Permissions = (
                         userPermissions = userPermissions + '.' + responseJSON[1]
                         userPermissions = userPermissions.split('.')
                         userPermissions.push(userPermissions[userPermissions.length -2] + "." + userPermissions[userPermissions.length -1])
-                        
+                        userPermissions.unshift(auser)
                     }
 
             }).catch(e => {
