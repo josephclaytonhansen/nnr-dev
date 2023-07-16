@@ -115,7 +115,11 @@ app.disable('x-powered-by')
 app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
+  if (process.env.NODE_ENV === 'production') {
   console.log("\nRate limit remaining: ", req.rateLimit.remaining, "\nTo path:",  req.path)
+  } else {
+    console.log(req.path)
+  }
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
