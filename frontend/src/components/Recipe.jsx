@@ -27,7 +27,7 @@ const Recipe = ({recipe, permissions}) => {
                         <Row>
                             <Col>
                             <h1 className = 'm-0'>{recipe.name} {canEdit && 
-                            <Link to={`/edit/${recipe.slug}`}>
+                            <Link to={`/edit/${recipe._id}`}>
                                 <FontAwesomeIcon icon={faEdit} className="icon-dark-blue icon-hover-dark-blue" />
                                 </Link>
                             }</h1>

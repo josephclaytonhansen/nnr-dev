@@ -119,6 +119,10 @@ header{
     background-color: var(--light-purple)!important;
 }
 
+.bg-strong-purple{
+    background-color: var(--strong-purple)!important;
+}
+
 .bg-cream{
     background-color: var(--cream)!important;
 }

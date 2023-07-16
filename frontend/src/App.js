@@ -23,6 +23,7 @@ import './css/App.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import AdminButtons from './components/AdminButtons'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
     <>
 
     <Header></Header>
+    <AdminButtons/>
     <Router>
         <Switch>
 
@@ -50,7 +52,7 @@ function App() {
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
 
-          <Route path="/admin/recipe/:id" component={withRouter(CRUDRecipesScreen)} />
+          <Route path="/edit/:id" component={withRouter(CRUDRecipesScreen)} />
           <Route path="/admin/recipes" component={withRouter(AdminListAllRecipes)} />
           <Route path="/admin" component={withRouter(AdminScreen)} />
 
