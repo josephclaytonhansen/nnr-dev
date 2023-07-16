@@ -8,6 +8,7 @@ const Comments = ({comments, permissions, recipe}) => {
     const canSeeFlaggedComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
     const canSeePendingComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
     const canComment = permissions.includes('is-commentor')
+    const user = permissions[0]
 
     return(
         <>
@@ -44,7 +45,7 @@ const Comments = ({comments, permissions, recipe}) => {
                     ))}
                     {canComment && (
                         <ListGroup.Item>
-                            <CommentForm recipe={recipe}/>
+                            <CommentForm recipe={recipe} user = {user}/>
                         </ListGroup.Item>
                     )}
                 </ListGroup>

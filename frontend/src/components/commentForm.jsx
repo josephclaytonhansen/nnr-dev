@@ -1,10 +1,10 @@
 import React from 'react'
 import { Form, FormControl, FormGroup, Button, Row, Col } from 'react-bootstrap'
 import { useState } from 'react'
-
+import {toast } from 'react-toastify'
 import { useCreateCommentMutation } from '../slices/commentsApiSlice'
 
-const CommentForm = ({recipe}) => {
+const CommentForm = ({recipe, user}) => {
 
 const [createComment, { isLoading, isError, error }] = useCreateCommentMutation()
 
@@ -24,7 +24,13 @@ const [createComment, { isLoading, isError, error }] = useCreateCommentMutation(
 
     const submitHandler = () => {
         let comment = document.getElementById('comment').value
-        createComment({recipe: recipe._id, comment: comment})
+        const res = createComment({recipe: recipe._id, comment: comment, rating: rating, user: user})
+        if (res){
+            toast.success('Comment submitted')
+        }
+        else if (isError) {
+            toast.error(error?.message || error?.error || 'Unknown error')
+        }
 }
 
     return(
