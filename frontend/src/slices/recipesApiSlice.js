@@ -95,7 +95,7 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
         }),
         createRecipe: builder.mutation({
             query: (data) => ({
-                url: `${RECIPES_URL}`,
+                url: `${RECIPES_URL}/create`,
                 method: 'POST',
                 body: data,
             }),
