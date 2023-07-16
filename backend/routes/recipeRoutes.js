@@ -27,6 +27,7 @@ import {
 } from '../controllers/admin/recipeController.js'
 
 import Recipe from '../models/recipeModel.js'
+import User from '../models/userModel.js'
 
 
 //Admin routes (needs protect/admin middleware)
@@ -37,15 +38,15 @@ router.route('/id/:id').put(updateRecipeById)
 router.route('/create').post(
     //create a new Recipe and return the ID 
     (req, res, next) => {
+        console.log(req.body.author)
+        const user = User.findOne({id: {$eq: req.body.author}})
+        console.log(user)
         Recipe.create({
-            author: req.body.author,
-        }, function (err, recipe) {}).then(recipe => {
-            if (err) {
-                res.status(203).send('Error creating recipe')
-            } else {
-            res.status(200).send(recipe._id)
-            }
-        })
+            author: user._id,
+            name: req.body.name,
+            cuisine: "American",
+            content: "new recipe",
+        }).then(recipe => {res.status(200).send(recipe._id)}).catch(err => {res.status(400).send(err)})
     }
 )
 

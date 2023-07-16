@@ -50,7 +50,7 @@ const recipeSchema = new mongoose.Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: "User",
     },
     slug: {
@@ -131,7 +131,7 @@ const recipeSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required: true,
+        required: false,
         index: true,
     },
     feeds: {
