@@ -78,31 +78,32 @@ app.use(passport.session())
 import rateLimit from 'express-rate-limit'
 
 const recipesLimiter = rateLimit({
-	windowMs: 30 * 60 * 1000,
-	max: 500,
+	windowMs: 15 * 60 * 1000,
+	max: 200,
 	standardHeaders: true,
 	legacyHeaders: false,
 })
 
 const usersLimiter = rateLimit({
-  windowMs: 30 * 60 * 1000, // 15 minutes
-  max: 200,
+  windowMs: 30 * 60 * 1000,
+  max: 210,
   standardHeaders: true,
   legacyHeaders: false,
 })
 
 const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 60 * 60 * 1000,
   max: 5,
   standardHeaders: true,
   legacyHeaders: false,
 })
 
-// Apply the rate limiting middleware to API calls only
-app.use('/api/recipes', recipesLimiter)
-app.use('/api/users', usersLimiter)
-app.use('/api/users/login', loginLimiter)
-app.use('/api/users/register', loginLimiter)
+if (process.env.NODE_ENV === 'production') {
+  app.use('/api/recipes', recipesLimiter)
+  app.use('/api/users', usersLimiter)
+  app.use('/api/users/login', loginLimiter)
+  app.use('/api/users/register', loginLimiter)
+}
 
 import helmet from 'helmet'
 app.use(helmet())
@@ -136,13 +137,29 @@ app.use(notFound)
 app.use(errorHandler)
 
 cron.schedule('*/30 * * * *', () => {
-  console.log('Removing authSessions');
+  console.log('\nRemoving authSessions');
   User.find().then(users => {
     users.forEach(user => {
       console.log("Removing authSession for user: ", user.email)
       user.authSession = null
       user.save()
       })
+    })
+  })
+
+
+  cron.schedule('0 6 * * *', () => {
+    console.log('\nUsers\n')
+    User.find().then(users => {
+      users.forEach(user => {
+        console.log(user)
+        })
+    })
+    console.log('\nRecipes\n')
+    Recipe.find().then(recipes => {
+      recipes.forEach(recipe => {
+        console.log(recipe)
+        })
     })
   })
 
