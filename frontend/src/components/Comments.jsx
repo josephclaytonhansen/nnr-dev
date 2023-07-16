@@ -44,7 +44,7 @@ const Comments = ({comments, permissions, recipe}) => {
                     ))}
                     {canComment && (
                         <ListGroup.Item>
-                            <CommentForm recipe={recipe} permissions = {permissions}/>
+                            <CommentForm recipe={recipe}/>
                         </ListGroup.Item>
                     )}
                 </ListGroup>
