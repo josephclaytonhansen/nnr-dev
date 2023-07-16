@@ -72,7 +72,7 @@ const Recipe = ({recipe, permissions}) => {
                 <Row className="my-4 gy-2">
                     <Col sm={12}>
 
-                        <Comments comments={recipe.comments} permissions = {permissions}/>
+                        <Comments comments={recipe.comments} permissions = {permissions} recipe = {recipe}/>
                         
                     </Col>
                 </Row>
