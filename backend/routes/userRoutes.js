@@ -31,7 +31,7 @@ router.route('/:id').get(getUserById)
 
 //Public routes
 router.route('/register').post((req, res, next) => {
-    User.register(
+
         new User({ 
           email: req.body.email, 
           username: req.body.email 
@@ -62,7 +62,7 @@ router.route('/register').post((req, res, next) => {
 
           }
         }
-      )
+      
 })
 
 router.route('/login').post((req, res, next) => {
