@@ -5,6 +5,7 @@ import {Row, Col, Container, Card, Badge} from "react-bootstrap"
 import StarRating from "./StarRating"
 import  "../css/Recipe.css"
 import {useGetUserByIdQuery} from "../slices/usersApiSlice"
+import Loader from "./Loader"
 
 const SingleComment = ({comment, permissions, classNames = ''}) => {
     console.log(comment)
@@ -18,12 +19,14 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
     const canDelete = permissions.includes('is-admin') || canEdit
     const canModerate = permissions.includes('is-admin') || permissions.includes('is-moderator')
     const {data: commentUser, isLoading, error} = useGetUserByIdQuery(comment.user)
-    console.log(commentUser)
-    const commentUserName = commentUser[0]
+    const commentUserName = commentUser ? commentUser[0] : 'Anonymous'
 
     return(
         <>
-        <Row className={`my-1 d-flex align-items-center ${classNames}`}>
+        {isLoading && (<Loader/>)}
+        {commentUser && (
+            <>
+            <Row className={`my-1 d-flex align-items-center ${classNames}`}>
             <Col>
             <h5 className='my-1'>{commentUserName}</h5>
             </Col>
@@ -62,6 +65,9 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
             
 
         </Row>
+            </>
+        )}
+        
         </>
     )
 }
