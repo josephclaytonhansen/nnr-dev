@@ -29,6 +29,17 @@ router.route('/email/:email').get(getUserByEmail)
 //Private routes (must be logged in)
 router.route('/:id').get(getUserById)
 
+router.route('/request-authorship/:id').get((req, res, next) => {
+    User.findById(req.params.id).then(user => {
+        user.permissions = user.permissions + ".authorship-requested"
+        user.save().then(user => {
+            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+        })
+    }).catch(
+        res.status(200).send(JSON.stringify({"message":"User not found"}))
+    )
+})
+
 //Public routes
 router.route('/register').post((req, res, next) => {
     new User(
