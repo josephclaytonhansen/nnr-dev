@@ -13,8 +13,8 @@ import {
 router.route('/').post(createComment)
 router.route('/:id').get(getCommentsByRecipe)
 router.route('/:id').put(updateComment)
-router.route('/:id').delete(deleteComment)
-router.route('/flag/:id').put(flagComment)
+router.route('/delete/:id').get(deleteComment)
+router.route('/flag/:id').get(flagComment)
 router.route('/pending/:id').put(togglePending)
 
 export default router

@@ -33,7 +33,7 @@ const commentSchema = new mongoose.Schema({
     pending: {
         type: Boolean,
         required: true,
-        default: true,
+        default: false,
     },
 
 }, {timestamps: true})

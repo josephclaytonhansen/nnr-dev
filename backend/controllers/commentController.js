@@ -27,6 +27,8 @@ const createComment = asyncHandler(async (req, res) => {
     const commentExists = await Comment.findOne({
         user: user,
         recipe: recipe,
+        content: content,
+        rating: rating,
     })
     if (commentExists) {
         res.status(400).json({data:'Comment already exists'})
