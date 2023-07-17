@@ -34,10 +34,10 @@ const createComment = asyncHandler(async (req, res) => {
         
             await Recipe.findOne({_id: {$eq:recipe}}).then(recipe => {
                 const comment = Comment.create({
-                    user,
-                    content,
-                    rating,
-                    recipe,
+                    user: {$eq:user},
+                    content: {$eq:content},
+                    rating: {$eq:rating},
+                    recipe: {$eq:recipe},
                 }).then(comment => {
                 recipe.comments.push(comment)
                 console.log(recipe.comments)
