@@ -38,6 +38,7 @@ const createComment = asyncHandler(async (req, res) => {
                     content,
                     rating,
                     recipe,
+                    pending: false,
                 }).then(comment => {
                 recipe.comments.push(comment)
                 console.log(recipe.comments)
@@ -102,8 +103,11 @@ const togglePending = asyncHandler(async (req, res) => {
 //delete
 const deleteComment = asyncHandler(async (req, res) => {
     const comment = await Comment.findById(req.params.id)
+    const recipe = await Recipe.findById(comment.recipe)
     if (comment) {
         await comment.deleteOne()
+        await recipe.comments.pull(comment)
+        await recipe.save()
         res.json({message: 'Comment removed'})
     } else {
         res.status(404)

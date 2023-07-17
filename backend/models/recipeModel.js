@@ -123,6 +123,12 @@ recipeSchema.pre('validate', async function (next){
 
 recipeSchema.post('save', async function (next){
     this.slug = this.name.toLowerCase().replace(/ /g, '-')
+    this.numReviews = this.comments.filter(comment => comment.rating).length
+    let commentsWithRatings = this.comments.filter(comment => comment.rating)
+    if (commentsWithRatings.length > 0) {
+        this.rating = commentsWithRatings.reduce((acc, comment) => comment.rating + acc, 0) / commentsWithRatings.length
+    }
+    this.save()
     
 })
 const Recipe = mongoose.model("Recipe", recipeSchema)
