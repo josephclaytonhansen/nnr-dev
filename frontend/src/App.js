@@ -16,6 +16,7 @@ import Vegetarian from './screens/VegetarianScreen'
 import DogSafe from './screens/DogSafeScreen'
 import Meal from './screens/MealScreen'
 import Why from './screens/WhyScreen'
+import Contact from './screens/ContactScreen'
 import Contribute from './screens/ContributeScreen'
 import UserLogin from './screens/UserLoginScreen'
 import UserPage from './screens/UserPageScreen'
@@ -62,6 +63,7 @@ function App() {
 
           <Route path="/why" component={withRouter(Why)}/>
           <Route path="/contribute" component={withRouter(Contribute)} />
+          <Route path="/contact" component={withRouter(Contact)} />
 
 
           <Route path="/register" component={withRouter(UserRegister)} />

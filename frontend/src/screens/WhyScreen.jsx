@@ -35,7 +35,7 @@ const WhyScreen = () => {
 </form>
 <p style = {{fontSize:"105%", marginTop:"1rem"}}>You know what they say; "if you're annoyed with something, make the better version yourself!" (Close enough.) Rock on, and if you read all this- go make something cool today 🤘🏻 </p>
 <p style = {{fontSize:"105%"}}>
-    P.S. Hit me up at <a className = 'balloon-tooltip' aria-label='j&#8203;@&#8203;j&#8203;h&#8203;a&#8203;n&#8203;s&#8203;e&#8203;n&#8203;.a&#8203;r&#8203;t' data-balloon-pos='right'>show email</a> if you want. I'm always down for development projects. (I made this site myself, full-stack; you can learn more on the <Link to='/about'>About</Link> page)
+    P.S. Hit me up at <a className = 'balloon-tooltip' aria-label='j&#8203;@&#8203;j&#8203;h&#8203;a&#8203;n&#8203;s&#8203;e&#8203;n&#8203;.a&#8203;r&#8203;t' data-balloon-pos='right'>show email</a> if you want. I'm always down for development projects.
 </p>
 
                 </Col>

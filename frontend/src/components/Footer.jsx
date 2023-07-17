@@ -41,14 +41,13 @@ const Footer = () => {
                         <Link to="/contribute">Contribute recipes</Link>
                     </Col>
                     <Col className="text-center py-3">
+                        <Link to="/contact">Contact</Link>
+                    </Col>
+                    <Col className="text-center py-3">
                         <strong>Copyright 2023 Joseph Hansen</strong>
                     </Col>
-                    <Col className="text-center py-3">
-                        <Link to="/about">Contact</Link>
-                    </Col>
-                    <Col className="text-center py-3">
-                        <Link to="/about">About</Link>
-                    </Col>
+                    
+
 
 
                 </Row>
