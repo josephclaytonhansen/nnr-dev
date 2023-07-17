@@ -66,10 +66,20 @@ const getUserByPermissions = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateUserById = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
+    console.log(req.body)
     if (user) {
-        user.displayName = req.body.displayName || user.displayName
-        user.email = req.body.email || user.email
-        user.password = req.body.password || user.password
+        user.displayName = req.body.displayName
+
+        if (req.body.password){
+            user.password = req.body.password
+        } 
+        if (req.body.email){
+            user.email = req.body.email
+        }
+        if (req.body.displayName.startsWith('anon')){
+            user.email = req.body.displayName + '@anon.com'
+            user.username = req.body.displayName
+        }
         const updatedUser = await user.save()
         res.json({
             _id: updatedUser._id,
