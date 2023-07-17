@@ -6,12 +6,33 @@ import StarRating from "./StarRating"
 import  "../css/Recipe.css"
 import {useGetUserByIdQuery} from "../slices/usersApiSlice"
 import Loader from "./Loader"
+import { COMMENTS_URL, BASE_URL } from "../constants"
 
 const SingleComment = ({comment, permissions, classNames = ''}) => {
-    console.log(comment)
-    const flagCommentHandler = () => {}
-    const editCommentHandler = () => {}
-    const deleteCommentHandler = () => {}
+
+    let [flags, setFlags] = React.useState(comment.flags)
+    let [deleted, setDeleted] = React.useState(false)
+
+    const FlagCommentHandler = () => {
+        fetch(`${BASE_URL}/api/comments/flag/${comment._id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+        }).then(setFlags(flags + 1))
+
+    }
+    const EditCommentHandler = () => {}
+    const DeleteCommentHandler = () => {
+        fetch(`${BASE_URL}/api/comments/delete/${comment._id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+        }).then(setDeleted(true))
+    }
 
     const canFlag = permissions.includes('is-flagger')
     const [username] = permissions.slice(-1)
@@ -24,7 +45,7 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
     return(
         <>
         {isLoading && (<Loader/>)}
-        {commentUser && (
+        {(commentUser && !deleted) && (
             <>
             <Row className={`my-1 d-flex align-items-center ${classNames}`}>
             <Col>
@@ -45,21 +66,21 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
             {canFlag && (
                 <Col className = 'flex-grow-0 flex-shrink-0 d-flex align-items-center'>
                     {canModerate && (
-                        <div className={comment.flags > 0 ? 'custom-badge bg-red' : 'custom-badge bg-transparent'} style = {{borderRadius:'100%', padding:'3px', marginRight:'.25rem'}}>{comment.flags}</div>
+                        <div className={flags > 0 ? 'custom-badge bg-red' : 'custom-badge bg-transparent'} style = {{borderRadius:'100%', padding:'3px', marginRight:'.25rem'}}>{flags}</div>
                     )}
-                    <FontAwesomeIcon onClick={flagCommentHandler} icon={faFlag} className="icon-light-gray iconClick"/>
+                    <FontAwesomeIcon onClick={FlagCommentHandler} icon={faFlag} className="icon-hover-dark-blue icon-dark-blue"/>
                 </Col>
             )} 
             
             {canEdit && (
                 <Col className = 'flex-grow-0 flex-shrink-0'>
-                    <FontAwesomeIcon onClick = {editCommentHandler} icon={faEdit} className="icon-light-gray iconClick"/>
+                    <FontAwesomeIcon onClick = {EditCommentHandler} icon={faEdit} className="icon-hover-dark-blue icon-dark-blue"/>
                 </Col>
             )}
 
             {canDelete && (
                 <Col className = 'flex-grow-0 flex-shrink-0'>
-                    <FontAwesomeIcon onClick = {deleteCommentHandler} icon={faTrash} className="icon-light-gray iconClick"/>
+                    <FontAwesomeIcon onClick = {DeleteCommentHandler} icon={faTrash} className="icon-hover-dark-blue icon-dark-blue"/>
                 </Col>
             )}
             
