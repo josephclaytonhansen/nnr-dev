@@ -17,6 +17,7 @@ import DogSafe from './screens/DogSafeScreen'
 import Meal from './screens/MealScreen'
 import Why from './screens/WhyScreen'
 import UserLogin from './screens/UserLoginScreen'
+import UserPage from './screens/UserPageScreen'
 import UserRegister from './screens/UserRegisterScreen'
 import AdminListAllUsers from './screens/admin/AdminListAllUsers'
 import ListAllRecipes from './screens/ListAllRecipesScreen'
@@ -61,6 +62,7 @@ function App() {
 
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
+          <Route path='/user' component={withRouter(UserPage)} permissions={Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)} />
 
           <Route path="/edit/:id" component={withRouter(CRUDRecipesScreen)} />
           <Route path="/admin-recipes" component={withRouter(AdminListAllRecipes)} />
