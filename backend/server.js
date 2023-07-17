@@ -99,11 +99,19 @@ const loginLimiter = rateLimit({
   legacyHeaders: false,
 })
 
+const commentLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 500,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
 if (process.env.NODE_ENV === 'production') {
   app.use('/api/recipes', recipesLimiter)
   app.use('/api/users', usersLimiter)
   app.use('/api/users/login', loginLimiter)
   app.use('/api/users/register', loginLimiter)
+  app.use('/api/comments', commentLimiter)
 }
 
 import helmet from 'helmet'
