@@ -2,7 +2,7 @@ import { Nav, NavDropdown, NavLink, Navbar, Container, Form, FormControl, FormGr
 import { LinkContainer } from "react-router-bootstrap"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {} from '@fortawesome/free-solid-svg-icons'
+import {faUser} from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from "react-router-dom"
 import {toast} from 'react-toastify'
 import { useEffect, useState } from "react"
@@ -81,6 +81,7 @@ const Header = () => {
                         <Form className="d-flex ps-md-3">
                         <Form.Control type="search" placeholder="Search" className="me-2 bg-l-cream" aria-label="Search"
                         onKeyDown={handleKeyDown}/>
+                        <Nav.Link href="/login"><FontAwesomeIcon icon={faUser} /></Nav.Link>
                     </Form>
                     </Nav>
                     </Navbar.Collapse>

@@ -16,6 +16,10 @@ const UserLogin = () => {
 
     const history = useHistory()
 
+    if(sessionStorage.getItem('token')){
+        history.push('/user')
+    }
+
     const submitHandler = async (e) => {
         e.preventDefault()
         try{

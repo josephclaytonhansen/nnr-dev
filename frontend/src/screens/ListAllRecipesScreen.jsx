@@ -29,7 +29,6 @@ const ListAllRecipes = () => {
 
     return(
         <main>
-            {user && user}
             <Container>
             <h1 style = {{marginBottom: "2rem"}}>All recipes</h1>
                 {recipes ? (
