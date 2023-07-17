@@ -34,6 +34,7 @@ app.use(session({
 
 import recipeRoutes from "./routes/recipeRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
+import commentRoutes from "./routes/commentRoutes.js"
 
 import {Strategy as LocalStrategy} from 'passport-local'
 import User from './models/userModel.js'
@@ -136,6 +137,8 @@ app.use("/api/recipes", recipeRoutes)
 
 
 app.use("/api/users", userRoutes)
+
+app.use("/api/comments", commentRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
