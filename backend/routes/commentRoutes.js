@@ -10,8 +10,8 @@ import {
 } from '../controllers/commentController.js'
 
 router.route('/').post(createComment)
-router.route('/id/:id').put(updateComment)
-router.route('/id/:id').delete(deleteComment)
+router.route('/:id').put(updateComment)
+router.route('/:id').delete(deleteComment)
 router.route('/flag/:id').put(flagComment)
 router.route('/pending/:id').put(togglePending)
 

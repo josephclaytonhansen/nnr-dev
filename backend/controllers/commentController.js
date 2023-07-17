@@ -1,44 +1,53 @@
 import asyncHandler from '../middleware/asyncHandler.js'
 import Comment from '../models/commentModel.js'
+import Recipe from '../models/recipeModel.js'
 
 //create
 const createComment = asyncHandler(async (req, res) => {
     const {
         user,
-        comment,
+        content,
         rating,
         recipe,
     } = req.body
+
+    console.log(user, content, rating, recipe)
+
     const commentExists = await Comment.findOne({
         user: user,
         recipe: recipe,
-        rating,
-        comment: comment,
     })
     if (commentExists) {
-        res.status(400)
-        throw new Error('Comment already exists')
+        res.status(400).json({data:'Comment already exists'})
     } else {
-        const comment = await Comment.create({
-            user,
-            comment,
-            rating,
-            recipe,
-        })
-        if (comment) {
-            res.status(201).json({
-                _id: comment._id,
-                user: comment.user,
-                content: comment.comment,
-                rating: comment.rating,
-                recipe: comment.recipe,
+        
+            await Recipe.findById(recipe).then(recipe => {
+                const comment = Comment.create({
+                    user,
+                    content,
+                    rating,
+                    recipe,
+                }).then(comment => {
+                console.log(recipe, comment)
+                recipe.comments.push(comment)
+                console.log(recipe.comments)
+                recipe.save()
+                res.status(201).json({
+                    _id: comment._id,
+                    user: comment.user,
+                    content: comment.content,
+                    rating: comment.rating,
+                    recipe: comment.recipe,
+                })
+            }).catch(err => {
+                res.status(400)
             })
-        } else {
+        }).catch(err => {
             res.status(400)
-            throw new Error('Invalid comment data')
-        }
+        })
     }
 })
+
 
 
 //update
