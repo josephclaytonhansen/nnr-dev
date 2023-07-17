@@ -30,12 +30,11 @@ const [createComment, { isLoading, isError, error }] = useCreateCommentMutation(
     }
 
 
-    const submitHandler = () => {
+    const submitHandler = async() => {
         let comment = document.getElementById('comment').value
-        const res = createComment({recipe: recipe._id, content: comment, rating: rating, user: user})
-        if (res.success){
-            toast.success('Comment submitted')
-        }
+        const res = await createComment({recipe: recipe._id, content: comment, rating: rating, user: user})
+        toast.success('Comment submitted')
+        window.location.reload()
 }
 
     return(
