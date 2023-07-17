@@ -62,7 +62,7 @@ const createComment = asyncHandler(async (req, res) => {
 
 //update
 const updateComment = asyncHandler(async (req, res) => {
-    const comment = await Comment.findById(req.params.id)
+    const comment = await Comment.findById({_id: {$eq:req.params.id}})
     if (comment) {
         comment.content = req.body.content || comment.content
         comment.save()
