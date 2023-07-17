@@ -36,9 +36,6 @@ const [createComment, { isLoading, isError, error }] = useCreateCommentMutation(
         if (res.success){
             toast.success('Comment submitted')
         }
-        else {
-            toast.error(error?.message || error?.error || 'Comment already exists')
-        }
 }
 
     return(
