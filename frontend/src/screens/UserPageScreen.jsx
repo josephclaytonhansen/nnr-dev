@@ -49,6 +49,14 @@ const UserPageScreen = () => {
         setPassword(e.target.value)
     }
 
+    const logOutHandler = () => {
+        sessionStorage.removeItem('token')
+        setUser('none')
+        setToken('none')
+        toast.success("Logged out")
+        history.push('/')
+    }
+
     const anonymizeAccountHandler = async() => {
         try {
             const res = await updateUser({userId: id, updatedUser: {displayName: `anon${Math.floor(Math.floor(Math.random()*1000)*(Math.random()*1000))}`, password: `anon${Math.floor(Math.floor(Math.random()*1000)*(Math.random()*1000))}`}, email: `anon${Math.floor(Math.floor(Math.random()*1000)*(Math.random()*1000))}`}).unwrap()
@@ -98,21 +106,15 @@ const UserPageScreen = () => {
                         </Col>
                     </Row>
                     </Card>
-                    <Row className="py-3">
-                        {permissions.includes('is-author') &&(
-                            <Col>
-                                <h2>Recipes</h2>
-                            </Col>
-                        )}
-                        {permissions.includes('is-commentor') &&(
-                            <Col>
-                                <h2>Comments</h2>
-                            </Col>
-                        )}
-                    </Row>
+                    
                     </Col>
-                    <hr className="py-3"/>
-                    <Row>
+
+                    <Row className = {`my-2`}> 
+                        <Col>
+                        <Button className = {'my-2 bg-blue button-bg-blue'} onClick = {logOutHandler}>Log Out</Button>
+                        </Col>
+                    </Row>
+                    <Row className = {'my-5'}>
                         <Col>
                         <Button className = {'my-2 bg-red button-bg-red'} onClick = {anonymizeAccountHandler}>Anonymize account</Button>
                         </Col>
