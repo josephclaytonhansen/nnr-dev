@@ -2,6 +2,17 @@ import asyncHandler from '../middleware/asyncHandler.js'
 import Comment from '../models/commentModel.js'
 import Recipe from '../models/recipeModel.js'
 
+//get comments for a recipe
+const getCommentsByRecipe = asyncHandler(async (req, res) => {
+    const recipe = await Recipe.findById(req.params.id)
+    if (recipe) {
+        const comments = await Comment.find({recipe: recipe._id})
+        res.json(comments)
+    } else {
+        res.status(404).send('Recipe not found')
+    }
+})
+
 //create
 const createComment = asyncHandler(async (req, res) => {
     const {
@@ -107,4 +118,5 @@ export {
     flagComment,
     togglePending,
     deleteComment,
+    getCommentsByRecipe,
 }
