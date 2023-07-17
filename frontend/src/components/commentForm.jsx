@@ -34,10 +34,7 @@ const [createComment, { isLoading, isError, error }] = useCreateCommentMutation(
         let comment = document.getElementById('comment').value
         const res = createComment({recipe: recipe._id, content: comment, rating: rating, user: user})
         if (res.success){
-            toast.success('Comment submitted (comments are pending by default)')
-        }
-        else {
-            toast.error(error?.message || error?.error || 'Comment already exists')
+            toast.success('Comment submitted')
         }
 }
 
