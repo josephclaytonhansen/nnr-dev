@@ -4,9 +4,10 @@ import {faFlag, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons"
 import {Row, Col, Container, Card, Badge} from "react-bootstrap"
 import StarRating from "./StarRating"
 import  "../css/Recipe.css"
+import {useGetUserByIdQuery} from "../slices/usersApiSlice"
 
 const SingleComment = ({comment, permissions, classNames = ''}) => {
-
+    console.log(comment)
     const flagCommentHandler = () => {}
     const editCommentHandler = () => {}
     const deleteCommentHandler = () => {}
@@ -16,22 +17,24 @@ const SingleComment = ({comment, permissions, classNames = ''}) => {
     const canEdit = username === comment.user.email
     const canDelete = permissions.includes('is-admin') || canEdit
     const canModerate = permissions.includes('is-admin') || permissions.includes('is-moderator')
-    const commentUserName = comment.user.displayName|| comment.user
+    const {data: commentUser, isLoading, error} = useGetUserByIdQuery(comment.user)
+    console.log(commentUser)
+    const commentUserName = commentUser[0]
 
     return(
         <>
         <Row className={`my-1 d-flex align-items-center ${classNames}`}>
-            <Col className="flex-grow-0 flex-shrink-0">
+            <Col>
             <h5 className='my-1'>{commentUserName}</h5>
             </Col>
-            <Col>
+            <Col style = {{flexGrow:12}}>
             <StarRating rating={comment.rating}/>
             </Col>
         </Row>
 
         <Row className={`${classNames}`}> 
             <Col>
-            <p>{comment.comment}</p>
+            <p>{comment.content}</p>
             </Col>
         </Row>
 

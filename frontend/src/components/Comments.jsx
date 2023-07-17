@@ -2,13 +2,15 @@ import React from "react"
 import {Row, Col, Container, ListGroup} from "react-bootstrap"
 import SingleComment from "./SingleComment"
 import CommentForm from "./commentForm"
+import { useGetCommentsByRecipeQuery } from "../slices/commentsApiSlice"
 
-const Comments = ({comments, permissions, recipe}) => {
+const Comments = ({permissions, recipe}) => {
 
     const canSeeFlaggedComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
     const canSeePendingComments = permissions.includes('is-moderator') || permissions.includes('is-admin')
     const canComment = permissions.includes('is-commentor')
     const user = permissions[0]
+    const { data: comments, isLoading, error } = useGetCommentsByRecipeQuery(recipe._id)
 
     return(
         <>
