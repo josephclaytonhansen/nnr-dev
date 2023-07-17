@@ -31,15 +31,18 @@ router.route('/:id').get(getUserById)
 
 //Public routes
 router.route('/register').post((req, res, next) => {
-
-        new User({ 
-          email: req.body.email, 
-          username: req.body.email 
-        }), req.body.password, function (err, user) {
-          if (err) {
-            const sanitized = err.message.replace(/[^a-zA-Z0-9 ]/g, '')
-            res.send(sanitized)
-          }}})(req, res, next)
+    new User(
+        {
+            email: req.body.email,
+            username: req.body.email,
+            password: req.body.password,
+        }
+    ).save().then(user => {
+        user.save().then(user => {
+            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+        })
+    })
+})
 
 
 router.route('/login').post((req, res, next) => {
