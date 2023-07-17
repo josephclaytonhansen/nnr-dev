@@ -38,10 +38,11 @@ function App() {
   let auth = sessionStorage.getItem('token')
   let [user, setUser] = useState('none')
   let [token, setToken] = useState('none')
+  let permissions = Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)
   
   return (
     <>
-    {auth && <AdminButtons permissions={Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)}/>}
+    {auth && <AdminButtons permissions={permissions}/>}
     <Header></Header>
     <Router>
         <Switch>
@@ -62,7 +63,7 @@ function App() {
 
           <Route path="/register" component={withRouter(UserRegister)} />
           <Route path="/login" component={withRouter(UserLogin)} />
-          <Route path='/user' component={withRouter(UserPage)} permissions={Permissions(auth, user, setUser, setToken, complete, jwt, BASE_URL, toast)} />
+          <Route path='/user' component={withRouter(UserPage)} />
 
           <Route path="/edit/:id" component={withRouter(CRUDRecipesScreen)} />
           <Route path="/admin-recipes" component={withRouter(AdminListAllRecipes)} />
