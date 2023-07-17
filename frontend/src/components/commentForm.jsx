@@ -32,12 +32,9 @@ const [createComment, { isLoading, isError, error }] = useCreateCommentMutation(
 
     const submitHandler = () => {
         let comment = document.getElementById('comment').value
-        const res = createComment({recipe: recipe._id, comment: comment, rating: rating, user: user})
-        if (res){
+        const res = createComment({recipe: recipe._id, content: comment, rating: rating, user: user})
+        if (res.success){
             toast.success('Comment submitted')
-        }
-        else if (isError) {
-            toast.error(error?.message || error?.error || 'Unknown error')
         }
 }
 

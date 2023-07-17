@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 
 const commentSchema = new mongoose.Schema({
-    comment: {
+    content: {
         type: String,
         required: true,
         unique: false,
@@ -33,7 +33,7 @@ const commentSchema = new mongoose.Schema({
     pending: {
         type: Boolean,
         required: true,
-        default: true,
+        default: false,
     },
 
 }, {timestamps: true})

@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: false,
-        default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor'
+        default: 'is-user.is-commentor.is-self-email-editor.is-self-display-name-editor.is-self-comment-editor.is-flagger'
     },
     authSession: {
         type: authSessionSchema,
