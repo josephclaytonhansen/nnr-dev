@@ -7,6 +7,7 @@ import { useState, useContext } from "react"
 import {useHistory} from "react-router-dom"
 import { set } from "mongoose"
 import { AuthContext } from "../utils/authContext"
+import { Link } from "react-router-dom"
 
 const UserLogin = () => {
     const [loginUser, { isLoading, isError, error }] = useLoginUserMutation()
@@ -83,9 +84,10 @@ const UserLogin = () => {
                                 <Button variant="light" type="submit" className="mx-auto btn w-100" disabled={isLoading}>Sign In</Button>
                             </Card.Body>
                         </Card>
-
+                        <Link to = '/register'>Don't have an account? Register here</Link>
                         </Col>
                     </Row>
+                    
                 </Form>
             </Container>
         </main>

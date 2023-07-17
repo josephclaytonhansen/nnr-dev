@@ -31,39 +31,19 @@ router.route('/:id').get(getUserById)
 
 //Public routes
 router.route('/register').post((req, res, next) => {
-    User.register(
-        new User({ 
-          email: req.body.email, 
-          username: req.body.email 
-        }), req.body.password, function (err, msg) {
-          if (err) {
-            const sanitized = err.message.replace(/[^a-zA-Z0-9 ]/g, '')
-            res.send(sanitized)
-          } else {
-            passport.authenticate('local', (err, user, info) => {
-                if(err) {
-                    res.status(203).send(err)
-                } else {
-                    if(user) {
-                        
-                        req.login(user, err => {
-                            req.session.user = user
-                            res.cookie('user', user._id, COOKIE_OPTIONS)
-                            res.status(200).send(user._id)
-                        })
-                        user.save().then(user => {
-                            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
-                        })
-                    } else {
-                        res.status(202).send(info)
-                    }
-                }
-            })(req, res, next)
-
-          }
+    new User(
+        {
+            email: req.body.email,
+            username: req.body.email,
+            password: req.body.password,
         }
-      )
+    ).save().then(user => {
+        user.save().then(user => {
+            res.status(200).send(JSON.stringify({"auth":authToken(user)}))
+        })
+    })
 })
+
 
 router.route('/login').post((req, res, next) => {
     
