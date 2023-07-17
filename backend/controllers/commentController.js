@@ -23,10 +23,10 @@ const createComment = asyncHandler(async (req, res) => {
     } = req.body
 
     const commentExists = await Comment.findOne({
-        user: user,
-        recipe: recipe,
-        content: content,
-        rating: rating,
+        user: {$eq:user},
+        content: {$eq:content},
+        rating: {$eq:rating},
+        recipe: {$eq:recipe},
     })
     if (commentExists) {
         res.status(400).json({data:'Comment already exists'})
@@ -34,10 +34,10 @@ const createComment = asyncHandler(async (req, res) => {
         
             await Recipe.findOne({_id: {$eq:recipe}}).then(recipe => {
                 const comment = Comment.create({
-                    user: {$eq:user},
-                    content: {$eq:content},
-                    rating: {$eq:rating},
-                    recipe: {$eq:recipe},
+                    user,
+                    content,
+                    rating,
+                    recipe,
                 }).then(comment => {
                 recipe.comments.push(comment)
                 console.log(recipe.comments)
