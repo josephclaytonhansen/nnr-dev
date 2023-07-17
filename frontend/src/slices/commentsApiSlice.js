@@ -10,6 +10,11 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
                 body: comment,
             }),
         }),
+        getCommentsByRecipe: builder.query({
+            query: (recipeId) => `${COMMENTS_URL}/${recipeId}`,
+            method: 'GET',
+        }, {keepUnusedDataFor: 5}),
+
         deleteComment: builder.mutation({
             query: (commentId) => ({
                 url: `${COMMENTS_URL}/${commentId}`,
@@ -44,4 +49,5 @@ export const {
     useUpdateCommentMutation,
     useFlagCommentMutation,
     useTogglePendingCommentMutation,
+    useGetCommentsByRecipeQuery,
 } = commentsApiSlice
