@@ -97,6 +97,7 @@ userSchema.set('toJSON', {
 
 userSchema.methods.matchPassword = async function (password) {
     try {
+        console.log(password, this.password, await bcrypt.compare(password, this.password))
       return await bcrypt.compare(password, this.password)
     } catch (error) {
       throw new Error(error)
