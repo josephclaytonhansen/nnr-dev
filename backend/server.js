@@ -8,7 +8,7 @@ import connectDB from './config/db.js'
 import passport from 'passport'
 import {notFound, errorHandler} from "./middleware/errorHandler.js"
 import cron from 'node-cron'
-
+import staticServe from 'serve-static'
 import cors from 'cors'
 
 import session from 'express-session'
@@ -31,6 +31,15 @@ app.use(session({
       path: '/',
   },
 }))
+
+// Used for setting up your static site
+app.use(staticServe('_domain', {'index': ['index.html', 'index.html']}))
+
+// Read the link below about express behind a proxy
+app.set('trust proxy', true)
+app.set('trust proxy', 'loopback')
+
+
 
 import recipeRoutes from "./routes/recipeRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
