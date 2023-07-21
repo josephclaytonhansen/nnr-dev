@@ -51,7 +51,7 @@ userSchema.pre('save', async function (next) {
 
         if (!user.isModified('password')) next()
         // generate salt
-        const salt = await bcrypt.genSalt(12)
+        const salt = await bcrypt.genSalt(10)
         // hash the password
         const hashedPassword = await bcrypt.hash(this.password, salt)
          // replace plain text password with hashed password
@@ -64,27 +64,6 @@ userSchema.pre('save', async function (next) {
     }
 })
 
-userSchema.pre('validate', async function (next) {
-    try{
-        const user = this
-        
-        user.username = user.email
-        //set user.authSession to a new Session object with user._id as the value of user
-        user.authSession = new authSession ({user: user._id})
-
-        if (!user.isModified('password')) next()
-        // generate salt
-        const salt = await bcrypt.genSalt(12)
-        // hash the password
-        const hashedPassword = await bcrypt.hash(this.password, salt)
-         // replace plain text password with hashed password
-        this.password = hashedPassword
-        
-        next()
-    } catch (error) {
-        next(error)
-    }
-})
 
 
 userSchema.set('toJSON', {
