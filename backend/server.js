@@ -52,7 +52,7 @@ import { COOKIE_OPTIONS } from './config/authenticate.js'
 
 
 const corsOptions = {
-  origin:'http://localhost:3000',
+  origin:'http://146.190.115.148:3000/',
   credentials: true,
   optionSuccessStatus: 200
 }
@@ -138,14 +138,14 @@ app.use(function(req, res, next) {
   } else {
     console.log(req.path)
   }
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Origin', 'http://146.190.115.148:3000/')
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie')
   next()
 })
 
 app.get("/", (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.set('Access-Control-Allow-Origin', 'http://146.190.115.148:3000/')
     res.send("API is running")
 })
 
