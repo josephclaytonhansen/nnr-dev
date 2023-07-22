@@ -16,7 +16,7 @@ import http from 'http'
 import https from 'https'
 
 var privateKey  = fs.readFileSync('/etc/ssl/key.pem', 'utf8')
-var certificate = fs.readFileSync('ettc/ssl/cert.pem', 'utf8')
+var certificate = fs.readFileSync('/etc/ssl/cert.pem', 'utf8')
 
 var credentials = {key: privateKey, cert: certificate}
 
