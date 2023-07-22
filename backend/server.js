@@ -199,7 +199,7 @@ cron.schedule('*/30 * * * *', () => {
   var httpServer = http.createServer(app)
   var httpsServer = https.createServer(credentials, app)
   
-  httpServer.listen(8000)
+  httpServer.listen(8080)
   httpsServer.listen(8443)
 
 //app.listen(port, () => {console.log(`Server running on port ${port}`)})
