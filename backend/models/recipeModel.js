@@ -74,8 +74,7 @@ const recipeSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
-        default: '/images/placeholder.jpg'
+        required: false,
     },
     rating: {
         type: Number,
