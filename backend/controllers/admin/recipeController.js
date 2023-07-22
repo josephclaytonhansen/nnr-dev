@@ -127,7 +127,7 @@ const updateRecipeById = asyncHandler(async (req, res) => {
         recipe.author = author
         recipe.isGlutenFree = isGlutenFree
         recipe.isVegetarian = isVegetarian
-        recipe.isDogSafe = isDogSafe
+        recipe.dogSafe = isDogSafe
         recipe.feeds = feeds
         recipe.meal = meal
         recipe.image = image
@@ -150,7 +150,9 @@ const updateRecipeById = asyncHandler(async (req, res) => {
             author: updatedRecipe.author,
             isGlutenFree: updatedRecipe.isGlutenFree,
             isVegetarian: updatedRecipe.isVegetarian,
+            dogSafe: updatedRecipe.dogSafe,
             meal: updatedRecipe.meal,
+            feeds: updatedRecipe.feeds,
             image: updatedRecipe.image,
             rating: updatedRecipe.rating,
             numReviews: updatedRecipe.numReviews,
