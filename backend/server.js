@@ -11,15 +11,6 @@ import cron from 'node-cron'
 import staticServe from 'serve-static'
 import cors from 'cors'
 
-import fs from 'fs'
-import http from 'http'
-import https from 'https'
-
-var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8')
-var certificate = fs.readFileSync('sslcert/server.crt', 'utf8')
-
-var credentials = {key: privateKey, cert: certificate}
-
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
@@ -41,8 +32,6 @@ app.use(session({
   },
 }))
 
-// Used for setting up your static site
-app.use(staticServe('_domain', {'index': ['index.html', 'index.html']}))
 
 // Read the link below about express behind a proxy
 app.set('trust proxy', true)
@@ -196,10 +185,5 @@ cron.schedule('*/30 * * * *', () => {
     })
   })
 
-  var httpServer = http.createServer(app)
-  var httpsServer = https.createServer(credentials, app)
-  
-  httpServer.listen(8000)
-  httpsServer.listen(8443)
 
-//app.listen(port, () => {console.log(`Server running on port ${port}`)})
+app.listen(port, () => {console.log(`Server running on port ${port}`)})
