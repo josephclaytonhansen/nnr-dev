@@ -132,7 +132,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 app.use(function(req, res, next) {
   if (process.env.NODE_ENV === 'production') {
-  console.log("\nRate limit remaining: ", req.rateLimit.remaining, "\nTo path:",  req.path)
+    try{console.log("\nRate limit remaining: ", req.rateLimit.remaining, "\nTo path:",  req.path)}
+    catch(err) {console.log(err, req.path)}
+  
   } else {
     console.log(req.path)
   }
